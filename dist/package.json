@@ -1,0 +1,46 @@
+{
+  "name": "@teclead/aem-generator",
+  "version": "1.0.8",
+  "private": false,
+  "description": "AEM Dialog and Component Generator based on Typescript Interfaces",
+  "main": "index.js",
+  "dependencies": {
+    "ts-node": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.0.0",
+    "@types/node": "^10.10.1",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.2",
+    "jest": "^23.5.0",
+    "prettier": "^1.14.2",
+    "ts-jest": "^23.1.4",
+    "ts-loader": "^4.5.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.0.1"
+  },
+  "scripts": {
+    "build-aem": "node src/builder.js",
+    "test": "jest --config jest.config.js --cache",
+    "test:dev": "jest --config jest.config.js --cache --watch",
+    "test:coverage": "jest --config jest.config.js --cache --coverage",
+    "test:ci": "jest --config jest.config.js --cache --ci --coverage",
+    "build:beta": "tsc --project tsconfig.build.json && cp -r src/templates dist/ && cp src/builder.js dist/ && cp -r dist/ ../react-components/react-components/node_modules/@eg/dialog-generator/",
+    "build": "npm run build:clean && npm run build:ts",
+    "build:ts": "tsc --project tsconfig.build.json && cp -r src/templates dist/ && cp src/builder.js dist/",
+    "build:clean": "rm -rf dist",
+    "tslint": "tslint --project ./tsconfig.json --config ./tslint.json",
+    "tslint:fix": "tslint --project ./tsconfig.json --config ./tslint.json --fix",
+    "current-version": "node -p \"require('./package.json').version\"",
+    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma none",
+    "prettier:check": "npm run prettier:base -- --list-different \"src/*.{ts,tsx}\" \"src/**/*.{ts,tsx}\" \"__tests__/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\"",
+    "prettier:write": "npm run prettier:base -- --write \"src/*.{ts,tsx}\" \"src/**/*.{ts,tsx}\" \"__tests__/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\""
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Teclead/AEM-Generator"
+  },
+  "author": "Teclead / Tony Schumacher",
+  "license": "ISC"
+}

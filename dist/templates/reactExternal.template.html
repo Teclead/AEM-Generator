@@ -1,0 +1,9 @@
+<sly data-sly-use.a="{{PACKAGE_CLASS}}">
+    {{STYLES}}
+    <script>
+        var {{VAR}} = JSON.parse("${a.allProperties @ context='scriptString'}" || "{}");
+    </script>
+    {{TARIFFSPINNER}}
+    <div id="{{TAG}}"></div>
+    {{javascript}}
+</sly>

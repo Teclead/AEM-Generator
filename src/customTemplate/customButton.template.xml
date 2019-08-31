@@ -1,0 +1,5 @@
+<ELNAME jcr:primaryType="nt:unstructured"
+    onClick="{{javascript}}" 
+    text="{{TITLE}}" 
+    selectionMode="single" 
+    sling:resourceType="/apps/ergo/engine/dialog/button" />

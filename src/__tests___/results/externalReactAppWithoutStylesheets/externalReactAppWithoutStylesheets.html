@@ -1,0 +1,9 @@
+<sly data-sly-use.a="de.ergo.aem.engine.components.ServerSideRenderingComponent">
+    
+    <script>
+        var data = JSON.parse("${a.allProperties @ context='scriptString'}" || "{}");
+    </script>
+    
+    <div id="external-app-id"></div>
+    <script src="https://server.com/script1.js"></script>
+</sly>

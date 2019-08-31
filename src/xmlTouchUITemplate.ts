@@ -1,0 +1,69 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import { FilePath } from './models';
+const Template = require('./dialogGeneratorConfig');
+import('./dialogGeneratorConfig');
+export const getFile = (filePath: string) => {
+  return fs.readFileSync(filePath).toString();
+};
+
+const CommonField =
+  'name="{{DATABASE}}" fieldLabel="{{TITLE}}" {{REQUIRED}} {{DESC}} {{DISABLED}}';
+
+// here we may get costum template path or we use the defuelt template
+export const template = {
+  commonField: CommonField,
+  dialog: getFile(
+    Template.dialogTemplate || path.resolve(__dirname, FilePath.Dialog)
+  ),
+  tab: getFile(Template.tabTemplate || path.resolve(__dirname, FilePath.Tab)),
+  textfield: getFile(
+    Template.textfieldTemplate || path.resolve(__dirname, FilePath.Text)
+  ),
+  richtext: getFile(
+    Template.richtextTemplate || path.resolve(__dirname, FilePath.RichText)
+  ),
+  numberfield: getFile(
+    Template.numberfieldTemplate || path.resolve(__dirname, FilePath.Number)
+  ),
+  pathfield: getFile(
+    Template.pathfieldTemplate || path.resolve(__dirname, FilePath.Path)
+  ),
+  select: getFile(
+    Template.checkboxTemplate || path.resolve(__dirname, FilePath.Checkbox)
+  ),
+  dropdown: getFile(
+    Template.dropdownTemplate || path.resolve(__dirname, FilePath.Dropwdown)
+  ),
+  multiField: getFile(
+    Template.multifieldTemplate || path.resolve(__dirname, FilePath.Multifield)
+  ),
+  multiFieldNested: getFile(
+    Template.multifieldNestedTemplate ||
+      path.resolve(__dirname, FilePath.MultifieldNested)
+  ),
+  tracking: getFile(
+    Template.trackingTemplate || path.resolve(__dirname, FilePath.Tracking)
+  ),
+  component: getFile(
+    Template.componentTemplate || path.resolve(__dirname, FilePath.Component)
+  ),
+  cqEditConfig: getFile(
+    Template.cqEditConfigTemplate ||
+      path.resolve(__dirname, FilePath.CqEditConfig)
+  ),
+  htmlTag: getFile(
+    Template.htmlTagTemplate || path.resolve(__dirname, FilePath.HtmlTag)
+  ),
+  tag: getFile(Template.tagTemplate || path.resolve(__dirname, FilePath.Tag)),
+  button: getFile(
+    Template.buttonTemplate || path.resolve(__dirname, FilePath.Button)
+  ),
+  imagefield: getFile(
+    Template.imagefieldTemplate || path.resolve(__dirname, FilePath.Imagefield)
+  ),
+  cqDesignDialog: getFile(
+    Template.cqDesignDialogTemplate ||
+      path.resolve(__dirname, FilePath.CqDesignDialog)
+  )
+};

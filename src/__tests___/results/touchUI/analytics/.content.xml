@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          cq:trackevents="event1,event2"
+          cq:trackvars="value1,value2"
+          cq:componentName="MyTestComponent"
+          cq:componentGroup="MyTestGroup"
+          jcr:primaryType="nt:unstructured"/>

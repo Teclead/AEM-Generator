@@ -1,0 +1,3 @@
+<ELNAME jcr:primaryType="nt:unstructured"
+        {{COMMON}}
+        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"/>
