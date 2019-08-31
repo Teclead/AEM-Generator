@@ -1,5 +1,0 @@
-<ELNAME jcr:primaryType="nt:unstructured"
-    onClick="{{javascript}}"
-    text="{{TITLE}}"
-    selectionMode="single"
-    sling:resourceType="granite/ui/components/foundation/button"/>
