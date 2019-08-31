@@ -8,7 +8,7 @@ src/__tests___/test
 # testing
 /coverage
 
-
+dist/
 
 # production
 /build
