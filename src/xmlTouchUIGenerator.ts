@@ -22,17 +22,17 @@ export class TouchUIXMLGenerator extends UiGenerator {
     return !this.dialogConfig.analytics
       ? null
       : template.tracking
-          .replace(PlaceHolder.Title, this.dialogConfig.componentName)
-          .replace(PlaceHolder.Group, this.dialogConfig.componentGroup)
-          .replace(
-            PlaceHolder.TrackingEvents,
-            this.getAnalyticsElements('events')
-          )
-          .replace(
-            PlaceHolder.TrackingVars,
-            this.getAnalyticsElements('values')
-          )
-          .replace(PlaceHolder.Group, this.dialogConfig.componentGroup);
+        .replace(PlaceHolder.Title, this.dialogConfig.componentName)
+        .replace(PlaceHolder.Group, this.dialogConfig.componentGroup)
+        .replace(
+          PlaceHolder.TrackingEvents,
+          this.getAnalyticsElements('events')
+        )
+        .replace(
+          PlaceHolder.TrackingVars,
+          this.getAnalyticsElements('values')
+        )
+        .replace(PlaceHolder.Group, this.dialogConfig.componentGroup);
   }
 
   /**
@@ -45,11 +45,11 @@ export class TouchUIXMLGenerator extends UiGenerator {
     template.component = !this.dialogConfig.resourceSuperType
       ? template.component.replace(PlaceHolder.ResourceSuperType, '')
       : (template.component = template.component.replace(
-          PlaceHolder.ResourceSuperType,
-          'sling:resourceSuperType="' +
-            this.dialogConfig.resourceSuperType +
-            '"'
-        ));
+        PlaceHolder.ResourceSuperType,
+        'sling:resourceSuperType="' +
+        this.dialogConfig.resourceSuperType +
+        '"'
+      ));
 
     return template.component
       .replace(PlaceHolder.Title, this.dialogConfig.componentName)
@@ -61,11 +61,11 @@ export class TouchUIXMLGenerator extends UiGenerator {
       .replace(
         PlaceHolder.NoDecoration,
         '{Boolean}' +
-          String(
-            this.dialogConfig.noDecoration
-              ? this.dialogConfig.noDecoration
-              : false
-          )
+        String(
+          this.dialogConfig.noDecoration
+            ? this.dialogConfig.noDecoration
+            : false
+        )
       )
       .replace(
         PlaceHolder.IsContainer,
@@ -137,6 +137,13 @@ export class TouchUIXMLGenerator extends UiGenerator {
    * @param {string} folderPath
    */
   public makeFolder(folderPath: string) {
+    try {
+      // handle new node versions
+      fs.mkdirSync(path.resolve(folderPath), { recursive: true });
+      return;
+    } catch (e) {
+      console.warn(e);
+    }
     // first folder
     let currentFolder = path.resolve(folderPath.split('/')[0]);
     // create folder if it does not exist
@@ -163,6 +170,11 @@ export class TouchUIXMLGenerator extends UiGenerator {
    * calls getHtmlTag() to replace the placeholders in the htmlTag-template
    */
   public writeHtmlTag() {
+    if (!this.getHtmlTag() || this.getHtmlTag() === 'undefined') {
+      console.info('No HTML for: ', this.dialogConfig.componentName);
+      return;
+    }
+
     const filePath = path.resolve(
       this.dialogConfig.componentPath + '/_cq_htmlTag/.content.xml'
     );
@@ -215,8 +227,13 @@ export class TouchUIXMLGenerator extends UiGenerator {
     const filePath = path.resolve(
       this.dialogConfig.componentPath + '/_cq_design_dialog/.content.xml'
     );
-    fs.writeFileSync(path.resolve(filePath), this.getCqDesignDialog());
-    console.info('AEM Cq Design Dialog Config XML built: ' + filePath);
+
+    try {
+      fs.writeFileSync(path.resolve(filePath), this.getCqDesignDialog());
+      console.info('AEM Cq Design Dialog Config XML built: ' + filePath);
+    } catch (e) {
+      console.warn('Design dialog faild: ', e);
+    }
   }
 
   /**
@@ -224,6 +241,10 @@ export class TouchUIXMLGenerator extends UiGenerator {
    * relaces the placeholders in the html-template file
    */
   public writeSightlyTemplate() {
+    if (!this.getSightlyTemplate()) {
+      console.log("No Sightly Template", this.dialogConfig.componentName);
+      return;
+    }
     const file = this.dialogConfig.componentPath.split('/')[
       this.dialogConfig.componentPath.split('/').length - 1
     ];

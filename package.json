@@ -1,6 +1,6 @@
 {
   "name": "@teclead/aem-generator",
-  "version": "1.0.8",
+  "version": "1.4.2",
   "private": false,
   "description": "AEM Dialog and Component Generator based on Typescript Interfaces",
   "main": "index.js",
@@ -27,7 +27,7 @@
     "test:coverage": "jest --config jest.config.js --cache --coverage",
     "test:ci": "jest --config jest.config.js --cache --ci --coverage",
     "build:beta": "tsc --project tsconfig.build.json && cp -r src/templates dist/ && cp src/builder.js dist/ && cp -r dist/ ../react-components/react-components/node_modules/@eg/dialog-generator/",
-    "build": "npm run build:clean && npm run build:ts && cp package.json dist/ && cp README.md dist/",
+    "build": "npm run build:clean && npm run build:ts && cp package.json dist/ && cp README.md dist/ && cp src/react-build-config.js dist/",
     "build:ts": "tsc --project tsconfig.build.json && cp -r src/templates dist/ && cp src/builder.js dist/",
     "build:clean": "rm -rf dist",
     "tslint": "tslint --project ./tsconfig.json --config ./tslint.json",
