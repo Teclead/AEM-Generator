@@ -1,8 +1,8 @@
-import * as fs from "fs";
-import * as path from "path";
-import { FilePath } from "./models";
-const Template = require("./dialogGeneratorConfig");
-import("./dialogGeneratorConfig");
+import * as fs from 'fs';
+import * as path from 'path';
+import { FilePath } from './models';
+const Template = require('./dialogGeneratorConfig');
+import('./dialogGeneratorConfig');
 export const getFile = (filePath: string) => {
   return fs.readFileSync(filePath).toString();
 };

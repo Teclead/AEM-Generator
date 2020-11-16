@@ -1,9 +1,9 @@
-import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 import {
   TouchUIDialogFieldOptions,
   TouchUIDialogTab,
-  TouchUIField
+  TouchUIField,
 } from '../models';
+import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 
 const fields: TouchUIDialogFieldOptions[] = [
   {
@@ -11,19 +11,19 @@ const fields: TouchUIDialogFieldOptions[] = [
     type: TouchUIField.Text,
     databaseName: 'label',
     isRequired: true,
-    description: 'Meine Beschreibung für Textfeld...'
+    description: 'Meine Beschreibung für Textfeld...',
   },
   {
     label: 'Mein PathField',
     type: TouchUIField.Path,
     databaseName: 'path',
-    description: 'Meine Beschreibung für PathField...'
+    description: 'Meine Beschreibung für PathField...',
   },
   {
     label: 'Mein Selectfeld',
     type: TouchUIField.Checkbox,
     databaseName: 'select',
-    description: 'Meine Beschreibung für Select...'
+    description: 'Meine Beschreibung für Select...',
   },
   {
     label: 'Mein Numberfield',
@@ -31,14 +31,14 @@ const fields: TouchUIDialogFieldOptions[] = [
     databaseName: 'numbwr',
     description: 'Meine Beschreibung für Numberfield...',
     max: 50,
-    min: 20
+    min: 20,
   },
   {
     label: 'Mein Imagefield',
     type: TouchUIField.Imagefield,
     databaseName: 'image',
     description: 'Meine Beschreibung für Imagefield',
-    isRequired: true
+    isRequired: true,
   },
   {
     label: 'Mein Dropwdown',
@@ -48,27 +48,27 @@ const fields: TouchUIDialogFieldOptions[] = [
     options: [
       { value: 1, name: 'Name 1' },
       { value: 2, name: 'Name 2' },
-      { value: 3, name: 'Name 3' }
-    ]
+      { value: 3, name: 'Name 3' },
+    ],
   },
   {
     label: 'Meine Textarea',
     type: TouchUIField.TextArea,
     databaseName: 'label',
     description: 'Meine Beschreibung für Textarea...',
-    maxLength: 50
+    maxLength: 50,
   },
   {
     label: 'Mein Richtexteld',
     type: TouchUIField.RichText,
     databaseName: 'richtext',
-    description: 'Meine Beschreibung für Richtext...'
+    description: 'Meine Beschreibung für Richtext...',
   },
   {
     label: 'Mein Button',
     type: TouchUIField.Button,
-    javaScriptHandler: 'alert(123)'
-  }
+    javaScriptHandler: 'alert(123)',
+  },
 ];
 
 const tabs: TouchUIDialogTab[] = [
@@ -81,9 +81,9 @@ const tabs: TouchUIDialogTab[] = [
         type: TouchUIField.Multifield,
         description: 'Meine Beschreibung für das Multifield...',
         databaseName: 'multitouchuidatabase',
-        multifieldtype: TouchUIField.Text
-      }
-    ]
+        multifieldtype: TouchUIField.Text,
+      },
+    ],
   },
   {
     title: 'Mein drittes Tab',
@@ -92,9 +92,9 @@ const tabs: TouchUIDialogTab[] = [
         label: 'Nested Multifield',
         databaseName: 'multi',
         type: TouchUIField.MultifieldNested,
-        multifieldOptions: fields.slice(5)
-      }
-    ]
+        multifieldOptions: fields.slice(5),
+      },
+    ],
   },
   {
     title: 'Mein viertes Tab',
@@ -105,8 +105,8 @@ const tabs: TouchUIDialogTab[] = [
         type: TouchUIField.Tag,
         description: 'Tolle Tags'
       } */
-    ]
-  }
+    ],
+  },
 ];
 
 const ReactTemplate = './src/templates/react.template.html';
@@ -123,7 +123,7 @@ export const exampleTouchUIDialog: AEMTouchUIDialog = {
   tabs,
   analytics: {
     values: ['value1', 'value2'],
-    events: ['event1', 'event2']
+    events: ['event1', 'event2'],
   },
-  resourceSuperType: 'core/wcm/components/text/v2/text'
+  resourceSuperType: 'core/wcm/components/text/v2/text',
 };
