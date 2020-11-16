@@ -5,11 +5,8 @@ import { UiGenerator } from './uiGenerator';
 import { template } from './xmlTouchUITemplate';
 
 export class TouchUIXMLGenerator extends UiGenerator {
-  public dialogConfig: AEMTouchUIDialog;
-
   constructor(dialogConfig: AEMTouchUIDialog) {
     super(dialogConfig);
-    this.dialogConfig = dialogConfig;
   }
 
   /**
@@ -22,17 +19,17 @@ export class TouchUIXMLGenerator extends UiGenerator {
     return !this.dialogConfig.analytics
       ? null
       : template.tracking
-        .replace(PlaceHolder.Title, this.dialogConfig.componentName)
-        .replace(PlaceHolder.Group, this.dialogConfig.componentGroup)
-        .replace(
-          PlaceHolder.TrackingEvents,
-          this.getAnalyticsElements('events')
-        )
-        .replace(
-          PlaceHolder.TrackingVars,
-          this.getAnalyticsElements('values')
-        )
-        .replace(PlaceHolder.Group, this.dialogConfig.componentGroup);
+          .replace(PlaceHolder.Title, this.dialogConfig.componentName)
+          .replace(PlaceHolder.Group, this.dialogConfig.componentGroup)
+          .replace(
+            PlaceHolder.TrackingEvents,
+            this.getAnalyticsElements('events')
+          )
+          .replace(
+            PlaceHolder.TrackingVars,
+            this.getAnalyticsElements('values')
+          )
+          .replace(PlaceHolder.Group, this.dialogConfig.componentGroup);
   }
 
   /**
@@ -45,11 +42,11 @@ export class TouchUIXMLGenerator extends UiGenerator {
     template.component = !this.dialogConfig.resourceSuperType
       ? template.component.replace(PlaceHolder.ResourceSuperType, '')
       : (template.component = template.component.replace(
-        PlaceHolder.ResourceSuperType,
-        'sling:resourceSuperType="' +
-        this.dialogConfig.resourceSuperType +
-        '"'
-      ));
+          PlaceHolder.ResourceSuperType,
+          'sling:resourceSuperType="' +
+            this.dialogConfig.resourceSuperType +
+            '"'
+        ));
 
     return template.component
       .replace(PlaceHolder.Title, this.dialogConfig.componentName)
@@ -61,11 +58,11 @@ export class TouchUIXMLGenerator extends UiGenerator {
       .replace(
         PlaceHolder.NoDecoration,
         '{Boolean}' +
-        String(
-          this.dialogConfig.noDecoration
-            ? this.dialogConfig.noDecoration
-            : false
-        )
+          String(
+            this.dialogConfig.noDecoration
+              ? this.dialogConfig.noDecoration
+              : false
+          )
       )
       .replace(
         PlaceHolder.IsContainer,
@@ -147,7 +144,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
     // first folder
     let currentFolder = path.resolve(folderPath.split('/')[0]);
     // create folder if it does not exist
-    folderPath.split('/').forEach(folder => {
+    folderPath.split('/').forEach((folder) => {
       currentFolder += '/' + folder;
       if (!fs.existsSync(path.resolve(currentFolder))) {
         fs.mkdirSync(path.resolve(currentFolder));
@@ -242,7 +239,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
    */
   public writeSightlyTemplate() {
     if (!this.getSightlyTemplate()) {
-      console.log("No Sightly Template", this.dialogConfig.componentName);
+      console.log('No Sightly Template', this.dialogConfig.componentName);
       return;
     }
     const file = this.dialogConfig.componentPath.split('/')[

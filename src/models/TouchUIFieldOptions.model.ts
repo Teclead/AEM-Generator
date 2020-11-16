@@ -8,6 +8,7 @@ export interface CommonOptions {
   description?: string;
   isRequired?: boolean;
   label: string;
+  value?: string | boolean | number;
 }
 
 export interface BaseOptions extends CommonOptions {

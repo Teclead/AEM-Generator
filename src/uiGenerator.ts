@@ -5,7 +5,7 @@ import {
   PlaceHolder,
   TouchUIDialogFieldOptions,
   TouchUIField,
-  TouchUIFieldOption
+  TouchUIFieldOption,
 } from './models';
 import { template } from './xmlTouchUITemplate';
 
@@ -42,7 +42,7 @@ export class UiGenerator {
    * in the getHtmlTag template and returns getHtmlTag template string
    */
   public getHtmlTag() {
-    console.log("????", template.htmlTag)
+    console.log('????', template.htmlTag);
     return template.htmlTag
       .replace(
         PlaceHolder.Tag,
@@ -152,6 +152,7 @@ export class UiGenerator {
         .replace(PlaceHolder.Element, 'element_' + i)
         .replace('/' + PlaceHolder.Element, '/element_' + i)
         .replace(PlaceHolder.Title, _field.label)
+        .replace(PlaceHolder.Value, this.getFieldValue(field))
         .replace(PlaceHolder.Database, `./${_field.databaseName}`)
         .replace(
           PlaceHolder.Description,
@@ -167,15 +168,20 @@ export class UiGenerator {
         )
     );
   }
+
+  public getFieldValue(field: TouchUIDialogFieldOptions): string {
+    return typeof field.value === 'undefined'
+      ? ''
+      : ` value="${this.parseFieldValue(field)}"`;
+  }
+
   /**
    * getOption() returns string element
    * @param  option: TouchUIFieldOption, i: number
    * @returns {string}
    */
   public getOption(option: TouchUIFieldOption, i: number) {
-    return `<option_${i} jcr:primaryType="nt:unstructured" value="${
-      option.value
-    }" text="${option.name}"/>`;
+    return `<option_${i} jcr:primaryType="nt:unstructured" value="${option.value}" text="${option.name}"/>`;
   }
   /**
    * getMultiField() returns the multifieldtype or FIELD-TYPE-ERROR
@@ -205,5 +211,18 @@ export class UiGenerator {
       return this.dialogConfig.sightlyTemplate;
     }
     return;
+  }
+
+  private parseFieldValue(field: TouchUIDialogFieldOptions): string {
+    switch (typeof field.value) {
+      case 'boolean':
+        return `{Boolean}${field.value ? 'true' : 'false'}`;
+      case 'number':
+        return `{Double}${field.value}`;
+      case 'string':
+        return field.value;
+      default:
+        return '';
+    }
   }
 }
