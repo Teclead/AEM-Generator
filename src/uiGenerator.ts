@@ -170,7 +170,7 @@ export class UiGenerator {
   }
 
   public getFieldValue(field: TouchUIDialogFieldOptions): string {
-    return typeof field.value === "undefined"
+    return typeof field.defaultValue === "undefined"
       ? ""
       : ` value="${this.parseFieldValue(field)}"`;
   }
@@ -214,13 +214,13 @@ export class UiGenerator {
   }
 
   private parseFieldValue(field: TouchUIDialogFieldOptions): string {
-    switch (typeof field.value) {
+    switch (typeof field.defaultValue) {
       case "boolean":
-        return `{Boolean}${field.value ? "true" : "false"}`;
+        return `{Boolean}${field.defaultValue ? "true" : "false"}`;
       case "number":
-        return `{Double}${field.value}`;
+        return `{Double}${field.defaultValue}`;
       case "string":
-        return field.value;
+        return field.defaultValue;
       default:
         return "";
     }
