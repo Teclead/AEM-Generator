@@ -1,8 +1,8 @@
 /**
  * Please use index.ts to import and export the models out of the model folder
  */
-import { TouchUIDialogFieldOptions } from './AEMTouchUIDialogModels.model';
-import { TouchUIField } from './TouchUIFieldEnum.model';
+import { TouchUIDialogFieldOptions } from "./AEMTouchUIDialogModels.model";
+import { TouchUIField } from "./TouchUIFieldEnum.model";
 
 export interface CommonOptions {
   description?: string;
@@ -42,8 +42,8 @@ export interface CheckboxOptions extends BaseOptions {
   isDisabled?: boolean;
 }
 
-export interface DropwdownOptions extends BaseOptions {
-  type: TouchUIField.Dropwdown;
+export interface DropdownOptions extends BaseOptions {
+  type: TouchUIField.Dropdown;
   options: TouchUIFieldOption[];
 }
 

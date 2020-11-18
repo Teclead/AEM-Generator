@@ -1,6 +1,7 @@
 <img src="https://teclead.de/assets/custom_img/teclead_black.svg"
      alt="Teclead Logo"
      style="float: right; width:250px" />
+
 # AEM Dialog Generator
 
 This project contains the Custom Dialog Generator for AEM. The Library provides the creating of all necessary AEM Files (XML, HTML) to create an AEM component
@@ -18,9 +19,9 @@ Building the dialogues can then be executed by running npm run build:dialogues
 
 ## API
 
-The following example shows a *.dialog.ts file with the necessary configuration for the creating of an AEM component. 
+The following example shows a \*.dialog.ts file with the necessary configuration for the creating of an AEM component.
 
-******
+---
 
 ### Full Example
 
@@ -108,10 +109,10 @@ const tabs: TouchUIDialogTab[] = [
 ]
 ```
 
-The sightlyTemplate variable is referencing the HTMl-Template that is used to build the AEM component.  It is mandatory to create this reference on a component Level.
+The sightlyTemplate variable is referencing the HTMl-Template that is used to build the AEM component. It is mandatory to create this reference on a component Level.
 
 ```typescript
-const sightlyTemplate = "<h1>my custom template...</h1>"
+const sightlyTemplate = "<h1>my custom template...</h1>";
 ```
 
 The exampleTouchUiDialog: AEMTouchUIDialog variable describes the configuration of the AEM component. It holds the reference to the sightlyTemplate, the component name, the component group, the component description, tabs and the component path (destination path) as required inputs and a couple of optional properties than can be configured. For more Information check out the Interfaces.
@@ -119,40 +120,61 @@ The exampleTouchUiDialog: AEMTouchUIDialog variable describes the configuration 
 ```typescript
 export const exampleTouchUIDialog: AEMTouchUIDialog = {
   sightlyTemplate: sightlyTemplate,
-  componentName: 'MyTestComponent',
-  componentGroup: 'MyTestGroup',
-  componentDescription: 'MyTestComponentDescription',
-  componentPath: './src/__tests___/results/touchUI',
-  tabs: tabs
+  componentName: "MyTestComponent",
+  componentGroup: "MyTestGroup",
+  componentDescription: "MyTestComponentDescription",
+  componentPath: "./src/__tests___/results/touchUI",
+  tabs: tabs,
 };
 ```
 
 ## Full example for a simple component
-```typescript
-import { AEMTouchUIDialog, TouchUIField } from '@teclead/aem-generator/models';
-import {
-  TouchUIXMLGenerator
-} from '@teclead/aem-generator';
-import { COMPONENTPATH, COMPONENT_GROUP, REACT_TEMPLATE } from '../Commons/commons';
 
-const dropDownOptions = [{ value: 'val1', name: 'Label 1' }, { value: 'val2', name: 'Label 2' }];
+```typescript
+import { AEMTouchUIDialog, TouchUIField } from "@teclead/aem-generator/models";
+import { TouchUIXMLGenerator } from "@teclead/aem-generator";
+import {
+  COMPONENTPATH,
+  COMPONENT_GROUP,
+  REACT_TEMPLATE,
+} from "../Commons/commons";
+
+const dropDownOptions = [
+  { value: "val1", name: "Label 1" },
+  { value: "val2", name: "Label 2" },
+];
 
 export const ctaDialog: AEMTouchUIDialog = {
-  componentPath: COMPONENTPATH + 'ctaReact',
+  componentPath: COMPONENTPATH + "ctaReact",
   sightlyTemplate: REACT_TEMPLATE,
-  componentName: 'Button-React',
+  componentName: "Button-React",
   componentGroup: COMPONENT_GROUP,
-  tabs: [{
-    title: 'My first Tab',
-    fields: [
-      { label: 'Text field', databaseName: 'text', type: TouchUIField.Text },
-      { label: 'Text Area', databaseName: 'textArea', type: TouchUIField.TextArea },
-      { label: 'Dropdown field', databaseName: 'dropdown', type: TouchUIField.Dropwdown, options: dropDownOptions },
-      { label: 'Pathfield', databaseName: 'path', type: TouchUIField.Path, },
-      { label: 'Checkbox', databaseName: 'check', type: TouchUIField.Checkbox, },
-      { label: 'Image', databaseName: 'img', type: TouchUIField.Imagefield, }
-    ]
-  }]
+  tabs: [
+    {
+      title: "My first Tab",
+      fields: [
+        { label: "Text field", databaseName: "text", type: TouchUIField.Text },
+        {
+          label: "Text Area",
+          databaseName: "textArea",
+          type: TouchUIField.TextArea,
+        },
+        {
+          label: "Dropdown field",
+          databaseName: "dropdown",
+          type: TouchUIField.Dropdown,
+          options: dropDownOptions,
+        },
+        { label: "Pathfield", databaseName: "path", type: TouchUIField.Path },
+        {
+          label: "Checkbox",
+          databaseName: "check",
+          type: TouchUIField.Checkbox,
+        },
+        { label: "Image", databaseName: "img", type: TouchUIField.Imagefield },
+      ],
+    },
+  ],
 };
 
 new TouchUIXMLGenerator(ctaDialog).writeFilesToAEM(); // will write the files when npm build:dialogues is called
@@ -180,4 +202,5 @@ Important notice: Pull requests that are opened while they're still being worked
 Collapse
 
 ## License
+
 [MIT](https://teclead.de/#contact)
