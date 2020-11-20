@@ -2,27 +2,27 @@
  * Please use index.ts to import and export the models out of model folder
  */
 
+export { FilePath, PlaceHolder } from "./AemEnumUI.model";
 export {
-  TouchUIDialogFieldOptions,
   AEMTouchUIDialog,
-  TouchUIDialogTab,
+  Templates,
   TouchUIAnalytics,
-  Templates
-} from './AEMTouchUIDialogModels.model';
-export { FilePath, PlaceHolder } from './AemEnumUI.model';
-export { TouchUIField } from './TouchUIFieldEnum.model';
+  TouchUIDialogFieldOptions,
+  TouchUIDialogTab,
+} from "./AEMTouchUIDialogModels.model";
+export { CustomFilePath } from "./CustomAemEnumUI.model";
+export { TouchUIField } from "./TouchUIFieldEnum.model";
 export {
-  TouchUIFieldOption,
-  TextOptions,
+  ButtonOptions,
+  CheckboxOptions,
+  DropdownOptions,
+  ImagefieldOptions,
+  MultifieldNestedOptions,
+  MultifieldOptions,
+  NumberOptions,
   PathOptions,
   RichTextOptions,
   TextAreaOptions,
-  CheckboxOptions,
-  DropwdownOptions,
-  NumberOptions,
-  MultifieldOptions,
-  ImagefieldOptions,
-  ButtonOptions,
-  MultifieldNestedOptions
-} from './TouchUIFieldOptions.model';
-export { CustomFilePath } from './CustomAemEnumUI.model';
+  TextOptions,
+  TouchUIFieldOption,
+} from "./TouchUIFieldOptions.model";

@@ -9,7 +9,7 @@ export enum FilePath {
   Text = 'templates/textfield.template.xml',
   RichText = 'templates/richtext.template.xml',
   Checkbox = 'templates/select.template.xml',
-  Dropwdown = 'templates/dropdown.template.xml',
+  Dropdown = 'templates/dropdown.template.xml',
   Number = 'templates/numberfield.template.xml',
   Multifield = 'templates/multifield.template.xml',
   Imagefield = 'templates/imagefield.template.xml',
@@ -22,7 +22,7 @@ export enum FilePath {
   MultifieldNested = 'templates/multifieldNested.template.xml',
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
-  CqEditConfig = 'templates/cqEditConfig.template.xml'
+  CqEditConfig = 'templates/cqEditConfig.template.xml',
 }
 
 export enum PlaceHolder {
@@ -30,6 +30,7 @@ export enum PlaceHolder {
   Tab = '{{TABPLACEHOLDER}}',
   Element = 'ELNAME',
   Title = '{{TITLE}}',
+  Value = '{{VALUE}}',
   Fields = '{{FIELDS}}',
   Field = '{{FIELD}}',
   Database = '{{DATABASE}}',
@@ -53,5 +54,5 @@ export enum PlaceHolder {
   StyleSheets = '{{STYLES}}',
   JavaScript = '{{javascript}}',
   VariableName = '{{VAR}}',
-  Tariffspinner = '{{TARIFFSPINNER}}'
+  Tariffspinner = '{{TARIFFSPINNER}}',
 }

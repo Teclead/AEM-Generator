@@ -2,14 +2,14 @@
  * Please use index.ts to import and export the models out of model folder
  */
 
-import * as options from './TouchUIFieldOptions.model';
+import * as options from "./TouchUIFieldOptions.model";
 export type TouchUIDialogFieldOptions =
   | options.TextOptions
   | options.PathOptions
   | options.RichTextOptions
   | options.TextAreaOptions
   | options.CheckboxOptions
-  | options.DropwdownOptions
+  | options.DropdownOptions
   | options.NumberOptions
   | options.MultifieldOptions
   | options.ImagefieldOptions

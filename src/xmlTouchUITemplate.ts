@@ -8,7 +8,7 @@ export const getFile = (filePath: string) => {
 };
 
 const CommonField =
-  'name="{{DATABASE}}" fieldLabel="{{TITLE}}" {{REQUIRED}} {{DESC}} {{DISABLED}}';
+  'name="{{DATABASE}}" fieldLabel="{{TITLE}}"{{VALUE}} {{REQUIRED}} {{DESC}} {{DISABLED}}';
 
 // here we may get costum template path or we use the defuelt template
 export const template = {
@@ -33,7 +33,7 @@ export const template = {
     Template.checkboxTemplate || path.resolve(__dirname, FilePath.Checkbox)
   ),
   dropdown: getFile(
-    Template.dropdownTemplate || path.resolve(__dirname, FilePath.Dropwdown)
+    Template.dropdownTemplate || path.resolve(__dirname, FilePath.Dropdown)
   ),
   multiField: getFile(
     Template.multifieldTemplate || path.resolve(__dirname, FilePath.Multifield)
@@ -65,5 +65,5 @@ export const template = {
   cqDesignDialog: getFile(
     Template.cqDesignDialogTemplate ||
       path.resolve(__dirname, FilePath.CqDesignDialog)
-  )
+  ),
 };

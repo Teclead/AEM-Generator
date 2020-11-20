@@ -1,6 +1,6 @@
+import * as fs from 'fs';
 import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 import { TouchUIXMLGenerator } from './../xmlTouchUIGenerator';
-import * as fs from 'fs';
 import { exampleTouchUIDialog } from './xmlTouchUIGenerator.test.data';
 
 describe('xml generator for touch ui aem dialogs', () => {
@@ -21,7 +21,7 @@ describe('xml generator for touch ui aem dialogs', () => {
   const externalReactAppTemplate =
     './src/templates/reactExternal.template.html';
 
-  [touchUIDialogPath, analyticsPath, configPath].forEach(file => {
+  [touchUIDialogPath, analyticsPath, configPath].forEach((file) => {
     try {
       fs.unlinkSync(file);
     } catch (e) {
@@ -76,13 +76,11 @@ describe('xml generator for touch ui aem dialogs', () => {
       componentGroup: 'External Group',
       componentDescription: '...',
       componentPath: externalReactAppPath,
-      tabs: []
+      tabs: [],
     };
     const touchUIGenerator = new TouchUIXMLGenerator(config);
     touchUIGenerator.writeFilesToAEM();
     const renderedFile = fs.readFileSync(externalreactPath).toString();
     expect(renderedFile).toMatchSnapshot();
   });
-
-
 });

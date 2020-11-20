@@ -5,9 +5,9 @@ import {
   PlaceHolder,
   TouchUIDialogFieldOptions,
   TouchUIField,
-  TouchUIFieldOption
-} from './models';
-import { template } from './xmlTouchUITemplate';
+  TouchUIFieldOption,
+} from "./models";
+import { template } from "./xmlTouchUITemplate";
 
 export class UiGenerator {
   public dialogConfig: AEMTouchUIDialog;
@@ -42,15 +42,15 @@ export class UiGenerator {
    * in the getHtmlTag template and returns getHtmlTag template string
    */
   public getHtmlTag() {
-    console.log("????", template.htmlTag)
+    console.log("????", template.htmlTag);
     return template.htmlTag
       .replace(
         PlaceHolder.Tag,
-        this.dialogConfig.tag ? this.dialogConfig.tag : 'div'
+        this.dialogConfig.tag ? this.dialogConfig.tag : "div"
       )
       .replace(
         PlaceHolder.Class,
-        this.dialogConfig.css ? this.dialogConfig.css : ''
+        this.dialogConfig.css ? this.dialogConfig.css : ""
       );
   }
   /**
@@ -61,17 +61,17 @@ export class UiGenerator {
     return this.dialogConfig.tabs
       .map((tab, index) => {
         return template.tab
-          .replace(PlaceHolder.Element, 'tab_' + index)
-          .replace('/' + PlaceHolder.Element, '/tab_' + index)
+          .replace(PlaceHolder.Element, "tab_" + index)
+          .replace("/" + PlaceHolder.Element, "/tab_" + index)
           .replace(PlaceHolder.Title, tab.title)
           .replace(
             PlaceHolder.Fields,
             tab.fields
               .map((field, fieldIndex) => this.getField(field, fieldIndex))
-              .join('')
+              .join("")
           );
       })
-      .join('');
+      .join("");
   }
 
   /**
@@ -86,14 +86,14 @@ export class UiGenerator {
         return template.pathfield;
       case TouchUIField.Checkbox:
         return template.select;
-      case TouchUIField.Dropwdown:
+      case TouchUIField.Dropdown:
         return template.dropdown.replace(
           PlaceHolder.Options,
           field.options
             ? field.options
                 .map((option, i) => this.getOption(option, i))
-                .join('')
-            : 'OPTIONERROR'
+                .join("")
+            : "OPTIONERROR"
         );
       case TouchUIField.Multifield:
         return template.multiField.replace(
@@ -115,13 +115,13 @@ export class UiGenerator {
       case TouchUIField.Button:
         return template.button.replace(
           PlaceHolder.JavaScript,
-          field.javaScriptHandler || ''
+          field.javaScriptHandler || ""
         );
       default:
         // text, bumber, error
         return template.textfield.replace(
-          'textfield',
-          field.type || 'FIELDERROR'
+          "textfield",
+          field.type || "FIELDERROR"
         );
     }
   }
@@ -141,21 +141,22 @@ export class UiGenerator {
         .replace(PlaceHolder.Common, template.commonField)
         .replace(
           PlaceHolder.MaxLength,
-          _field.maxLength ? ` maxlength="${_field.maxLength}" ` : ''
+          _field.maxLength ? ` maxlength="${_field.maxLength}" ` : ""
         )
-        .replace(PlaceHolder.Max, _field.max ? ` max="${_field.max}" ` : '')
-        .replace(PlaceHolder.Min, _field.min ? ` min="${_field.min}" ` : '')
+        .replace(PlaceHolder.Max, _field.max ? ` max="${_field.max}" ` : "")
+        .replace(PlaceHolder.Min, _field.min ? ` min="${_field.min}" ` : "")
         .replace(
           PlaceHolder.Required,
-          _field.isRequired ? ` required="{Boolean}true" ` : ''
+          _field.isRequired ? ` required="{Boolean}true" ` : ""
         )
-        .replace(PlaceHolder.Element, 'element_' + i)
-        .replace('/' + PlaceHolder.Element, '/element_' + i)
+        .replace(PlaceHolder.Element, "element_" + i)
+        .replace("/" + PlaceHolder.Element, "/element_" + i)
         .replace(PlaceHolder.Title, _field.label)
+        .replace(PlaceHolder.Value, this.getFieldValue(field))
         .replace(PlaceHolder.Database, `./${_field.databaseName}`)
         .replace(
           PlaceHolder.Description,
-          _field.description ? ` fieldDescription="${_field.description}"` : ''
+          _field.description ? ` fieldDescription="${_field.description}"` : ""
         )
         /**
          * not used anymore
@@ -163,19 +164,24 @@ export class UiGenerator {
          */
         .replace(
           PlaceHolder.isDisabled,
-          _field.isDisabled ? ` disabled="{Boolean}true" ` : ''
+          _field.isDisabled ? ` disabled="{Boolean}true" ` : ""
         )
     );
   }
+
+  public getFieldValue(field: TouchUIDialogFieldOptions): string {
+    return typeof field.defaultValue === "undefined"
+      ? ""
+      : ` value="${this.parseFieldValue(field)}"`;
+  }
+
   /**
    * getOption() returns string element
    * @param  option: TouchUIFieldOption, i: number
    * @returns {string}
    */
   public getOption(option: TouchUIFieldOption, i: number) {
-    return `<option_${i} jcr:primaryType="nt:unstructured" value="${
-      option.value
-    }" text="${option.name}"/>`;
+    return `<option_${i} jcr:primaryType="nt:unstructured" value="${option.value}" text="${option.name}"/>`;
   }
   /**
    * getMultiField() returns the multifieldtype or FIELD-TYPE-ERROR
@@ -183,7 +189,7 @@ export class UiGenerator {
    * @returns {string}
    */
   public getMultiField(field: MultifieldOptions) {
-    return field.multifieldtype ? field.multifieldtype : 'FIELD-TYPE-ERROR';
+    return field.multifieldtype ? field.multifieldtype : "FIELD-TYPE-ERROR";
   }
   /**
    * getMultiFieldNested() calls  getField and returns the field string template
@@ -193,7 +199,7 @@ export class UiGenerator {
   public getMultiFieldNested(field: MultifieldNestedOptions) {
     return (field.multifieldOptions || [])
       .map((fieldOption, index) => this.getField(fieldOption, index))
-      .join('');
+      .join("");
   }
   /**
    * getSightlyTemplate() creates the sightly Template file if we have sightlyTemplate
@@ -205,5 +211,18 @@ export class UiGenerator {
       return this.dialogConfig.sightlyTemplate;
     }
     return;
+  }
+
+  private parseFieldValue(field: TouchUIDialogFieldOptions): string {
+    switch (typeof field.defaultValue) {
+      case "boolean":
+        return `{Boolean}${field.defaultValue ? "true" : "false"}`;
+      case "number":
+        return `{Double}${field.defaultValue}`;
+      case "string":
+        return field.defaultValue;
+      default:
+        return "";
+    }
   }
 }
