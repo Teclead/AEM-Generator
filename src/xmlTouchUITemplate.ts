@@ -29,7 +29,7 @@ export const template = {
   pathfield: getFile(
     Template.pathfieldTemplate || path.resolve(__dirname, FilePath.Path)
   ),
-  select: getFile(
+  checkbox: getFile(
     Template.checkboxTemplate || path.resolve(__dirname, FilePath.Checkbox)
   ),
   dropdown: getFile(

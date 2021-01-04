@@ -7,7 +7,7 @@ export enum TouchUIField {
   Text = 'textfield',
   RichText = 'richtext',
   TextArea = 'textarea',
-  Checkbox = 'select',
+  Checkbox = 'checkbox',
   Dropdown = 'selection',
   Number = 'numberfield',
   Multifield = 'multifield',

@@ -115,7 +115,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/checkbox\\"
     name=\\"./select\\"
-    text=\\"Mein Selectfeld\\"   fieldDescription=\\"Meine Beschreibung für Select...\\" 
+    text=\\"Mein Selectfeld\\" checked=\\"true\\"   fieldDescription=\\"Meine Beschreibung für Select...\\" 
     uncheckedValue=\\"false\\"
     value=\\"true\\"/>
 <element_3 jcr:primaryType=\\"nt:unstructured\\"
@@ -127,7 +127,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
     name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
     <items jcr:primaryType=\\"nt:unstructured\\">
-        <option_0 jcr:primaryType=\\"nt:unstructured\\" value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\" value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" value=\\"3\\" text=\\"Name 3\\"/>
+        <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
 </element_5>
 <element_6 jcr:primaryType=\\"nt:unstructured\\"
@@ -352,7 +352,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
     name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
     <items jcr:primaryType=\\"nt:unstructured\\">
-        <option_0 jcr:primaryType=\\"nt:unstructured\\" value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\" value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" value=\\"3\\" text=\\"Name 3\\"/>
+        <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
 </element_0>
 <element_1 jcr:primaryType=\\"nt:unstructured\\"

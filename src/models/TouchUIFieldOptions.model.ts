@@ -16,6 +16,7 @@ export interface BaseOptions extends CommonOptions {
 }
 
 export interface TouchUIFieldOption {
+  selected?: boolean;
   name: string;
   value: string | number;
 }
@@ -39,6 +40,7 @@ export interface TextAreaOptions extends BaseOptions {
 
 export interface CheckboxOptions extends BaseOptions {
   type: TouchUIField.Checkbox;
+  checked?: boolean;
   isDisabled?: boolean;
 }
 

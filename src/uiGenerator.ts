@@ -93,7 +93,7 @@ export class UiGenerator {
       case TouchUIField.Path:
         return template.pathfield;
       case TouchUIField.Checkbox:
-        return template.select;
+        return template.checkbox;
       case TouchUIField.Dropdown:
         return template.dropdown.replace(
           PlaceHolder.Options,
@@ -162,6 +162,7 @@ export class UiGenerator {
         .replace(PlaceHolder.Title, _field.label)
         .replace(PlaceHolder.Value, this.getFieldValue(field))
         .replace(PlaceHolder.Database, `./${_field.databaseName}`)
+        .replace(PlaceHolder.Checked, _field.checked ? 'checked="true"' : '')
         .replace(
           PlaceHolder.Description,
           _field.description ? ` fieldDescription="${_field.description}"` : ''
@@ -189,8 +190,10 @@ export class UiGenerator {
    * @returns {string}
    */
   public getOption(option: TouchUIFieldOption, i: number) {
-    return `<option_${i} jcr:primaryType="nt:unstructured" value="${option.value}" text="${option.name}"/>`;
+    const selectedAttr = option.selected ? 'selected="true"' : '';
+    return `<option_${i} jcr:primaryType="nt:unstructured" ${selectedAttr} value="${option.value}" text="${option.name}"/>`;
   }
+
   /**
    * getMultiField() returns the multifieldtype or FIELD-TYPE-ERROR
    * @param  field: TouchUIDialogFieldOptions

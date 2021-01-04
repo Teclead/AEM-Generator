@@ -24,6 +24,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     type: TouchUIField.Checkbox,
     databaseName: 'select',
     description: 'Meine Beschreibung für Select...',
+    checked: true,
   },
   {
     label: 'Mein Numberfield',
@@ -48,7 +49,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     options: [
       { value: 1, name: 'Name 1' },
       { value: 2, name: 'Name 2' },
-      { value: 3, name: 'Name 3' },
+      { value: 3, name: 'Name 3', selected: true },
     ],
   },
   {
