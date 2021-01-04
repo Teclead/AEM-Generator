@@ -23,6 +23,7 @@ export enum FilePath {
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',
+  NewPar = 'templates/newPar.template.xml',
 }
 
 export enum PlaceHolder {

@@ -24,5 +24,6 @@ module.exports = {
   checkboxTemplate: templates.checkboxTemplate || '',
   tabTemplate: templates.tabTemplate || '',
   textfieldTemplate: templates.textfieldTemplate || '',
-  trackingTemplate: templates.trackingTemplate || ''
+  trackingTemplate: templates.trackingTemplate || '',
+  newParTemplate: templates.newParTemplate || '',
 };

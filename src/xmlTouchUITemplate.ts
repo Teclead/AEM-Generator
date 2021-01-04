@@ -66,4 +66,7 @@ export const template = {
     Template.cqDesignDialogTemplate ||
       path.resolve(__dirname, FilePath.CqDesignDialog)
   ),
+  newPar: getFile(
+    Template.newParTemplate || path.resolve(__dirname, FilePath.NewPar)
+  ),
 };

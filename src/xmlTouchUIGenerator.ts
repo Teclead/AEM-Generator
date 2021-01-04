@@ -116,6 +116,11 @@ export class TouchUIXMLGenerator extends UiGenerator {
       this.writeAnalytics();
     }
 
+    if (this.dialogConfig.newPar) {
+      this.makeFolder(this.dialogConfig.componentPath + '/new');
+      this.writeNewParConfig();
+    }
+
     this.writeAEMConfig();
 
     this.writeCqConfig();
@@ -216,6 +221,18 @@ export class TouchUIXMLGenerator extends UiGenerator {
   }
 
   /**
+   * writeNewParConfig() creates the /new/.content.xml file
+   */
+  public writeNewParConfig() {
+    const filePath = path.resolve(
+      this.dialogConfig.componentPath + '/new/.content.xml'
+    );
+
+    fs.writeFileSync(path.resolve(filePath), this.getNewParConfig());
+    console.info('AEM New Par Component built: ' + filePath);
+  }
+
+  /**
    * writeCqDesignDialog() creates the /_cq_design_dialog/.content.xml file and
    * replaces the placeholders in the CqDesignDialog-template
    *  file in the file system
@@ -229,7 +246,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
       fs.writeFileSync(path.resolve(filePath), this.getCqDesignDialog());
       console.info('AEM Cq Design Dialog Config XML built: ' + filePath);
     } catch (e) {
-      console.warn('Design dialog faild: ', e);
+      console.warn('Design dialog failed: ', e);
     }
   }
 

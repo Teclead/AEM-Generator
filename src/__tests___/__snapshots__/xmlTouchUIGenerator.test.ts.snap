@@ -65,6 +65,15 @@ exports[`xml generator for touch ui aem dialogs should print the html-tag file 1
 "
 `;
 
+exports[`xml generator for touch ui aem dialogs should print the new par file 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+<jcr:root xmlns:sling=\\"http://sling.apache.org/jcr/sling/1.0\\" xmlns:cq=\\"http://www.day.com/jcr/cq/1.0\\" xmlns:jcr=\\"http://www.jcp.org/jcr/1.0\\"
+    jcr:primaryType=\\"cq:Component\\"
+    jcr:title=\\"New Component\\"
+    sling:resourceSuperType=\\"wcm/foundation/components/parsys/newpar\\"
+    componentGroup=\\".hidden\\"/>"
+`;
+
 exports[`xml generator for touch ui aem dialogs should print the react template file 1`] = `"./src/templates/react.template.html"`;
 
 exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 1`] = `

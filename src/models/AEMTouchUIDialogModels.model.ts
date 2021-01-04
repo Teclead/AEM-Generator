@@ -2,7 +2,7 @@
  * Please use index.ts to import and export the models out of model folder
  */
 
-import * as options from "./TouchUIFieldOptions.model";
+import * as options from './TouchUIFieldOptions.model';
 export type TouchUIDialogFieldOptions =
   | options.TextOptions
   | options.PathOptions
@@ -42,6 +42,7 @@ export interface AEMTouchUIDialog {
   tag?: string;
   css?: string; // classes that should be used in the tag
   noCqDesignDialog?: boolean; // conditionally build cqDesignDialog
+  newPar?: boolean; // conditionally generate a new par component for containers
 }
 
 export interface TouchUIDialogTab {
@@ -72,4 +73,5 @@ export interface Templates {
   tabTemplate: string;
   textfieldTemplate: string;
   trackingTemplate: string;
+  newParTemplate: string;
 }
