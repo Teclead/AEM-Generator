@@ -17,6 +17,7 @@ describe('xml generator for touch ui aem dialogs', () => {
     './src/__tests___/results/touchUI/_cq_design_dialog/.content.xml';
   const htmlTagPath =
     './src/__tests___/results/touchUI/_cq_htmlTag/.content.xml';
+  const newParPath = './src/__tests___/results/touchUI/new/.content.xml';
 
   const externalReactAppTemplate =
     './src/templates/reactExternal.template.html';
@@ -37,6 +38,11 @@ describe('xml generator for touch ui aem dialogs', () => {
 
   it('should print the analytics file', () => {
     const renderedFile = fs.readFileSync(analyticsPath).toString();
+    expect(renderedFile).toMatchSnapshot();
+  });
+
+  it('should print the new par file', () => {
+    const renderedFile = fs.readFileSync(newParPath).toString();
     expect(renderedFile).toMatchSnapshot();
   });
 

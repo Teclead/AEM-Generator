@@ -8,7 +8,7 @@ export enum FilePath {
   Path = 'templates/pathfield.template.xml',
   Text = 'templates/textfield.template.xml',
   RichText = 'templates/richtext.template.xml',
-  Checkbox = 'templates/select.template.xml',
+  Checkbox = 'templates/checkbox.template.xml',
   Dropdown = 'templates/dropdown.template.xml',
   Number = 'templates/numberfield.template.xml',
   Multifield = 'templates/multifield.template.xml',
@@ -23,6 +23,7 @@ export enum FilePath {
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',
+  NewPar = 'templates/newPar.template.xml',
 }
 
 export enum PlaceHolder {
@@ -36,6 +37,7 @@ export enum PlaceHolder {
   Database = '{{DATABASE}}',
   Description = '{{DESC}}',
   Options = '{{OPTIONS}}',
+  Checked = '{{CHECKED}}',
   Group = '{{GROUP}}',
   TrackingEvents = '{{EVENTS}}',
   TrackingVars = '{{VARS}}',
