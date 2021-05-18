@@ -100,11 +100,11 @@ const fields: TouchUIDialogFieldOptions[] = [{
 ];
 ```
 
-The variable tabs: TouchUiDialogTab[] describes the required tabs for the dialog, it hold a title and a field property. The field property should hold the value of the fields: TouchUIDialogFieldOptions[] variable. If more than one tab is used, then obviously more than one fields: TouchUIDialogFieldOptions[] variable needs to be configured.
+The variable tabs: TouchUiDialogTab[] describes the required tabs for the dialog, it hold a title and a field property. The field property should hold the value of the fields: TouchUIDialogFieldOptions[] variable. If more than one tab is used, then obviously more than one fields: TouchUIDialogFieldOptions[] variable needs to be configured. The hide property is optional and can be used to hide a tab inside a specific condition. This property uses a function where return an boolean.
 
 ```typescript
 const tabs: TouchUIDialogTab[] = [
-  { title: 'Mein erstes Tab', fields },
+  { title: 'Mein erstes Tab', fields, hide: () => location.href.includes('/de') },
   ...
 ]
 ```
