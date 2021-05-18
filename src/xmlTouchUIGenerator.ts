@@ -104,12 +104,13 @@ export class TouchUIXMLGenerator extends UiGenerator {
 
       const hasHideFunction = this.dialogConfig.tabs.some((tab) => tab.hide !== undefined);
       
+      this.writeDialog();
+
       if (hasHideFunction) {
+        console.log('has hide');
         this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
         this.writeClientLibs();
       }
-
-      this.writeDialog();
 
       // Optional html-tag values for the component.
       if (this.dialogConfig.tag && this.dialogConfig.css) {
@@ -279,7 +280,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
   public writeClientLibs() {
       const filePath = path.resolve(this.dialogConfig.componentPath + '/clientlibs/.content.xml');
       fs.writeFileSync(path.resolve(filePath),  this.buildCqClientLibs());
-
+    
       const txtFile = path.resolve(this.dialogConfig.componentPath + '/clientlibs/js.txt');
       fs.writeFileSync(path.resolve(txtFile),  this.buildJQuery(this.dialogConfig.componentPath + '/clientlibs/'));
 
