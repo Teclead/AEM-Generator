@@ -273,16 +273,12 @@ export class UiGenerator {
    */
   protected buildJQuery(dir: string): string {
     if (this.clientlibs.length === 0) { return ''; }
-    // const {filename, content} = this.clientlibs[0];
-    // const file = dir + filename;
-    // fs.writeFileSync(path.resolve(file), content);
-    // fs.unlinkSync(file);
-    // return filename;
+    console.log(dir);
     return this.clientlibs
       .map(({filename, content}): string => {
+      
         const file = dir + filename;
         fs.writeFileSync(path.resolve(file), content);
-       
         return filename;
       })
       .join(' ');
