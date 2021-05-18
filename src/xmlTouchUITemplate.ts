@@ -69,4 +69,5 @@ export const template = {
   newPar: getFile(
     Template.newParTemplate || path.resolve(__dirname, FilePath.NewPar)
   ),
+  clientlibs: getFile(Template.clientlibs || path.resolve(__dirname, FilePath.Clientlibs))
 };

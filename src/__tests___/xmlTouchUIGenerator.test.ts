@@ -22,6 +22,8 @@ describe('xml generator for touch ui aem dialogs', () => {
   const externalReactAppTemplate =
     './src/templates/reactExternal.template.html';
 
+  const clientlibsPath = './src/__tests___/results/touchUI/clientlibs/.content.xml';
+
   [touchUIDialogPath, analyticsPath, configPath].forEach((file) => {
     try {
       fs.unlinkSync(file);
@@ -68,6 +70,11 @@ describe('xml generator for touch ui aem dialogs', () => {
 
   it('should print the html-tag file', () => {
     const renderedFile = fs.readFileSync(htmlTagPath).toString();
+    expect(renderedFile).toMatchSnapshot();
+  });
+
+  it('should print the clientlibs content xml', () => {
+    const renderedFile =  fs.readFileSync(clientlibsPath).toString();
     expect(renderedFile).toMatchSnapshot();
   });
 
