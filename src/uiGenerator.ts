@@ -1,5 +1,9 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import {
   AEMTouchUIDialog,
+  CustomFilePath,
+  JavaScriptPlaceHolder,
   MultifieldNestedOptions,
   MultifieldOptions,
   PlaceHolder,
@@ -7,10 +11,11 @@ import {
   TouchUIField,
   TouchUIFieldOption,
 } from './models';
-import { template } from './xmlTouchUITemplate';
-
+import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator {
   public dialogConfig: AEMTouchUIDialog;
+
+  protected clientlibs: Array<{filename: string, content: string}> = [];
 
   constructor(dialogConfig: AEMTouchUIDialog) {
     this.dialogConfig = dialogConfig;
@@ -66,6 +71,11 @@ export class UiGenerator {
    * in the buildTabs template and returns buildTabs template string
    */
   public buildTabs(): string {
+    const hasHideImplementation = this.dialogConfig.tabs.some((tab) => tab.hide !== undefined);
+    if (hasHideImplementation) {
+      this.clientlibs = [...this.clientlibs, {filename: 'hideTab.js', content: this.buildHideTabScript()}];
+    }
+
     return this.dialogConfig.tabs
       .map((tab, index) => {
         return template.tab
@@ -81,7 +91,40 @@ export class UiGenerator {
       })
       .join('');
   }
+  /**
+   * buildHideTabScript() replace the placeholder in the hideTab scripts template 
+   * and returns buildHideTabScript template string
+   */
+  public buildHideTabScript(): string {
+    const file = getFile( path.resolve(__dirname, CustomFilePath.HideTab));
+    const hideTabIndex = this.dialogConfig.tabs.reduce(
+      (prev: number[] , curr , idx: number ) => {
+        if (curr.hide) {
+          prev.push(idx);
+        }
+        return prev;
+      },  []);
+    const isHide = this.dialogConfig.tabs.reduce(
+      (prev, curr, idx)  => (curr.hide) ? {...prev, [idx]: '' + curr.hide} : {...prev}, {});
+    return file
+            .replace(JavaScriptPlaceHolder.HideTabComponentName, this.dialogConfig.componentName.toLocaleLowerCase())
+            .replace(JavaScriptPlaceHolder.HideTabIndex, `[${hideTabIndex.toString()}]`)
+            .replace(JavaScriptPlaceHolder.HideTabFunction, JSON.stringify(isHide))
+            .replace(/\`/g, '')
+            .replace('<script>', '')
+            .replace('</script>', '');
 
+  }
+  /**
+   * buildClientLibs replace the config placeholder Categories 
+   * in the cqClientlibs template and returns cqClientlibs template string
+   */
+  public buildCqClientLibs(): string {
+    return (!this.dialogConfig.clientlibsCategories) ? '' : (
+      template.clientlibs
+        .replace(PlaceHolder.ClientlibsCategories, this.dialogConfig.clientlibsCategories.toString())
+    )
+  }
   /**
    * getTemplate() check the field type and return
    * the right field template string
@@ -222,6 +265,27 @@ export class UiGenerator {
       return this.dialogConfig.sightlyTemplate;
     }
     return;
+  }
+
+  /**
+   * buildJQuery creates the jquery files inside a directory
+   * and returns the name of the files
+   */
+  protected buildJQuery(dir: string): string {
+    if (this.clientlibs.length === 0) { return ''; }
+    // const {filename, content} = this.clientlibs[0];
+    // const file = dir + filename;
+    // fs.writeFileSync(path.resolve(file), content);
+    // fs.unlinkSync(file);
+    // return filename;
+    return this.clientlibs
+      .map(({filename, content}): string => {
+        const file = dir + filename;
+        fs.writeFileSync(path.resolve(file), content);
+       
+        return filename;
+      })
+      .join(' ');
   }
 
   private parseFieldValue(field: TouchUIDialogFieldOptions): string {

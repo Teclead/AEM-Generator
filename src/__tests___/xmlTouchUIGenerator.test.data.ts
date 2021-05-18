@@ -1,3 +1,4 @@
+// import * as fs from 'fs';
 import {
   TouchUIDialogFieldOptions,
   TouchUIDialogTab,
@@ -73,7 +74,7 @@ const fields: TouchUIDialogFieldOptions[] = [
 ];
 
 const tabs: TouchUIDialogTab[] = [
-  { title: 'Mein erstes Tab', fields },
+  { title: 'Mein erstes Tab', fields, hide: () => location.href.includes('/de') },
   {
     title: 'Mein zweites Tab',
     fields: [
@@ -107,10 +108,12 @@ const tabs: TouchUIDialogTab[] = [
         description: 'Tolle Tags'
       } */
     ],
+    hide: () => location.href.includes('/it')
   },
 ];
 
-const ReactTemplate = './src/templates/react.template.html';
+const ReactTemplate =  './src/templates/react.template.html';
+// const ReactTemplate =  fs.readFileSync('./src/templates/react.template.html').toString();
 export const exampleTouchUIDialog: AEMTouchUIDialog = {
   sightlyTemplate: ReactTemplate,
   componentName: 'MyTestComponent',
@@ -128,4 +131,5 @@ export const exampleTouchUIDialog: AEMTouchUIDialog = {
   },
   resourceSuperType: 'core/wcm/components/text/v2/text',
   newPar: true,
+  clientlibsCategories: ['cq.authoring.dialog']
 };

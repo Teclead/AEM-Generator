@@ -94,11 +94,12 @@ export class TouchUIXMLGenerator extends UiGenerator {
 
   /**
    * writeFilesToAEM() calls makeFolder() to create the folders
-   * /_cq_dialog, /_cq_htmlTagm,/analytics, /_cq_design_dialog
+   * /_cq_dialog, /_cq_htmlTagm,/analytics, /_cq_design_dialog, /clientlibs 
    * and calls the write*-methods to create the AEM files
    */
   public writeFilesToAEM() {
     this.makeFolder(this.dialogConfig.componentPath);
+    this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
 
     if (this.dialogConfig.tabs) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_dialog');
@@ -126,6 +127,8 @@ export class TouchUIXMLGenerator extends UiGenerator {
     this.writeCqConfig();
 
     this.writeSightlyTemplate();
+
+    this.writeClientLibs();
 
     if (!this.dialogConfig.noCqDesignDialog) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_design_dialog');
@@ -262,11 +265,20 @@ export class TouchUIXMLGenerator extends UiGenerator {
     const file = this.dialogConfig.componentPath.split('/')[
       this.dialogConfig.componentPath.split('/').length - 1
     ];
-
     const filePath = path.resolve(
       this.dialogConfig.componentPath + '/' + file + '.html'
     );
     fs.writeFileSync(path.resolve(filePath), this.getSightlyTemplate());
     console.info('REACT Template built: ' + filePath);
+  }
+
+  public writeClientLibs() {
+      const filePath = path.resolve(this.dialogConfig.componentPath + '/clientlibs/.content.xml');
+      fs.writeFileSync(path.resolve(filePath),  this.buildCqClientLibs());
+
+      const txtFile = path.resolve(this.dialogConfig.componentPath + '/clientlibs/js.txt');
+      fs.writeFileSync(path.resolve(txtFile),  this.buildJQuery(this.dialogConfig.componentPath + '/clientlibs/'));
+
+      console.info('Clientlibs built: ' + filePath);
   }
 }

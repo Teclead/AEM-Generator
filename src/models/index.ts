@@ -10,7 +10,7 @@ export {
   TouchUIDialogFieldOptions,
   TouchUIDialogTab,
 } from './AEMTouchUIDialogModels.model';
-export { CustomFilePath } from './CustomAemEnumUI.model';
+export { CustomFilePath, JavaScriptPlaceHolder } from './CustomAemEnumUI.model';
 export { TouchUIField } from './TouchUIFieldEnum.model';
 export {
   ButtonOptions,

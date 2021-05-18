@@ -24,6 +24,7 @@ export enum FilePath {
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',
   NewPar = 'templates/newPar.template.xml',
+  Clientlibs = 'templates/cqClientlibs.template.xml', 
 }
 
 export enum PlaceHolder {
@@ -57,4 +58,5 @@ export enum PlaceHolder {
   JavaScript = '{{javascript}}',
   VariableName = '{{VAR}}',
   Tariffspinner = '{{TARIFFSPINNER}}',
+  ClientlibsCategories = '{{CATEGORIES}}' 
 }
