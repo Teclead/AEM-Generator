@@ -99,10 +99,16 @@ export class TouchUIXMLGenerator extends UiGenerator {
    */
   public writeFilesToAEM() {
     this.makeFolder(this.dialogConfig.componentPath);
-    this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
-
     if (this.dialogConfig.tabs) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_dialog');
+
+      const hasHideFunction = this.dialogConfig.tabs.some((tab) => tab.hide !== undefined);
+      
+      if (hasHideFunction) {
+        this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
+        this.writeClientLibs();
+      }
+
       this.writeDialog();
 
       // Optional html-tag values for the component.
@@ -127,8 +133,6 @@ export class TouchUIXMLGenerator extends UiGenerator {
     this.writeCqConfig();
 
     this.writeSightlyTemplate();
-
-    this.writeClientLibs();
 
     if (!this.dialogConfig.noCqDesignDialog) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_design_dialog');
