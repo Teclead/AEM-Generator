@@ -134,5 +134,4 @@ export const exampleTouchUIDialog: AEMTouchUIDialog = {
   },
   resourceSuperType: 'core/wcm/components/text/v2/text',
   newPar: true,
-  clientlibsCategories: ['cq.authoring.dialog']
 };
