@@ -3,7 +3,7 @@
     /**
      * object where the properties are a reference to the hideTabIndex array 
      */
-    var isHide = {"0":"function () { return location.href.includes('/de'); }","3":"function () { return location.href.includes('/it'); }"}; 
+    var isHide = {"0":"function () { return location.href.includes('/de'); }","3":"function (params) {\n            console.log(params);\n            return params === null || params === void 0 ? void 0 : params.contentPath.includes('/it');\n        }"}; 
     var componentName = 'mytestcomponent'; // execute js only inside this component
 
     // when dialog gets injected
@@ -37,13 +37,21 @@
             var tab = getTab(hideTab);
             var tabPaneId = getTabPaneId(tab);
             var hideFn = getFunction(isHide[hideTab]);
-            if(hideFn()) {
+            if(hideFn({contentPath: getContentPath()})) {
                 setTabHide(tab);
                 deactivateTabPane(tabPaneId);
             }
         })
     }
 
+    function getDialogForm(){
+       return $(".coral-TabPanel-navigation").closest('form')[0]
+    }
+
+    function getContentPath(){
+        var form = getDialogForm();
+        return new URL(form.action).pathname
+    }
 
     function getTab(index) {
         return $(".coral-TabPanel-navigation").children()[index];

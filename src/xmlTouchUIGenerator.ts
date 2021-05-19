@@ -102,14 +102,20 @@ export class TouchUIXMLGenerator extends UiGenerator {
     if (this.dialogConfig.tabs) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_dialog');
 
+      // required condition to create clientlibs
       const hasHideFunction = this.dialogConfig.tabs.some((tab) => tab.hide !== undefined);
+
+      this.writeDialog();
       
       if (hasHideFunction) {
         this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
         this.writeClientLibs();
-      }
+      } 
 
-      this.writeDialog();
+      // remove clientlibs if required condition for clientlibs not exist
+      if(this.existFolder(this.dialogConfig.componentPath + '/clientlibs') && !hasHideFunction) {
+        this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs')
+      }
 
       // Optional html-tag values for the component.
       if (this.dialogConfig.tag && this.dialogConfig.css) {
@@ -162,6 +168,38 @@ export class TouchUIXMLGenerator extends UiGenerator {
         fs.mkdirSync(path.resolve(currentFolder));
       }
     });
+  }
+
+  /**
+   * deleteFolder() takes the component path and delete the
+   * folder in the file system when is exist
+   * @param {string} folderPath
+   */
+  public deleteFolder(folderPath: string): void {
+    if(!this.existFolder(folderPath)) return;
+    try {
+
+      const files = fs.readdirSync(folderPath);
+      if(!files) { 
+        fs.rmdirSync(folderPath)
+      } else {
+        files.forEach(file => {
+          fs.unlinkSync(path.resolve(folderPath + '/' + file));
+        });
+        fs.rmdirSync(folderPath)
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  /**
+   * existingFolder() takes the component path and check the
+   * folder in the file system if exist
+   * @param {string} folderPath
+   */
+  public existFolder(folderPath: string): boolean{
+    return fs.existsSync(path.resolve(folderPath))
   }
   /**
    * writeDialog() create the /_cq_dialog/.content.xml file and
@@ -279,7 +317,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
   public writeClientLibs() {
       const filePath = path.resolve(this.dialogConfig.componentPath + '/clientlibs/.content.xml');
       fs.writeFileSync(path.resolve(filePath),  this.buildCqClientLibs());
-
+    
       const txtFile = path.resolve(this.dialogConfig.componentPath + '/clientlibs/js.txt');
       fs.writeFileSync(path.resolve(txtFile),  this.buildJQuery(this.dialogConfig.componentPath + '/clientlibs/'));
 

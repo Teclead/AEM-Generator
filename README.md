@@ -78,7 +78,7 @@ export const dialog: AEMTouchUIDialog = {
   componentDescription: 'MyTestComponentDescription',
   componentPath: './src/__tests___/results/touchUI',
   tabs,
-  resourceSuperType: 'core/wcm/components/text/v2/text'
+  resourceSuperType: 'core/wcm/components/text/v2/text',
 };
 
 new TouchUIXMLGenerator(dialog).writeFilesToAEM();
@@ -104,7 +104,7 @@ The variable tabs: TouchUiDialogTab[] describes the required tabs for the dialog
 
 ```typescript
 const tabs: TouchUIDialogTab[] = [
-  { title: 'Mein erstes Tab', fields, hide: () => location.href.includes('/de') },
+  { title: 'Mein erstes Tab', fields, hide: ({contentPath: '/path/to/content'}) => contentPath.includes('/to') },
   ...
 ]
 ```

@@ -108,7 +108,10 @@ const tabs: TouchUIDialogTab[] = [
         description: 'Tolle Tags'
       } */
     ],
-    hide: () => location.href.includes('/it')
+    hide: (params) => {
+      console.log(params);
+      return params?.contentPath.includes('/it')
+    }
   },
 ];
 

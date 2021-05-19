@@ -116,14 +116,10 @@ export class UiGenerator {
 
   }
   /**
-   * buildClientLibs replace the config placeholder Categories 
-   * in the cqClientlibs template and returns cqClientlibs template string
+   * buildClientLibs returns cqClientlibs template string
    */
   public buildCqClientLibs(): string {
-    return (!this.dialogConfig.clientlibsCategories) ? '' : (
-      template.clientlibs
-        .replace(PlaceHolder.ClientlibsCategories, this.dialogConfig.clientlibsCategories.toString())
-    )
+    return template.clientlibs
   }
   /**
    * getTemplate() check the field type and return
@@ -273,16 +269,12 @@ export class UiGenerator {
    */
   protected buildJQuery(dir: string): string {
     if (this.clientlibs.length === 0) { return ''; }
-    // const {filename, content} = this.clientlibs[0];
-    // const file = dir + filename;
-    // fs.writeFileSync(path.resolve(file), content);
-    // fs.unlinkSync(file);
-    // return filename;
+    console.log(dir);
     return this.clientlibs
       .map(({filename, content}): string => {
+      
         const file = dir + filename;
-        fs.writeFileSync(path.resolve(file), content);
-       
+        fs.writeFileSync(path.resolve(file, ), content);
         return filename;
       })
       .join(' ');

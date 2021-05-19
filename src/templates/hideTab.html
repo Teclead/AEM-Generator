@@ -37,13 +37,21 @@
             var tab = getTab(hideTab);
             var tabPaneId = getTabPaneId(tab);
             var hideFn = getFunction(isHide[hideTab]);
-            if(hideFn()) {
+            if(hideFn({contentPath: getContentPath()})) {
                 setTabHide(tab);
                 deactivateTabPane(tabPaneId);
             }
         })
     }
 
+    function getDialogForm(){
+       return $(".coral-TabPanel-navigation").closest('form')[0]
+    }
+
+    function getContentPath(){
+        var form = getDialogForm();
+        return new URL(form.action).pathname
+    }
 
     function getTab(index) {
         return $(".coral-TabPanel-navigation").children()[index];

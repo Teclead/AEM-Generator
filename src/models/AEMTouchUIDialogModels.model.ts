@@ -43,13 +43,12 @@ export interface AEMTouchUIDialog {
   css?: string; // classes that should be used in the tag
   noCqDesignDialog?: boolean; // conditionally build cqDesignDialog
   newPar?: boolean; // conditionally generate a new par component for containers
-  clientlibsCategories?: string[]; // adding and execute javascript to the dialog
 }
 
 export interface TouchUIDialogTab {
   title: string;
   fields: TouchUIDialogFieldOptions[];
-  hide?: () => boolean;
+  hide?: (params:{ contentPath: string }) => boolean;
 }
 
 export interface TouchUIAnalytics {
