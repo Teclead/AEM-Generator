@@ -79,7 +79,6 @@ export const dialog: AEMTouchUIDialog = {
   componentPath: './src/__tests___/results/touchUI',
   tabs,
   resourceSuperType: 'core/wcm/components/text/v2/text',
-  clientlibsCategories: ['cq.authoring.dialog']
 };
 
 new TouchUIXMLGenerator(dialog).writeFilesToAEM();
