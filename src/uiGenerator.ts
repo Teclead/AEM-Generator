@@ -116,14 +116,10 @@ export class UiGenerator {
 
   }
   /**
-   * buildClientLibs replace the config placeholder Categories 
-   * in the cqClientlibs template and returns cqClientlibs template string
+   * buildClientLibs returns cqClientlibs template string
    */
   public buildCqClientLibs(): string {
-    return (!this.dialogConfig.clientlibsCategories) ? '' : (
-      template.clientlibs
-        .replace(PlaceHolder.ClientlibsCategories, this.dialogConfig.clientlibsCategories.toString())
-    )
+    return template.clientlibs
   }
   /**
    * getTemplate() check the field type and return
@@ -278,7 +274,7 @@ export class UiGenerator {
       .map(({filename, content}): string => {
       
         const file = dir + filename;
-        fs.writeFileSync(path.resolve(file), content);
+        fs.writeFileSync(path.resolve(file, ), content);
         return filename;
       })
       .join(' ');
