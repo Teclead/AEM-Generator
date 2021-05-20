@@ -85,7 +85,7 @@ new TouchUIXMLGenerator(dialog).writeFilesToAEM();
 ```
 
 The variable fields: TouchUIDialogFieldOptions[] describes the individual fields of the Dialog. Label, type, databaseName are always required,
-all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. For further information check out the individual interfaces for the different field types.
+all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. The hide property is optional and can be used to hide a dialog field inside a specific condition. This property uses a function where return a boolean. For further information check out the individual interfaces for the different field types.
 
 Side-Node: The button offers to execute javaScript code with the onClick listener by adding the javaScriptHandler-Property.
 
@@ -94,13 +94,14 @@ const fields: TouchUIDialogFieldOptions[] = [{
     label: 'Mein Button',
     type: TouchUIField.Button,
     databaseName: 'btn',
-    javaScriptHandler: 'alert(123)'
+    javaScriptHandler: 'alert(123)',
+    hide: ({contentPath: '/path/to/content'}) => contentPath.includes('/to'),
 },
 ...
 ];
 ```
 
-The variable tabs: TouchUiDialogTab[] describes the required tabs for the dialog, it hold a title and a field property. The field property should hold the value of the fields: TouchUIDialogFieldOptions[] variable. If more than one tab is used, then obviously more than one fields: TouchUIDialogFieldOptions[] variable needs to be configured. The hide property is optional and can be used to hide a tab inside a specific condition. This property uses a function where return an boolean.
+The variable tabs: TouchUiDialogTab[] describes the required tabs for the dialog, it hold a title and a field property. The field property should hold the value of the fields: TouchUIDialogFieldOptions[] variable. If more than one tab is used, then obviously more than one fields: TouchUIDialogFieldOptions[] variable needs to be configured. The hide property is optional and can be used to hide a tab inside a specific condition. This property uses a function where return a boolean.
 
 ```typescript
 const tabs: TouchUIDialogTab[] = [
