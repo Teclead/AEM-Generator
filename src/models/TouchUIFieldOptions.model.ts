@@ -3,12 +3,14 @@
  */
 import { TouchUIDialogFieldOptions } from './AEMTouchUIDialogModels.model';
 import { TouchUIField } from './TouchUIFieldEnum.model';
+import { HideFunction } from './TouchUIFunction.model';
 
 export interface CommonOptions {
   description?: string;
   isRequired?: boolean;
   label: string;
   defaultValue?: string | boolean | number;
+  hide?: HideFunction;
 }
 
 export interface BaseOptions extends CommonOptions {

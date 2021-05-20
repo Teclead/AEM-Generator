@@ -1,13 +1,12 @@
 export enum CustomFilePath {
   ReactExternal = 'templates/reactExternal.template.html',
   React = 'templates/react.template.html',
-  HideTab = 'templates/hideTab.html',
+  HideTab = 'templates/hide.js',
 }
 /**
  * Placeholders for scripts tags inside html templates 
  */
  export enum JavaScriptPlaceHolder {
-  HideTabIndex =  '{{HIDE_TAB_INDEX}}',
-  HideTabFunction = '{{HIDE_TAB_FUNCTION}}',
-  HideTabComponentName = '{{HIDE_TAB_COMPONENT_NAME}}'
+  HideContainer =  '\'{{HIDE_CONTAINER}}\'',
+  HideComponentName = '\'{{HIDE_COMPONENT_NAME}}\'',
 }

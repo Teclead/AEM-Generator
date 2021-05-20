@@ -3,6 +3,7 @@
  */
 
 import * as options from './TouchUIFieldOptions.model';
+import { HideFunction } from './TouchUIFunction.model';
 export type TouchUIDialogFieldOptions =
   | options.TextOptions
   | options.PathOptions
@@ -48,7 +49,7 @@ export interface AEMTouchUIDialog {
 export interface TouchUIDialogTab {
   title: string;
   fields: TouchUIDialogFieldOptions[];
-  hide?: (params:{ contentPath: string }) => boolean;
+  hide?: HideFunction;
 }
 
 export interface TouchUIAnalytics {

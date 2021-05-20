@@ -4,6 +4,7 @@ import {
   AEMTouchUIDialog,
   CustomFilePath,
   JavaScriptPlaceHolder,
+  JQueryHideModel,
   MultifieldNestedOptions,
   MultifieldOptions,
   PlaceHolder,
@@ -71,9 +72,8 @@ export class UiGenerator {
    * in the buildTabs template and returns buildTabs template string
    */
   public buildTabs(): string {
-    const hasHideImplementation = this.dialogConfig.tabs.some((tab) => tab.hide !== undefined);
-    if (hasHideImplementation) {
-      this.clientlibs = [...this.clientlibs, {filename: 'hideTab.js', content: this.buildHideTabScript()}];
+    if (this.hasHideImplementation()) {
+      this.clientlibs = [...this.clientlibs, {filename: 'hide.js', content: this.buildHideScript()}];
     }
 
     return this.dialogConfig.tabs
@@ -92,34 +92,22 @@ export class UiGenerator {
       .join('');
   }
   /**
-   * buildHideTabScript() replace the placeholder in the hideTab scripts template 
-   * and returns buildHideTabScript template string
+   * buildHideScript() replace the placeholder in the hideTab scripts template 
+   * and returns buildHideScript template string
    */
-  public buildHideTabScript(): string {
-    const file = getFile( path.resolve(__dirname, CustomFilePath.HideTab));
-    const hideTabIndex = this.dialogConfig.tabs.reduce(
-      (prev: number[] , curr , idx: number ) => {
-        if (curr.hide) {
-          prev.push(idx);
-        }
-        return prev;
-      },  []);
-    const isHide = this.dialogConfig.tabs.reduce(
-      (prev, curr, idx)  => (curr.hide) ? {...prev, [idx]: '' + curr.hide} : {...prev}, {});
-    return file
-            .replace(JavaScriptPlaceHolder.HideTabComponentName, this.dialogConfig.componentName.toLocaleLowerCase())
-            .replace(JavaScriptPlaceHolder.HideTabIndex, `[${hideTabIndex.toString()}]`)
-            .replace(JavaScriptPlaceHolder.HideTabFunction, JSON.stringify(isHide))
-            .replace(/\`/g, '')
-            .replace('<script>', '')
-            .replace('</script>', '');
+  public buildHideScript(): string {
+    const templateFile = getFile( path.resolve(__dirname, CustomFilePath.HideTab));
+    const container: JQueryHideModel[] = [...this.getJQueryHideTabModels(), ...this.getJQueryHideDialogFieldModels()];
+    return templateFile
+            .replace(JavaScriptPlaceHolder.HideComponentName, this.dialogConfig.componentName.toLowerCase())
+            .replace(JavaScriptPlaceHolder.HideContainer, JSON.stringify(container));
 
   }
   /**
    * buildClientLibs returns cqClientlibs template string
    */
   public buildCqClientLibs(): string {
-    return template.clientlibs
+    return template.clientlibs;
   }
   /**
    * getTemplate() check the field type and return
@@ -263,16 +251,37 @@ export class UiGenerator {
     return;
   }
 
+  public getJQueryHideTabModels(): JQueryHideModel[] {
+    return this.dialogConfig.tabs.reduce(
+      (prev, curr, index) => (curr.hide) ? [...prev, {index, isTab: true, hide: '' + curr.hide }] : [...prev], 
+      [] as JQueryHideModel[]);
+  }
+
+  public getJQueryHideDialogFieldModels(): JQueryHideModel[] {
+    return this.dialogConfig.tabs.map(
+      (tab, tabIndex) => tab.fields.reduce(
+          (prev, curr, index) => (curr.hide) ? [...prev, {index, tabIndex, isTab: false, hide: '' + curr.hide }] : [...prev], 
+          [] as JQueryHideModel[])
+      ).reduce((acc, val) => acc.concat(val), []);
+  }
+
+  public hasHideImplementation(): boolean {
+    return this.dialogConfig.tabs
+      .some((tab) => tab.hide !== undefined || (
+        tab.fields.some(
+          (field) => field.hide !== undefined)
+        )
+    );
+  }
+
   /**
    * buildJQuery creates the jquery files inside a directory
    * and returns the name of the files
    */
   protected buildJQuery(dir: string): string {
     if (this.clientlibs.length === 0) { return ''; }
-    console.log(dir);
     return this.clientlibs
       .map(({filename, content}): string => {
-      
         const file = dir + filename;
         fs.writeFileSync(path.resolve(file, ), content);
         return filename;
