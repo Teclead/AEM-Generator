@@ -52,6 +52,7 @@ const fields: TouchUIDialogFieldOptions[] = [
       { value: 2, name: 'Name 2' },
       { value: 3, name: 'Name 3', selected: true },
     ],
+    hide: ({contentPath}) => contentPath.includes('/de')
   },
   {
     label: 'Meine Textarea',
@@ -74,7 +75,7 @@ const fields: TouchUIDialogFieldOptions[] = [
 ];
 
 const tabs: TouchUIDialogTab[] = [
-  { title: 'Mein erstes Tab', fields, hide: () => location.href.includes('/de') },
+  { title: 'Mein erstes Tab', fields },
   {
     title: 'Mein zweites Tab',
     fields: [
@@ -108,10 +109,7 @@ const tabs: TouchUIDialogTab[] = [
         description: 'Tolle Tags'
       } */
     ],
-    hide: (params) => {
-      console.log(params);
-      return params?.contentPath.includes('/it')
-    }
+    hide: ({contentPath}) => contentPath.includes('/it')
   },
 ];
 

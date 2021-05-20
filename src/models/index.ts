@@ -26,3 +26,6 @@ export {
   TextOptions,
   TouchUIFieldOption,
 } from './TouchUIFieldOptions.model';
+
+export * from './TouchUIFunction.model';
+export * from './JQueryModels.model';

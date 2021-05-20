@@ -103,7 +103,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_dialog');
 
       // required condition to create clientlibs
-      const hasHideFunction = this.dialogConfig.tabs.some((tab) => tab.hide !== undefined);
+      const hasHideFunction = this.hasHideImplementation();
 
       this.writeDialog();
       
@@ -114,7 +114,7 @@ export class TouchUIXMLGenerator extends UiGenerator {
 
       // remove clientlibs if required condition for clientlibs not exist
       if(this.existFolder(this.dialogConfig.componentPath + '/clientlibs') && !hasHideFunction) {
-        this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs')
+        this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs');
       }
 
       // Optional html-tag values for the component.
