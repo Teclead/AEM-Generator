@@ -13,6 +13,14 @@ export interface CommonOptions {
   hide?: HideFunction;
 }
 
+export interface DataSourceOptionAttribute {
+  [key: string]: string;
+}
+
+export interface DataSourceOptions {
+  dataSource: string;
+  attributes: DataSourceOptionAttribute;
+}
 export interface BaseOptions extends CommonOptions {
   databaseName: string;
 }
@@ -48,7 +56,7 @@ export interface CheckboxOptions extends BaseOptions {
 
 export interface DropdownOptions extends BaseOptions {
   type: TouchUIField.Dropdown;
-  options: TouchUIFieldOption[];
+  options: TouchUIFieldOption[] | DataSourceOptions;
 }
 
 export interface NumberOptions extends BaseOptions {

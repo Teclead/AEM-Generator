@@ -55,6 +55,20 @@ const fields: TouchUIDialogFieldOptions[] = [
     hide: ({contentPath}) => contentPath.includes('/de')
   },
   {
+    label: 'Mein Dropdown mit DataSource',
+    type: TouchUIField.Dropdown,
+    databaseName: 'dropdown',
+    description: 'Meine Beschreibung für Dropdown',
+    options : {
+      dataSource: 'path/to/java/servlet',
+      attributes: { 
+        'mode': 'placeholderOne', 
+        'mode1': 'placeholderTwo'
+    }
+      
+    },
+  },
+  {
     label: 'Meine Textarea',
     type: TouchUIField.TextArea,
     databaseName: 'label',

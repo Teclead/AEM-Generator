@@ -25,6 +25,8 @@ export {
   TextAreaOptions,
   TextOptions,
   TouchUIFieldOption,
+  DataSourceOptions,
+  DataSourceOptionAttribute,
 } from './TouchUIFieldOptions.model';
 
 export * from './TouchUIFunction.model';

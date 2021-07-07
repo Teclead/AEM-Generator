@@ -3,6 +3,8 @@ import * as path from 'path';
 import {
   AEMTouchUIDialog,
   CustomFilePath,
+  DataSourceOptions,
+  DropdownOptions,
   JavaScriptPlaceHolder,
   JQueryHideModel,
   MultifieldNestedOptions,
@@ -122,14 +124,7 @@ export class UiGenerator {
       case TouchUIField.Checkbox:
         return template.checkbox;
       case TouchUIField.Dropdown:
-        return template.dropdown.replace(
-          PlaceHolder.Options,
-          field.options
-            ? field.options
-                .map((option, i) => this.getOption(option, i))
-                .join('')
-            : 'OPTIONERROR'
-        );
+        return this.createDropdownFields(field);
       case TouchUIField.Multifield:
         return template.multiField.replace(
           PlaceHolder.Field,
@@ -205,6 +200,38 @@ export class UiGenerator {
     );
   }
 
+  /**
+   * createDropdownFields() create
+   * the right dropdown option template string for a data source
+   * or normal selected items 
+   * @param {DropdownOptions} field
+   * @returns {string}
+   */
+  public createDropdownFields(field: DropdownOptions): string {
+   
+    if (this.isDataSourceOption(field)) {
+      return template.dropdown
+        .replace(/(<i([^>]+)>)/g, '')
+        .replace(/(<\/i([^>]+)>)/g, '')
+        .replace(/^\s*\n/gm, '')
+        .replace(
+        PlaceHolder.Options,
+         field.options
+          ? this.getDataSource(field.options as DataSourceOptions)
+          : 'OPTIONERROR'
+       )
+    }
+
+    return template.dropdown.replace(
+      PlaceHolder.Options,
+      field.options
+        ? (field.options as TouchUIFieldOption[])
+            .map((option, i) => this.getOption(option, i))
+            .join('')
+        : 'OPTIONERROR'
+    );    
+  }
+
   public getFieldValue(field: TouchUIDialogFieldOptions): string {
     return typeof field.defaultValue === 'undefined'
       ? ''
@@ -219,6 +246,20 @@ export class UiGenerator {
   public getOption(option: TouchUIFieldOption, i: number) {
     const selectedAttr = option.selected ? 'selected="true"' : '';
     return `<option_${i} jcr:primaryType="nt:unstructured" ${selectedAttr} value="${option.value}" text="${option.name}"/>`;
+  }
+
+  /**
+   * getDataSource() returns string element for a data source
+   * @param {DataSourceOptions} option
+   * @returns {string}
+   */
+  public getDataSource({dataSource, attributes}: DataSourceOptions): string {
+     const attrs = Object.entries(attributes)
+                  .map(([key, value]) => `${key}="${value}" `)
+                  .join('');
+     return `<datasource jcr:primaryType="nt:unstructured"  
+              sling:resourceType="${dataSource}"  
+              ${attrs} />`
   }
 
   /**
@@ -300,5 +341,9 @@ export class UiGenerator {
       default:
         return '';
     }
+  }
+
+  private isDataSourceOption(field: DropdownOptions): boolean {
+    return !Array.isArray(field.options) && field.options.dataSource !== 'undefined';
   }
 }
