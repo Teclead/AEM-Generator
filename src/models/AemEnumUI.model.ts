@@ -58,5 +58,7 @@ export enum PlaceHolder {
   JavaScript = '{{javascript}}',
   VariableName = '{{VAR}}',
   Tariffspinner = '{{TARIFFSPINNER}}',
-  ClientlibsCategories = '{{CATEGORIES}}' 
+  ClientlibsCategories = '{{CATEGORIES}}',
+  Container = '{{CONTAINER}}',
+  AscCommonNested = '{{ASC_COMMON_NESTED}}'
 }

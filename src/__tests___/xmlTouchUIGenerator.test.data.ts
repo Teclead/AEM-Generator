@@ -102,12 +102,25 @@ const tabs: TouchUIDialogTab[] = [
   {
     title: 'Mein viertes Tab',
     fields: [
-      /* {
-        label: 'Tag',
-        databaseName: 'tag',
-        type: TouchUIField.Tag,
-        description: 'Tolle Tags'
-      } */
+      {
+        label: 'Nested Multifield with JSON storage',
+        databaseName: 'multi',
+        type: TouchUIField.MultifieldNested,
+        multifieldOptions: [
+          {
+            label: 'Mein Dropdown',
+            type: TouchUIField.Dropdown,
+            databaseName: 'dropdown',
+            jsonStorage: true,
+            description: 'Meine Beschreibung für Dropdown',
+            options: [
+              { value: 1, name: 'Name 1' },
+              { value: 2, name: 'Name 2' },
+              { value: 3, name: 'Name 3', selected: true },
+              ]
+          },
+        ]
+      },
     ],
     hide: ({contentPath}) => contentPath.includes('/it')
   },

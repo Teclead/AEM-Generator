@@ -8,6 +8,7 @@ import { HideFunction } from './TouchUIFunction.model';
 export interface CommonOptions {
   description?: string;
   isRequired?: boolean;
+  jsonStorage?: boolean;
   label: string;
   defaultValue?: string | boolean | number;
   hide?: HideFunction;
