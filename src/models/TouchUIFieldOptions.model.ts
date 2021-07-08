@@ -40,6 +40,10 @@ export interface PathOptions extends BaseOptions {
   type: TouchUIField.Path;
 }
 
+export interface PathBrowserOptions extends BaseOptions {
+  type: TouchUIField.PathBrowser;
+}
+
 export interface RichTextOptions extends BaseOptions {
   type: TouchUIField.RichText;
 }

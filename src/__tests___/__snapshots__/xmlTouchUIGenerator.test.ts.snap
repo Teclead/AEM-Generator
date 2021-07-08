@@ -586,7 +586,10 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
             </column>
         </items>
     </field>
-</element_0>
+</element_0><element_1 jcr:primaryType=\\"nt:unstructured\\"
+        name=\\"./pathBrowser\\" fieldLabel=\\"6.2 Pathbrowser\\"   
+        sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathbrowser\\"/>
+
             </items>
         </column>
     </items>

@@ -4,6 +4,7 @@
 
 export enum TouchUIField {
   Path = 'pathfield',
+  PathBrowser = 'pathBrowser',
   Text = 'textfield',
   RichText = 'richtext',
   TextArea = 'textarea',

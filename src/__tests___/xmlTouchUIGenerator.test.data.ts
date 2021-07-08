@@ -135,6 +135,11 @@ const tabs: TouchUIDialogTab[] = [
           },
         ]
       },
+      {
+        label: "6.2 Pathbrowser",
+        type: TouchUIField.PathBrowser,
+        databaseName: "pathBrowser",    
+      },
     ],
     hide: ({contentPath}) => contentPath.includes('/it')
   },

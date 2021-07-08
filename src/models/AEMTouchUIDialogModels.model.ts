@@ -7,6 +7,7 @@ import { HideFunction } from './TouchUIFunction.model';
 export type TouchUIDialogFieldOptions =
   | options.TextOptions
   | options.PathOptions
+  | options.PathBrowserOptions
   | options.RichTextOptions
   | options.TextAreaOptions
   | options.CheckboxOptions

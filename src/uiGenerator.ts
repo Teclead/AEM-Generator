@@ -121,6 +121,11 @@ export class UiGenerator {
     switch (field.type) {
       case TouchUIField.Path:
         return template.pathfield;
+      case TouchUIField.PathBrowser:
+        return template.pathfield
+          .replace(
+              "granite/ui/components/coral/foundation/form/pathfield", 
+              "granite/ui/components/coral/foundation/form/pathbrowser");
       case TouchUIField.Checkbox:
         return template.checkbox;
       case TouchUIField.Dropdown:
