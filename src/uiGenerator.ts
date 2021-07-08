@@ -131,9 +131,7 @@ export class UiGenerator {
           this.getMultiField(field)
         );
       case TouchUIField.MultifieldNested:
-        return template.multiFieldNested
-          .replace(PlaceHolder.Title, field.label)
-          .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
+        return this.createMultiFieldNested(field);
       case TouchUIField.Imagefield:
         return template.imagefield;
       case TouchUIField.Number:
@@ -229,7 +227,32 @@ export class UiGenerator {
             .map((option, i) => this.getOption(option, i))
             .join('')
         : 'OPTIONERROR'
-    );    
+    );  
+  }
+  /**  
+   * createMultiFieldNested create
+   * a nested multi field template string 
+   * @param {MultifieldNestedOptions} field
+   * @returns {string}
+   */
+  public createMultiFieldNested(field: MultifieldNestedOptions) {
+    const { multifieldOptions } = field;  
+    const hasJsonStorage = multifieldOptions.some((dialogField: TouchUIDialogFieldOptions) => dialogField.jsonStorage);
+
+    if (hasJsonStorage) {
+      return template.multiFieldNested
+        .replace(PlaceHolder.Title, field.label)
+        .replace(PlaceHolder.AscCommonNested,  'acs-commons-nested="JSON_STORE"')
+        .replace(PlaceHolder.Container, 'granite/ui/components/foundation/form/fieldset')
+        .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
+    }
+
+    return template.multiFieldNested
+      .replace(PlaceHolder.Title, field.label)
+      .replace(PlaceHolder.AscCommonNested, '')
+      .replace(PlaceHolder.Container, 'granite/ui/components/coral/foundation/container')
+      .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
+    
   }
 
   public getFieldValue(field: TouchUIDialogFieldOptions): string {

@@ -1,5 +1,5 @@
 <ELNAME jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/multifield" composite="{Boolean}true" fieldLabel="{{TITLE}}">
-    <field jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container" {{COMMON}}>
+    <field jcr:primaryType="nt:unstructured" {{ASC_COMMON_NESTED}} sling:resourceType="{{CONTAINER}}" {{COMMON}}>
         <items jcr:primaryType="nt:unstructured">
             <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
