@@ -32,9 +32,15 @@ function addFiles(dirPath) {
 
 files.forEach(file => {
     // execute each file
-    console.log('Run dialog file: ' + file)
+    console.log('Run dialog file: ' + file);
     // run the typescript file
-    exec('ts-node --compilerOptions {\"\"\"module\"\"\":\"\"\"commonjs\"\"\"} ' + file, (err, t) => {
-        console.log(err || t)
-    })
-})
+    if (process.platform === 'win32') {
+        exec('ts-node --compilerOptions {\"\"\"module\"\"\":\"\"\"commonjs\"\"\"} ' + file, (err, t) => {
+            console.log(err || t)
+        });
+    } else {
+        exec('ts-node --compiler-options \'{"module": "commonjs"}\' ' + file, (err, t) => {
+            console.log(err || t)
+        });
+    }
+});
