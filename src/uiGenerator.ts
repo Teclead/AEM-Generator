@@ -3,12 +3,14 @@ import * as path from 'path';
 import {
   AEMTouchUIDialog,
   CustomFilePath,
+  CustomOptionAttribute,
   DataSourceOptions,
   DropdownOptions,
   JavaScriptPlaceHolder,
   JQueryHideModel,
   MultifieldNestedOptions,
   MultifieldOptions,
+  OptionKeys,
   PlaceHolder,
   TouchUIDialogFieldOptions,
   TouchUIField,
@@ -69,6 +71,48 @@ export class UiGenerator {
         this.dialogConfig.css ? this.dialogConfig.css : ''
       );
   }
+
+  /**
+   * Filter additional common option keys from the default common options keys
+   */
+  public getAdditionalCommonKeys(field: TouchUIDialogFieldOptions): string[] {
+    return Object.keys(field).filter(x  => !Object.values(OptionKeys).includes(x as any));
+  }
+
+  /**
+   * Returns key value pairs as object from given touch ui dialog fields and additional common option keys
+   */
+  public getAdditionalCommon(field: TouchUIDialogFieldOptions, additionalCommonKeys: string[]): CustomOptionAttribute {
+    return Object
+      .entries(field)
+      .reduce(
+        (total, [key, value]) => (additionalCommonKeys.includes(key)) ? {...total, [key]: value} : {...total}, {}
+      );
+  }
+  /**
+   * Check have a given key inside touch ui dialog fields 
+   * @param {string} key 
+   * @return {boolean}
+   */
+  public has(key: string): boolean {
+    return this.dialogConfig.tabs
+      .some((tab) => tab.fields
+        .some((dialogField) => dialogField[key])
+      );
+  } 
+
+  /**
+   * replaceResourceType() replace sling:resourcesType of a field 
+   * with given type to replace it with the new type
+   * @param {string} tmp - template string to replace with
+   * @param {TouchUIField | string} type - touch ui field type to replace
+   * @param {string} replace - replace value 
+   */
+  public replaceResourceType(tmp: string, type: TouchUIField | string = 'container', replace: string): string {
+      const regex =  '(granite\/ui\/components\/coral\/foundation\/' + type  + ')';
+      return tmp.replace(new RegExp(regex), replace);
+  }
+
   /**
    * buildTabs() replaces the config placeholders Element, Title and Fields
    * in the buildTabs template and returns buildTabs template string
@@ -86,13 +130,13 @@ export class UiGenerator {
           .replace(PlaceHolder.Title, tab.title)
           .replace(
             PlaceHolder.Fields,
-            tab.fields
-              .map((field, fieldIndex) => this.getField(field, fieldIndex))
-              .join('')
+            this.getFields(tab.fields)
+              
           );
       })
       .join('');
   }
+
   /**
    * buildHideScript() replace the placeholder in the hideTab scripts template 
    * and returns buildHideScript template string
@@ -159,6 +203,18 @@ export class UiGenerator {
     }
   }
   /**
+   * Mapping over the given fields and 
+   * execute getField() method for all fields
+   * @param {TouchUIDialogFieldOptions[]} fields
+   * @returns {string}
+   */
+   public getFields(fields: TouchUIDialogFieldOptions[]): string {
+    return fields
+      .map((field, fieldIndex) => this.getField(field, fieldIndex))
+      .join('');
+  }
+
+  /**
    * getField() calls
    * the right field template string getTemplate() to get the field
    * and replaces the config placeholders Common, MaxLength, Max, Min, Required,
@@ -169,6 +225,11 @@ export class UiGenerator {
   public getField(field: TouchUIDialogFieldOptions, i: number): string {
     const _field = field as any; // not every interface has every options
 
+    // get additional keys from TouchUIDialogFieldOptions
+    const additionalCommonKeys = this.getAdditionalCommonKeys(_field);
+    // get additional common key value pairs
+    const additionalCommon = this.getAdditionalCommon(_field, additionalCommonKeys);
+    
     return (
       this.getTemplate(field)
         .replace(PlaceHolder.Common, template.commonField)
@@ -199,6 +260,13 @@ export class UiGenerator {
         .replace(
           PlaceHolder.isDisabled,
           _field.isDisabled ? ` disabled="{Boolean}true" ` : ''
+        )
+        .replace(
+          PlaceHolder.CustomAttribute,
+          additionalCommon ? ( Object.entries(additionalCommon )
+              .map(([key, value]) => `${key}="${value}" `)
+              .join('')
+            ) :  ''
         )
     );
   }
@@ -240,22 +308,9 @@ export class UiGenerator {
    * @param {MultifieldNestedOptions} field
    * @returns {string}
    */
-  public createMultiFieldNested(field: MultifieldNestedOptions) {
-    const { multifieldOptions } = field;  
-    const hasJsonStorage = multifieldOptions.some((dialogField: TouchUIDialogFieldOptions) => dialogField.jsonStorage);
-
-    if (hasJsonStorage) {
-      return template.multiFieldNested
-        .replace(PlaceHolder.Title, field.label)
-        .replace(PlaceHolder.AscCommonNested,  'acs-commons-nested="JSON_STORE"')
-        .replace(PlaceHolder.Container, 'granite/ui/components/foundation/form/fieldset')
-        .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
-    }
-
+  public createMultiFieldNested(field: MultifieldNestedOptions): string {
     return template.multiFieldNested
       .replace(PlaceHolder.Title, field.label)
-      .replace(PlaceHolder.AscCommonNested, '')
-      .replace(PlaceHolder.Container, 'granite/ui/components/coral/foundation/container')
       .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
     
   }
@@ -341,7 +396,7 @@ export class UiGenerator {
           (field) => field.hide !== undefined)
         )
     );
-  }
+  } 
 
   /**
    * buildJQuery creates the jquery files inside a directory

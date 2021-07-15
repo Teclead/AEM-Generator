@@ -17,6 +17,11 @@ The library can be run by executing builder.js. It is recommended to implement a
 
 Building the dialogues can then be executed by running npm run build:dialogues
 
+## Touch UI fields
+
+The default props for the touch ui fields will be define with TouchUIFieldOptionKeysEnum.model.ts
+Expand the default props with the enum
+
 ## API
 
 The following example shows a \*.dialog.ts file with the necessary configuration for the creating of an AEM component.
@@ -85,7 +90,7 @@ new TouchUIXMLGenerator(dialog).writeFilesToAEM();
 ```
 
 The variable fields: TouchUIDialogFieldOptions[] describes the individual fields of the Dialog. Label, type, databaseName are always required,
-all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. The hide property is optional and can be used to hide a dialog field inside a specific condition. This property uses a function where return a boolean. For further information check out the individual interfaces for the different field types.
+all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. You can add custom additional common keys for own implementations on touch ui dialog field level. The hide property is optional and can be used to hide a dialog field inside a specific condition. This property uses a function where return a boolean. For further information check out the individual interfaces for the different field types.
 
 Side-Node: The button offers to execute javaScript code with the onClick listener by adding the javaScriptHandler-Property.
 
@@ -93,6 +98,7 @@ Side-Node: The button offers to execute javaScript code with the onClick listene
 const fields: TouchUIDialogFieldOptions[] = [{
     label: 'Mein Button',
     type: TouchUIField.Button,
+    'acs-commons-nested': "JSON_STORE",
     databaseName: 'btn',
     javaScriptHandler: 'alert(123)',
     hide: ({contentPath: '/path/to/content'}) => contentPath.includes('/to'),
@@ -179,6 +185,52 @@ export const ctaDialog: AEMTouchUIDialog = {
 };
 
 new TouchUIXMLGenerator(ctaDialog).writeFilesToAEM(); // will write the files when npm build:dialogues is called
+```
+
+## TouchUIXMLGenerator extended
+
+The TouchUIXMLGenerator can be extended for own implementation on touch ui dialog field level
+for this you can add custom additional common keys e.g. acs-commons-nested, inside TouchUIDialogFieldOptions
+
+```typescript
+const tabs = [
+  {
+    title: 'Mein viertes Tab',
+    fields: [
+        {
+          label: 'Nested Multifield with JSON storage',
+          databaseName: 'multi',
+          type: TouchUIField.MultifieldNested,
+          'acs-commons-nested': "JSON_STORE",
+          multifieldOptions: [ ... ]
+        }, 
+        ...
+    ]
+  },
+  ...
+]
+
+class DialogGenerator extends TouchUIXMLGenerator {
+
+  public getFields(fields: TouchUIDialogFieldOptions[]) {
+      const template =  super.getFields(fields);
+      
+      if (this.has('acs-commons-nested')) {
+        return this.replaceResourceType(template,  'container', 'granite/ui/components/foundation/form/fieldset');
+      }
+
+      return template;
+  } 
+}  
+const dialog: AEMTouchUIDialog = {
+  componentPath: COMPONENTPATH + "ctaReact",
+  sightlyTemplate: REACT_TEMPLATE,
+  componentName: "Button-React",
+  componentGroup: COMPONENT_GROUP,
+  tabs
+}
+
+new DialogGenerator(dialog).writeFilesToAEM();
 ```
 
 ## How to contribute

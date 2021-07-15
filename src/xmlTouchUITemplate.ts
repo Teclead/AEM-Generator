@@ -8,7 +8,7 @@ export const getFile = (filePath: string) => {
 };
 
 const CommonField =
-  'name="{{DATABASE}}" fieldLabel="{{TITLE}}"{{VALUE}} {{REQUIRED}} {{DESC}} {{DISABLED}}';
+  'name="{{DATABASE}}" fieldLabel="{{TITLE}}"{{VALUE}} {{REQUIRED}} {{DESC}} {{DISABLED}} {{CUSTOM_ATTRIBUTE}}';
 
 // here we may get costum template path or we use the defuelt template
 export const template = {

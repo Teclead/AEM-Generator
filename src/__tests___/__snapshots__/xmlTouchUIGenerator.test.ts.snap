@@ -1,5 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`xml generator for touch ui aem dialogs should print a template for a extended version of TouchUIXMLGenerator 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+<jcr:root xmlns:sling=\\"http://sling.apache.org/jcr/sling/1.0\\"
+          xmlns:cq=\\"http://www.day.com/jcr/cq/1.0\\"
+          xmlns:jcr=\\"http://www.jcp.org/jcr/1.0\\"
+          xmlns:nt=\\"http://www.jcp.org/jcr/nt/1.0\\"
+          xmlns:granite=\\"http://www.adobe.com/jcr/granite/1.0\\"
+          jcr:primaryType=\\"nt:unstructured\\"
+          sling:resourceType=\\"cq/gui/components/authoring/dialog\\"
+          jcr:title=\\"extended\\">
+    <content
+            jcr:primaryType=\\"nt:unstructured\\"
+            sling:resourceType=\\"granite/ui/components/foundation/container\\">
+        <layout
+                jcr:primaryType=\\"nt:unstructured\\"
+                sling:resourceType=\\"granite/ui/components/foundation/layouts/tabs\\"
+                type=\\"nav\\"/>
+        <items jcr:primaryType=\\"nt:unstructured\\">
+            <tab_0
+        jcr:primaryType=\\"nt:unstructured\\"
+        jcr:title=\\"Mein viertes Tab\\"
+        sling:resourceType=\\"granite/ui/components/foundation/section\\">
+    <layout
+            jcr:primaryType=\\"nt:unstructured\\"
+            sling:resourceType=\\"granite/ui/components/foundation/layouts/fixedcolumns\\"/>
+    <items jcr:primaryType=\\"nt:unstructured\\">
+        <column jcr:primaryType=\\"nt:unstructured\\"
+                sling:resourceType=\\"granite/ui/components/foundation/container\\">
+            <items jcr:primaryType=\\"nt:unstructured\\">
+                <element_0 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/multifield\\" composite=\\"{Boolean}true\\" fieldLabel=\\"Nested Multifield with JSON storage\\">
+    <field jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/foundation/form/fieldset\\" name=\\"./multi\\" fieldLabel=\\"Nested Multifield with JSON storage\\"    acs-commons-nested=\\"JSON_STORE\\" >
+        <items jcr:primaryType=\\"nt:unstructured\\">
+            <column jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/container\\">
+                <items jcr:primaryType=\\"nt:unstructured\\">
+                     <element_0
+    jcr:primaryType=\\"nt:unstructured\\"
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
+    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  >
+    <items jcr:primaryType=\\"nt:unstructured\\">
+        <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
+    </items>
+</element_0>
+
+                </items>
+            </column>
+        </items>
+    </field>
+</element_0>
+            </items>
+        </column>
+    </items>
+</tab_0>
+
+        </items>
+    </content>
+</jcr:root>
+"
+`;
+
 exports[`xml generator for touch ui aem dialogs should print a template for a external react app 1`] = `"./src/templates/reactExternal.template.html"`;
 
 exports[`xml generator for touch ui aem dialogs should print the analytics file 1`] = `
@@ -114,9 +173,9 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
             <items jcr:primaryType=\\"nt:unstructured\\">
                 <element_0 jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"granite/ui/components/foundation/form/textfield\\"
-        name=\\"./label\\" fieldLabel=\\"Mein Textfeld\\"  required=\\"{Boolean}true\\"   fieldDescription=\\"Meine Beschreibung für Textfeld...\\"  />
+        name=\\"./label\\" fieldLabel=\\"Mein Textfeld\\"  required=\\"{Boolean}true\\"   fieldDescription=\\"Meine Beschreibung für Textfeld...\\"   />
 <element_1 jcr:primaryType=\\"nt:unstructured\\"
-        name=\\"./path\\" fieldLabel=\\"Mein PathField\\"   fieldDescription=\\"Meine Beschreibung für PathField...\\" 
+        name=\\"./path\\" fieldLabel=\\"Mein PathField\\"   fieldDescription=\\"Meine Beschreibung für PathField...\\"  
         sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathfield\\"/>
 <element_2
     jcr:primaryType=\\"nt:unstructured\\"
@@ -127,12 +186,12 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     value=\\"true\\"/>
 <element_3 jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"granite/ui/components/foundation/form/numberfield\\"
-        name=\\"./numbwr\\" fieldLabel=\\"Mein Numberfield\\"   fieldDescription=\\"Meine Beschreibung für Numberfield...\\"   max=\\"50\\"   min=\\"20\\" />
+        name=\\"./numbwr\\" fieldLabel=\\"Mein Numberfield\\"   fieldDescription=\\"Meine Beschreibung für Numberfield...\\"    max=\\"50\\"   min=\\"20\\" />
 <element_4 fieldLabel=\\"Mein Imagefield\\"  required=\\"{Boolean}true\\"  fileReferenceParameter=\\"./image\\" name=\\"./srcField\\" sling:resourceType=\\"granite/ui/components/foundation/form/fileupload\\" mimeTypes=\\"[image]\\" allowUpload=\\"{Boolean}false\\" autoStart=\\"{Boolean}false\\" class=\\"cq-droptarget\\" fileNameParameter=\\"./fileName\\" jcr:primaryType=\\"nt:unstructured\\" multiple=\\"{Boolean}false\\" uploadUrl=\\"\${suffix.path}\\" useHTML5=\\"{Boolean}true\\"/>
 <element_5
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
-    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
+    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
@@ -140,18 +199,18 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
 <element_6
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
-    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
+    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  >
         <datasource jcr:primaryType=\\"nt:unstructured\\"  
               sling:resourceType=\\"path/to/java/servlet\\"  
               mode=\\"placeholderOne\\" mode1=\\"placeholderTwo\\"  />
 </element_6>
 <element_7 jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"granite/ui/components/foundation/form/textarea\\"
-        name=\\"./label\\" fieldLabel=\\"Meine Textarea\\"   fieldDescription=\\"Meine Beschreibung für Textarea...\\"   maxlength=\\"50\\" />
+        name=\\"./label\\" fieldLabel=\\"Meine Textarea\\"   fieldDescription=\\"Meine Beschreibung für Textarea...\\"    maxlength=\\"50\\" />
 <element_8
         jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"cq/gui/components/authoring/dialog/richtext\\"
-        name=\\"./richtext\\" fieldLabel=\\"Mein Richtexteld\\"   fieldDescription=\\"Meine Beschreibung für Richtext...\\"  
+        name=\\"./richtext\\" fieldLabel=\\"Mein Richtexteld\\"   fieldDescription=\\"Meine Beschreibung für Richtext...\\"   
         useFixedInlineToolbar=\\"{Boolean}true\\">
     <rtePlugins jcr:primaryType=\\"nt:unstructured\\">
         <edit 
@@ -358,14 +417,14 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
                 sling:resourceType=\\"granite/ui/components/foundation/container\\">
             <items jcr:primaryType=\\"nt:unstructured\\">
                 <element_0 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/multifield\\" composite=\\"{Boolean}true\\" fieldLabel=\\"Nested Multifield\\">
-    <field jcr:primaryType=\\"nt:unstructured\\"  sling:resourceType=\\"granite/ui/components/coral/foundation/container\\" name=\\"./multi\\" fieldLabel=\\"Nested Multifield\\"   >
+    <field jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/container\\" name=\\"./multi\\" fieldLabel=\\"Nested Multifield\\"    >
         <items jcr:primaryType=\\"nt:unstructured\\">
             <column jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/container\\">
                 <items jcr:primaryType=\\"nt:unstructured\\">
                      <element_0
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
-    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
+    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
@@ -373,18 +432,18 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
 <element_1
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
-    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
+    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  >
         <datasource jcr:primaryType=\\"nt:unstructured\\"  
               sling:resourceType=\\"path/to/java/servlet\\"  
               mode=\\"placeholderOne\\" mode1=\\"placeholderTwo\\"  />
 </element_1>
 <element_2 jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"granite/ui/components/foundation/form/textarea\\"
-        name=\\"./label\\" fieldLabel=\\"Meine Textarea\\"   fieldDescription=\\"Meine Beschreibung für Textarea...\\"   maxlength=\\"50\\" />
+        name=\\"./label\\" fieldLabel=\\"Meine Textarea\\"   fieldDescription=\\"Meine Beschreibung für Textarea...\\"    maxlength=\\"50\\" />
 <element_3
         jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"cq/gui/components/authoring/dialog/richtext\\"
-        name=\\"./richtext\\" fieldLabel=\\"Mein Richtexteld\\"   fieldDescription=\\"Meine Beschreibung für Richtext...\\"  
+        name=\\"./richtext\\" fieldLabel=\\"Mein Richtexteld\\"   fieldDescription=\\"Meine Beschreibung für Richtext...\\"   
         useFixedInlineToolbar=\\"{Boolean}true\\">
     <rtePlugins jcr:primaryType=\\"nt:unstructured\\">
         <edit 
@@ -569,14 +628,14 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
                 sling:resourceType=\\"granite/ui/components/foundation/container\\">
             <items jcr:primaryType=\\"nt:unstructured\\">
                 <element_0 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/multifield\\" composite=\\"{Boolean}true\\" fieldLabel=\\"Nested Multifield with JSON storage\\">
-    <field jcr:primaryType=\\"nt:unstructured\\" acs-commons-nested=\\"JSON_STORE\\" sling:resourceType=\\"granite/ui/components/foundation/form/fieldset\\" name=\\"./multi\\" fieldLabel=\\"Nested Multifield with JSON storage\\"   >
+    <field jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/container\\" name=\\"./multi\\" fieldLabel=\\"Nested Multifield with JSON storage\\"    acs-commons-nested=\\"JSON_STORE\\" >
         <items jcr:primaryType=\\"nt:unstructured\\">
             <column jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/container\\">
                 <items jcr:primaryType=\\"nt:unstructured\\">
                      <element_0
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"
-    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\" >
+    name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
@@ -587,7 +646,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
         </items>
     </field>
 </element_0><element_1 jcr:primaryType=\\"nt:unstructured\\"
-        name=\\"./pathBrowser\\" fieldLabel=\\"6.2 Pathbrowser\\"   
+        name=\\"./pathBrowser\\" fieldLabel=\\"6.2 Pathbrowser\\"    
         sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathbrowser\\"/>
 
             </items>

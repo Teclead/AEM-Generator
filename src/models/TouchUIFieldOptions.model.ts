@@ -1,90 +1,91 @@
 /**
  * Please use index.ts to import and export the models out of the model folder
  */
+
 import { TouchUIDialogFieldOptions } from './AEMTouchUIDialogModels.model';
 import { TouchUIField } from './TouchUIFieldEnum.model';
+import { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';
 import { HideFunction } from './TouchUIFunction.model';
 
-export interface CommonOptions {
-  description?: string;
-  isRequired?: boolean;
-  jsonStorage?: boolean;
-  label: string;
-  defaultValue?: string | boolean | number;
-  hide?: HideFunction;
+
+export interface CustomOptionAttribute {
+  [key: string]: any;
 }
 
-export interface DataSourceOptionAttribute {
-  [key: string]: string;
+export interface CommonOptions extends CustomOptionAttribute {
+  [OptionKeys.Description]?: string;
+  [OptionKeys.IsRequired]?: boolean;
+  [OptionKeys.Label]: string;
+  [OptionKeys.DefaultValue]?: string | boolean | number;
+  [OptionKeys.HideFunction]?: HideFunction;
 }
 
 export interface DataSourceOptions {
   dataSource: string;
-  attributes: DataSourceOptionAttribute;
+  attributes: CustomOptionAttribute;
 }
 export interface BaseOptions extends CommonOptions {
-  databaseName: string;
+  [OptionKeys.DatabaseName]: string;
 }
 
 export interface TouchUIFieldOption {
-  selected?: boolean;
-  name: string;
-  value: string | number;
+  [OptionKeys.Selected]?: boolean;
+  [OptionKeys.Name]: string;
+  [OptionKeys.Value]: string | number;
 }
 export interface TextOptions extends BaseOptions {
-  type: TouchUIField.Text;
-  maxLength?: number;
+  [OptionKeys.Type]: TouchUIField.Text;
+  [OptionKeys.MaxLength]?: number;
 }
-
 export interface PathOptions extends BaseOptions {
-  type: TouchUIField.Path;
+  [OptionKeys.Type]: TouchUIField.Path;
 }
 
 export interface PathBrowserOptions extends BaseOptions {
-  type: TouchUIField.PathBrowser;
+  [OptionKeys.Type]: TouchUIField.PathBrowser;
 }
 
 export interface RichTextOptions extends BaseOptions {
-  type: TouchUIField.RichText;
+  [OptionKeys.Type]: TouchUIField.RichText;
 }
 
 export interface TextAreaOptions extends BaseOptions {
-  type: TouchUIField.TextArea;
-  maxLength?: number;
+  [OptionKeys.Type]: TouchUIField.TextArea;
+  [OptionKeys.MaxLength]?: number;
 }
 
 export interface CheckboxOptions extends BaseOptions {
-  type: TouchUIField.Checkbox;
-  checked?: boolean;
-  isDisabled?: boolean;
+  [OptionKeys.Type]: TouchUIField.Checkbox;
+  [OptionKeys.Checked]?: boolean;
+  [OptionKeys.IsDisabled]?: boolean;
 }
 
 export interface DropdownOptions extends BaseOptions {
-  type: TouchUIField.Dropdown;
-  options: TouchUIFieldOption[] | DataSourceOptions;
+  [OptionKeys.Type]: TouchUIField.Dropdown;
+  [OptionKeys.Options]: TouchUIFieldOption[] | DataSourceOptions;
 }
 
 export interface NumberOptions extends BaseOptions {
-  type: TouchUIField.Number;
-  max?: number;
-  min?: number;
+  [OptionKeys.Type]: TouchUIField.Number;
+  [OptionKeys.Max]?: number;
+  [OptionKeys.Min]?: number;
 }
 
 export interface MultifieldOptions extends BaseOptions {
-  type: TouchUIField.Multifield;
-  multifieldtype: TouchUIField;
+  [OptionKeys.Type]: TouchUIField.Multifield;
+  [OptionKeys.MultiFieldType]: TouchUIField;
 }
 
 export interface ImagefieldOptions extends BaseOptions {
-  type: TouchUIField.Imagefield;
+  [OptionKeys.Type]: TouchUIField.Imagefield;
 }
 
 export interface ButtonOptions extends CommonOptions {
-  type: TouchUIField.Button;
-  javaScriptHandler?: string;
+  [OptionKeys.Type]: TouchUIField.Button;
+  [OptionKeys.JavaScriptHandler]?: string;
 }
 
 export interface MultifieldNestedOptions extends BaseOptions {
-  type: TouchUIField.MultifieldNested;
-  multifieldOptions: TouchUIDialogFieldOptions[];
+  [OptionKeys.Type]: TouchUIField.MultifieldNested;
+  [OptionKeys.MultiFieldOptions]: TouchUIDialogFieldOptions[];
 }

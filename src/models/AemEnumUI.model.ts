@@ -60,5 +60,5 @@ export enum PlaceHolder {
   Tariffspinner = '{{TARIFFSPINNER}}',
   ClientlibsCategories = '{{CATEGORIES}}',
   Container = '{{CONTAINER}}',
-  AscCommonNested = '{{ASC_COMMON_NESTED}}'
+  CustomAttribute =  '{{CUSTOM_ATTRIBUTE}}',
 }

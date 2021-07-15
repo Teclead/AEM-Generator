@@ -1,7 +1,8 @@
 import * as fs from 'fs';
+import { TouchUIField } from '../models';
 import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 import { TouchUIXMLGenerator } from './../xmlTouchUIGenerator';
-import { exampleTouchUIDialog } from './xmlTouchUIGenerator.test.data';
+import { exampleTouchUIDialog, DialogGenerator } from './xmlTouchUIGenerator.test.data';
 
 describe('xml generator for touch ui aem dialogs', () => {
   const UIGenerator = new TouchUIXMLGenerator(exampleTouchUIDialog);
@@ -85,7 +86,7 @@ describe('xml generator for touch ui aem dialogs', () => {
 
     const config: AEMTouchUIDialog = {
       componentName: 'externalApp',
-      sightlyTemplate: externalReactAppTemplate,
+      sightlyTemplate:  externalReactAppTemplate,
       componentGroup: 'External Group',
       componentDescription: '...',
       componentPath: externalReactAppPath,
@@ -96,4 +97,52 @@ describe('xml generator for touch ui aem dialogs', () => {
     const renderedFile = fs.readFileSync(externalreactPath).toString();
     expect(renderedFile).toMatchSnapshot();
   });
+
+  it('should print a template for a extended version of TouchUIXMLGenerator', () => {
+
+    const externalExtendedPath = './src/__tests___/results/extendedTouchUIXMLGenerator';
+
+    const dialog: AEMTouchUIDialog = {
+      componentName: 'extended',
+      sightlyTemplate: "<h1>my custom template...</h1>",
+      componentGroup: 'Extended',
+      componentDescription: '...',
+      componentPath: externalExtendedPath ,
+      tabs: [
+        {
+          title: 'Mein viertes Tab',
+          fields: [
+            {
+              label: 'Nested Multifield with JSON storage',
+              databaseName: 'multi',
+              type: TouchUIField.MultifieldNested,
+              'acs-commons-nested': "JSON_STORE",
+              multifieldOptions: [
+                {
+                  label: 'Mein Dropdown',
+                  type: TouchUIField.Dropdown,
+                  databaseName: 'dropdown',
+                  description: 'Meine Beschreibung für Dropdown',
+                  options: [
+                    { value: 1, name: 'Name 1' },
+                    { value: 2, name: 'Name 2' },
+                    { value: 3, name: 'Name 3', selected: true },
+                    ]
+                },
+              ]
+            },
+          ],
+        },
+      ],
+    };
+
+    new DialogGenerator(dialog).writeFilesToAEM();
+
+    const touchUIDialogExtendedPath =
+    './src/__tests___/results/extendedTouchUIXMLGenerator/_cq_dialog/.content.xml';
+
+    const renderedFile = fs.readFileSync(touchUIDialogExtendedPath).toString();
+    expect(renderedFile).toMatchSnapshot();
+  });
+
 });

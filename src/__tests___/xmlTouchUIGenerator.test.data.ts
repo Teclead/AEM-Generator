@@ -4,7 +4,21 @@ import {
   TouchUIDialogTab,
   TouchUIField,
 } from '../models';
+import { TouchUIXMLGenerator } from '../xmlTouchUIGenerator';
 import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
+
+export class DialogGenerator extends TouchUIXMLGenerator {
+
+  public getFields(fields: TouchUIDialogFieldOptions[]) {
+      const template =  super.getFields(fields);
+      
+      if (this.has('acs-commons-nested')) {
+        return this.replaceResourceType(template,  'container', 'granite/ui/components/foundation/form/fieldset');
+      }
+
+      return template;
+  } 
+}   
 
 const fields: TouchUIDialogFieldOptions[] = [
   {
@@ -119,13 +133,13 @@ const tabs: TouchUIDialogTab[] = [
       {
         label: 'Nested Multifield with JSON storage',
         databaseName: 'multi',
+        'acs-commons-nested': "JSON_STORE",
         type: TouchUIField.MultifieldNested,
         multifieldOptions: [
           {
             label: 'Mein Dropdown',
             type: TouchUIField.Dropdown,
             databaseName: 'dropdown',
-            jsonStorage: true,
             description: 'Meine Beschreibung für Dropdown',
             options: [
               { value: 1, name: 'Name 1' },
