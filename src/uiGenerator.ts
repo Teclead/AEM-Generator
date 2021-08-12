@@ -337,12 +337,13 @@ export class UiGenerator {
    * @returns {string}
    */
   public getDataSource({dataSource, attributes}: DataSourceOptions): string {
-     const attrs = Object.entries(attributes)
-                  .map(([key, value]) => `${key}="${value}" `)
-                  .join('');
-     return `<datasource jcr:primaryType="nt:unstructured"  
+    const attrs = (attributes) ? (
+      Object.entries(attributes).map(([key, value]) => `${key}="${value}" `)
+        .join('')
+      ) :  '';    
+    return `<datasource jcr:primaryType="nt:unstructured"  
               sling:resourceType="${dataSource}"  
-              ${attrs} />`
+              ${attrs} />`;
   }
 
   /**

@@ -22,7 +22,7 @@ export interface CommonOptions extends CustomOptionAttribute {
 
 export interface DataSourceOptions {
   dataSource: string;
-  attributes: CustomOptionAttribute;
+  attributes?: CustomOptionAttribute;
 }
 export interface BaseOptions extends CommonOptions {
   [OptionKeys.DatabaseName]: string;

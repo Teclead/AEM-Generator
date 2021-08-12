@@ -83,6 +83,15 @@ const fields: TouchUIDialogFieldOptions[] = [
     },
   },
   {
+    label: 'My Dropdown with only dataSource path ',
+    type: TouchUIField.Dropdown,
+    databaseName: 'dropdown',
+    description: 'Meine Beschreibung für Dropdown',
+    options : {
+      dataSource: 'path/to/java/servlet'
+    },
+  },
+  {
     label: 'Meine Textarea',
     type: TouchUIField.TextArea,
     databaseName: 'label',
