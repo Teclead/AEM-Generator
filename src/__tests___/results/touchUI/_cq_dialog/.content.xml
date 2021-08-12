@@ -27,8 +27,11 @@
                                                         <element_6 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/select" name="./dropdown" fieldLabel="Mein Dropdown mit DataSource" fieldDescription="Meine Beschreibung für Dropdown">
                                                                 <datasource jcr:primaryType="nt:unstructured" sling:resourceType="path/to/java/servlet" mode="placeholderOne" mode1="placeholderTwo" />
                                                         </element_6>
-                                                        <element_7 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/form/textarea" name="./label" fieldLabel="Meine Textarea" fieldDescription="Meine Beschreibung für Textarea..." maxlength="50" />
-                                                        <element_8 jcr:primaryType="nt:unstructured" sling:resourceType="cq/gui/components/authoring/dialog/richtext" name="./richtext" fieldLabel="Mein Richtexteld" fieldDescription="Meine Beschreibung für Richtext..." useFixedInlineToolbar="{Boolean}true">
+                                                        <element_7 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/select" name="./dropdown" fieldLabel="My Dropdown with only dataSource path " fieldDescription="Meine Beschreibung für Dropdown">
+                                                                <datasource jcr:primaryType="nt:unstructured" sling:resourceType="path/to/java/servlet" />
+                                                        </element_7>
+                                                        <element_8 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/form/textarea" name="./label" fieldLabel="Meine Textarea" fieldDescription="Meine Beschreibung für Textarea..." maxlength="50" />
+                                                        <element_9 jcr:primaryType="nt:unstructured" sling:resourceType="cq/gui/components/authoring/dialog/richtext" name="./richtext" fieldLabel="Mein Richtexteld" fieldDescription="Meine Beschreibung für Richtext..." useFixedInlineToolbar="{Boolean}true">
                                                                 <rtePlugins jcr:primaryType="nt:unstructured">
                                                                         <edit jcr:primaryType="nt:unstructured" features="*"/>
                                                                         <findreplace jcr:primaryType="nt:unstructured" features="*"/>
@@ -89,8 +92,8 @@
                                                                                 <tableEditOptions jcr:primaryType="nt:unstructured" toolbar="[table#insertcolumn-before,table#insertcolumn-after,table#removecolumn,-,table#insertrow-before,table#insertrow-after,table#removerow,-,table#mergecells-right,table#mergecells-down,table#mergecells,table#splitcell-horizontal,table#splitcell-vertical,-,table#selectrow,table#selectcolumn,-,table#ensureparagraph,-,table#modifytableandcell,table#removetable,-,undo#undo,undo#redo,-,table#exitTableEditing,-]"/>
                                                                         </cui>
                                                                 </uiSettings>
-                                                        </element_8>
-                                                        <element_9 jcr:primaryType="nt:unstructured" onClick="alert(123)" text="Mein Button" selectionMode="single" sling:resourceType="granite/ui/components/foundation/button"/>
+                                                        </element_9>
+                                                        <element_10 jcr:primaryType="nt:unstructured" onClick="alert(123)" text="Mein Button" selectionMode="single" sling:resourceType="granite/ui/components/foundation/button"/>
                                                 </items>
                                         </column>
                                 </items>
@@ -128,8 +131,11 @@
                                                                                                 <element_1 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/select" name="./dropdown" fieldLabel="Mein Dropdown mit DataSource" fieldDescription="Meine Beschreibung für Dropdown">
                                                                                                         <datasource jcr:primaryType="nt:unstructured" sling:resourceType="path/to/java/servlet" mode="placeholderOne" mode1="placeholderTwo" />
                                                                                                 </element_1>
-                                                                                                <element_2 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/form/textarea" name="./label" fieldLabel="Meine Textarea" fieldDescription="Meine Beschreibung für Textarea..." maxlength="50" />
-                                                                                                <element_3 jcr:primaryType="nt:unstructured" sling:resourceType="cq/gui/components/authoring/dialog/richtext" name="./richtext" fieldLabel="Mein Richtexteld" fieldDescription="Meine Beschreibung für Richtext..." useFixedInlineToolbar="{Boolean}true">
+                                                                                                <element_2 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/select" name="./dropdown" fieldLabel="My Dropdown with only dataSource path " fieldDescription="Meine Beschreibung für Dropdown">
+                                                                                                        <datasource jcr:primaryType="nt:unstructured" sling:resourceType="path/to/java/servlet" />
+                                                                                                </element_2>
+                                                                                                <element_3 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/form/textarea" name="./label" fieldLabel="Meine Textarea" fieldDescription="Meine Beschreibung für Textarea..." maxlength="50" />
+                                                                                                <element_4 jcr:primaryType="nt:unstructured" sling:resourceType="cq/gui/components/authoring/dialog/richtext" name="./richtext" fieldLabel="Mein Richtexteld" fieldDescription="Meine Beschreibung für Richtext..." useFixedInlineToolbar="{Boolean}true">
                                                                                                         <rtePlugins jcr:primaryType="nt:unstructured">
                                                                                                                 <edit jcr:primaryType="nt:unstructured" features="*"/>
                                                                                                                 <findreplace jcr:primaryType="nt:unstructured" features="*"/>
@@ -190,8 +196,8 @@
                                                                                                                         <tableEditOptions jcr:primaryType="nt:unstructured" toolbar="[table#insertcolumn-before,table#insertcolumn-after,table#removecolumn,-,table#insertrow-before,table#insertrow-after,table#removerow,-,table#mergecells-right,table#mergecells-down,table#mergecells,table#splitcell-horizontal,table#splitcell-vertical,-,table#selectrow,table#selectcolumn,-,table#ensureparagraph,-,table#modifytableandcell,table#removetable,-,undo#undo,undo#redo,-,table#exitTableEditing,-]"/>
                                                                                                                 </cui>
                                                                                                         </uiSettings>
-                                                                                                </element_3>
-                                                                                                <element_4 jcr:primaryType="nt:unstructured" onClick="alert(123)" text="Mein Button" selectionMode="single" sling:resourceType="granite/ui/components/foundation/button"/>
+                                                                                                </element_4>
+                                                                                                <element_5 jcr:primaryType="nt:unstructured" onClick="alert(123)" text="Mein Button" selectionMode="single" sling:resourceType="granite/ui/components/foundation/button"/>
                                                                                         </items>
                                                                                 </column>
                                                                         </items>

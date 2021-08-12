@@ -20,7 +20,7 @@ export interface DataSourceOptionAttribute {
 
 export interface DataSourceOptions {
   dataSource: string;
-  attributes: DataSourceOptionAttribute;
+  attributes?: DataSourceOptionAttribute;
 }
 export interface BaseOptions extends CommonOptions {
   databaseName: string;
