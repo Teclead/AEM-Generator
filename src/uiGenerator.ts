@@ -60,7 +60,6 @@ export class UiGenerator {
    * in the getHtmlTag template and returns getHtmlTag template string
    */
   public getHtmlTag() {
-    console.log('????', template.htmlTag);
     return template.htmlTag
       .replace(
         PlaceHolder.Tag,
