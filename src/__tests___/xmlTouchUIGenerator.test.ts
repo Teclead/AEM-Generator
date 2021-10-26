@@ -84,7 +84,7 @@ describe('xml generator for touch ui aem dialogs', () => {
     const externalreactPath =
       './src/__tests___/results/externalReactApp/externalReactApp.html';
 
-    const config: AEMTouchUIDialog = {
+    const config: AEMTouchUIDialog<{}> = {
       componentName: 'externalApp',
       sightlyTemplate:  externalReactAppTemplate,
       componentGroup: 'External Group',
@@ -102,7 +102,7 @@ describe('xml generator for touch ui aem dialogs', () => {
 
     const externalExtendedPath = './src/__tests___/results/extendedTouchUIXMLGenerator';
 
-    const dialog: AEMTouchUIDialog = {
+    const dialog: AEMTouchUIDialog<{}> = {
       componentName: 'extended',
       sightlyTemplate: "<h1>my custom template...</h1>",
       componentGroup: 'Extended',
@@ -116,7 +116,7 @@ describe('xml generator for touch ui aem dialogs', () => {
               label: 'Nested Multifield with JSON storage',
               databaseName: 'multi',
               type: TouchUIField.MultifieldNested,
-              'acs-commons-nested': "JSON_STORE",
+              //'acs-commons-nested': "JSON_STORE",
               multifieldOptions: [
                 {
                   label: 'Mein Dropdown',

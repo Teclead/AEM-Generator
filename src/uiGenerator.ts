@@ -17,12 +17,12 @@ import {
   TouchUIFieldOption,
 } from './models';
 import { getFile, template } from './xmlTouchUITemplate';
-export class UiGenerator {
-  public dialogConfig: AEMTouchUIDialog;
+export class UiGenerator<T = {}> {
+  public dialogConfig: AEMTouchUIDialog<T>;
 
   protected clientlibs: Array<{filename: string, content: string}> = [];
 
-  constructor(dialogConfig: AEMTouchUIDialog) {
+  constructor(dialogConfig: AEMTouchUIDialog<T>) {
     this.dialogConfig = dialogConfig;
   }
 
@@ -74,14 +74,14 @@ export class UiGenerator {
   /**
    * Filter additional common option keys from the default common options keys
    */
-  public getAdditionalCommonKeys(field: TouchUIDialogFieldOptions): string[] {
+  public getAdditionalCommonKeys(field: TouchUIDialogFieldOptions<T[]>): string[] {
     return Object.keys(field).filter(x  => !Object.values(OptionKeys).includes(x as any));
   }
 
   /**
    * Returns key value pairs as object from given touch ui dialog fields and additional common option keys
    */
-  public getAdditionalCommon(field: TouchUIDialogFieldOptions, additionalCommonKeys: string[]): CustomOptionAttribute {
+  public getAdditionalCommon(field: TouchUIDialogFieldOptions<T[]>, additionalCommonKeys: string[]): CustomOptionAttribute {
     return Object
       .entries(field)
       .reduce(
@@ -160,7 +160,7 @@ export class UiGenerator {
    * @param  field TouchUIDialogFieldOptions
    * @returns {string}
    */
-  public getTemplate(field: TouchUIDialogFieldOptions): string {
+  public getTemplate(field: TouchUIDialogFieldOptions<T>): string {
     switch (field.type) {
       case TouchUIField.Path:
         return template.pathfield;
@@ -207,7 +207,7 @@ export class UiGenerator {
    * @param {TouchUIDialogFieldOptions[]} fields
    * @returns {string}
    */
-   public getFields(fields: TouchUIDialogFieldOptions[]): string {
+   public getFields(fields: TouchUIDialogFieldOptions<T>[]): string {
     return fields
       .map((field, fieldIndex) => this.getField(field, fieldIndex))
       .join('');
@@ -221,7 +221,7 @@ export class UiGenerator {
    * @param  field TouchUIDialogFieldOptions, i: number
    * @returns {string}
    */
-  public getField(field: TouchUIDialogFieldOptions, i: number): string {
+  public getField(field: TouchUIDialogFieldOptions<T>, i: number): string {
     const _field = field as any; // not every interface has every options
 
     // get additional keys from TouchUIDialogFieldOptions
@@ -307,14 +307,14 @@ export class UiGenerator {
    * @param {MultifieldNestedOptions} field
    * @returns {string}
    */
-  public createMultiFieldNested(field: MultifieldNestedOptions): string {
+  public createMultiFieldNested(field: MultifieldNestedOptions<T>): string {
     return template.multiFieldNested
       .replace(PlaceHolder.Title, field.label)
       .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
     
   }
 
-  public getFieldValue(field: TouchUIDialogFieldOptions): string {
+  public getFieldValue(field: TouchUIDialogFieldOptions<T>): string {
     return typeof field.defaultValue === 'undefined'
       ? ''
       : ` value="${this.parseFieldValue(field)}"`;
@@ -358,9 +358,9 @@ export class UiGenerator {
    * @param  field: TouchUIDialogFieldOptions
    * @returns {string}
    */
-  public getMultiFieldNested(field: MultifieldNestedOptions) {
+  public getMultiFieldNested(field: MultifieldNestedOptions<T>) {
     return (field.multifieldOptions || [])
-      .map((fieldOption, index) => this.getField(fieldOption, index))
+      .map((fieldOption: TouchUIDialogFieldOptions<T>, index: number) => this.getField(fieldOption, index))
       .join('');
   }
   /**
@@ -413,7 +413,7 @@ export class UiGenerator {
       .join(' ');
   }
 
-  private parseFieldValue(field: TouchUIDialogFieldOptions): string {
+  private parseFieldValue(field: TouchUIDialogFieldOptions<T>): string {
     switch (typeof field.defaultValue) {
       case 'boolean':
         return `{Boolean}${field.defaultValue ? 'true' : 'false'}`;

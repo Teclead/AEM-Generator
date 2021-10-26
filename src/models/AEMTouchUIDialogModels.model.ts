@@ -2,23 +2,38 @@
  * Please use index.ts to import and export the models out of model folder
  */
 
+import { TouchUIField } from '.';
 import * as options from './TouchUIFieldOptions.model';
 import { HideFunction } from './TouchUIFunction.model';
-export type TouchUIDialogFieldOptions =
-  | options.TextOptions
-  | options.PathOptions
-  | options.PathBrowserOptions
-  | options.RichTextOptions
-  | options.TextAreaOptions
-  | options.CheckboxOptions
-  | options.DropdownOptions
-  | options.NumberOptions
-  | options.MultifieldOptions
-  | options.ImagefieldOptions
-  | options.ButtonOptions
-  | options.MultifieldNestedOptions;
 
-export interface AEMTouchUIDialog {
+// Custom TouchUiField Types
+type CustomTextOptions<T> = T extends { [TouchUIField.Text]: unknown } ? T[TouchUIField.Text] : {}
+type CustomRichTextOptions<T> = T extends { [TouchUIField.RichText]: unknown } ? T[TouchUIField.RichText] : {}
+type CustomTextAreaOptions<T> = T extends { [TouchUIField.TextArea]: unknown } ? T[TouchUIField.TextArea] : {}
+type CustomCheckboxOptions<T> = T extends { [TouchUIField.Checkbox]: unknown } ? T[TouchUIField.Checkbox] : {}
+type CustomDropdownOptions<T> = T extends { [TouchUIField.Dropdown]: unknown } ? T[TouchUIField.Dropdown] : {}
+type CustomPathOptions<T> = T extends { [TouchUIField.PathBrowser]: unknown } ? T[TouchUIField.PathBrowser] : {}
+type CustomNumberOptions<T> = T extends { [TouchUIField.Number]: unknown } ? T[TouchUIField.Number] : {}
+type CustomMultifieldNestedOptions<T> = T extends { [TouchUIField.MultifieldNested]: unknown } ? T[TouchUIField.MultifieldNested] : {}
+type CustomButtonOptions<T> = T extends { [TouchUIField.Button]: unknown } ? T[TouchUIField.Button] : {}
+type CustomImagefieldOptions<T> = T extends { [TouchUIField.Imagefield]: unknown } ? T[TouchUIField.Imagefield] : {}
+
+export type TouchUIDialogFieldOptions<T = {}> =
+  | options.TextOptions & CustomTextOptions<T>
+  | options.PathOptions 
+  | options.PathBrowserOptions & CustomPathOptions<T>
+  | options.RichTextOptions & CustomRichTextOptions<T>
+  | options.TextAreaOptions & CustomTextAreaOptions<T>
+  | options.CheckboxOptions & CustomCheckboxOptions<T> 
+  | options.DropdownOptions & CustomDropdownOptions<T>
+  | options.NumberOptions & CustomNumberOptions<T>
+  | options.MultifieldOptions
+  | options.ImagefieldOptions & CustomImagefieldOptions<T>
+  | options.ButtonOptions & CustomButtonOptions<T>
+  | options.MultifieldNestedOptions<T> & CustomMultifieldNestedOptions<T>
+  
+
+export interface AEMTouchUIDialog<T = {}> {
   sightlyTemplate?: string; // this is the path to a html file.
   componentName: string; // componentName for selection in AEM.
   componentGroup: string; // componentGroup which contains the component.
@@ -30,7 +45,7 @@ export interface AEMTouchUIDialog {
    * the resource pointed to by the resource type.
    */
   resourceSuperType?: string;
-  tabs: TouchUIDialogTab[]; // Tab-Object which holds the tabs and inside the fields for each tab.
+  tabs: TouchUIDialogTab<T>[]; // Tab-Object which holds the tabs and inside the fields for each tab.
   analytics?: TouchUIAnalytics; // Analytics-Object with variables and events for creation of the analytics files.
   noDecoration?: boolean; // This property can be added to a component and a true value forces AEM not to generate any wrapper elements over the component.
   isContainer?: boolean; // Indicates whether the component is a container component and therefore can contain other components such as a paragraph system.
@@ -47,9 +62,9 @@ export interface AEMTouchUIDialog {
   newPar?: boolean; // conditionally generate a new par component for containers
 }
 
-export interface TouchUIDialogTab {
+export interface TouchUIDialogTab<T = {}> {
   title: string;
-  fields: TouchUIDialogFieldOptions[];
+  fields: TouchUIDialogFieldOptions<T>[];
   hide?: HideFunction;
 }
 

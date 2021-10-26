@@ -85,7 +85,7 @@ export interface ButtonOptions extends CommonOptions {
   [OptionKeys.JavaScriptHandler]?: string;
 }
 
-export interface MultifieldNestedOptions extends BaseOptions {
+export interface MultifieldNestedOptions<T> extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.MultifieldNested;
-  [OptionKeys.MultiFieldOptions]: TouchUIDialogFieldOptions[];
+  [OptionKeys.MultiFieldOptions]: TouchUIDialogFieldOptions<T>[];
 }
