@@ -116,7 +116,7 @@ describe('xml generator for touch ui aem dialogs', () => {
               label: 'Nested Multifield with JSON storage',
               databaseName: 'multi',
               type: TouchUIField.MultifieldNested,
-              //'acs-commons-nested': "JSON_STORE",
+              'acs-commons-nested': "JSON_STORE",
               multifieldOptions: [
                 {
                   label: 'Mein Dropdown',
