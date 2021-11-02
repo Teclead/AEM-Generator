@@ -22,6 +22,7 @@ export enum FilePath {
   MultifieldNested = 'templates/multifieldNested.template.xml',
   DatePicker = 'templates/datePicker.template.xml',
   Heading = 'templates/heading.template.xml',
+  FieldSet = 'templates/fieldset.template.xml',
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',

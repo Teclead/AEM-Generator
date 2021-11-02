@@ -1,3 +1,4 @@
+import { CommonOptions } from './../dist/models/TouchUIFieldOptions.model.d';
 import * as fs from 'fs';
 import * as path from 'path';
 import {
@@ -16,7 +17,7 @@ import {
   TouchUIField,
   TouchUIFieldOption,
 } from './models';
-import { DatePickerOptions, HeadingOptions } from './models/TouchUIFieldOptions.model';
+import { DatePickerOptions, HeadingOptions, FieldSetOptions } from './models/TouchUIFieldOptions.model';
 import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator<T = {}> {
   public dialogConfig: AEMTouchUIDialog<T>;
@@ -97,7 +98,7 @@ export class UiGenerator<T = {}> {
   public has(key: string): boolean {
     return this.dialogConfig.tabs
       .some((tab) => tab.fields
-        .some((dialogField) => dialogField[key])
+        .some((dialogField) => (dialogField as CommonOptions)[key])
       );
   }
 
@@ -180,7 +181,9 @@ export class UiGenerator<T = {}> {
           this.getMultiField(field)
         );
       case TouchUIField.MultifieldNested:
-        return this.createMultiFieldNested(field);
+        return this.createNestedFields(field);
+      case TouchUIField.FieldSet:
+        return this.createNestedFields(field);
       case TouchUIField.Imagefield:
         return template.imagefield;
       case TouchUIField.Number:
@@ -315,15 +318,15 @@ export class UiGenerator<T = {}> {
    * @param {MultifieldNestedOptions} field
    * @returns {string}
    */
-  public createMultiFieldNested(field: MultifieldNestedOptions<T>): string {
-    return template.multiFieldNested
-      .replace(PlaceHolder.Title, field.label)
-      .replace(PlaceHolder.Options, this.getMultiFieldNested(field));
+  public createNestedFields(field: MultifieldNestedOptions<T> | FieldSetOptions<T>): string {
+    return (field.type === TouchUIField.MultifieldNested ? template.multiFieldNested : template.fieldSet)
+      .replace(PlaceHolder.Title, (field as MultifieldNestedOptions<T>).label)
+      .replace(PlaceHolder.Options, this.getNestedFields(field));
 
   }
 
   public getFieldValue(field: TouchUIDialogFieldOptions<T>): string {
-    return typeof field.defaultValue === 'undefined'
+    return typeof (field as CommonOptions).defaultValue === 'undefined'
       ? ''
       : ` value="${this.parseFieldValue(field)}"`;
   }
@@ -366,8 +369,8 @@ export class UiGenerator<T = {}> {
    * @param  field: TouchUIDialogFieldOptions
    * @returns {string}
    */
-  public getMultiFieldNested(field: MultifieldNestedOptions<T>) {
-    return (field.multifieldOptions || [])
+  public getNestedFields(field: MultifieldNestedOptions<T> | FieldSetOptions<T>) {
+    return ((field as MultifieldNestedOptions<T>).multifieldOptions || field.options || [])
       .map((fieldOption: TouchUIDialogFieldOptions<T>, index: number) => this.getField(fieldOption, index))
       .join('');
   }
@@ -392,7 +395,7 @@ export class UiGenerator<T = {}> {
   public getJQueryHideDialogFieldModels(): JQueryHideModel[] {
     return this.dialogConfig.tabs.map(
       (tab, tabIndex) => tab.fields.reduce(
-        (prev, curr, index) => (curr.hide) ? [...prev, { index, tabIndex, isTab: false, hide: '' + curr.hide }] : [...prev],
+        (prev, curr, index) => ((curr as CommonOptions).hide) ? [...prev, { index, tabIndex, isTab: false, hide: '' + (curr as CommonOptions).hide }] : [...prev],
         [] as JQueryHideModel[])
     ).reduce((acc, val) => acc.concat(val), []);
   }
@@ -401,7 +404,7 @@ export class UiGenerator<T = {}> {
     return this.dialogConfig.tabs
       .some((tab) => tab.hide !== undefined || (
         tab.fields.some(
-          (field) => field.hide !== undefined)
+          (field) => (field as CommonOptions).hide !== undefined)
       )
       );
   }
@@ -421,7 +424,8 @@ export class UiGenerator<T = {}> {
       .join(' ');
   }
 
-  private parseFieldValue(field: TouchUIDialogFieldOptions<T>): string {
+  private parseFieldValue(_field: TouchUIDialogFieldOptions<T>): string {
+    const field = _field as CommonOptions;
     switch (typeof field.defaultValue) {
       case 'boolean':
         return `{Boolean}${field.defaultValue ? 'true' : 'false'}`;

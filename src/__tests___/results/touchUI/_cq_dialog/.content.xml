@@ -242,6 +242,20 @@
 <element_12 jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/form/heading"
         name="./undefined" fieldLabel="undefined"    text="Lorem Ipsum..." level="2"  />
+<element_13 jcr:primaryType="nt:unstructured" jcr:title="My Text" sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+    <items jcr:primaryType="nt:unstructured">
+        <element_0 jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/textarea"
+        name="./option1" fieldLabel="Meine Textarea"   fieldDescription="Meine Beschreibung für Textarea..."    maxlength="50" />
+<element_1 jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/textfield"
+        name="./option2" fieldLabel="Meine Text"     />
+
+    </items>
+</element_13>
+
+
+
 
             </items>
         </column>
@@ -489,6 +503,20 @@
 <element_7 jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/form/heading"
         name="./undefined" fieldLabel="undefined"    text="Lorem Ipsum..." level="2"  />
+<element_8 jcr:primaryType="nt:unstructured" jcr:title="My Text" sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+    <items jcr:primaryType="nt:unstructured">
+        <element_0 jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/textarea"
+        name="./option1" fieldLabel="Meine Textarea"   fieldDescription="Meine Beschreibung für Textarea..."    maxlength="50" />
+<element_1 jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/textfield"
+        name="./option2" fieldLabel="Meine Text"     />
+
+    </items>
+</element_8>
+
+
+
 
                 </items>
             </column>

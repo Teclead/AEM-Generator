@@ -104,3 +104,8 @@ export interface HeadingOptions {
   // {Long}4
   level: number
 }
+export interface FieldSetOptions<T> {
+  [OptionKeys.Type]: TouchUIField.FieldSet;
+  options: TouchUIDialogFieldOptions<T>[]
+  label: string;
+}

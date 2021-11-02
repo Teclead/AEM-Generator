@@ -122,6 +122,25 @@ const fields: TouchUIDialogFieldOptions[] = [
     text: "Lorem Ipsum...",
     level: 2
   },
+  {
+    type: TouchUIField.FieldSet,
+    label: "My Text",
+    options: [
+      {
+        label: 'Meine Textarea',
+        type: TouchUIField.TextArea,
+        databaseName: 'option1',
+        description: 'Meine Beschreibung für Textarea...',
+        maxLength: 50,
+      },
+      {
+        label: 'Meine Text',
+        type: TouchUIField.Text,
+        databaseName: 'option2',
+      },
+
+    ]
+  },
 ];
 
 const tabs: TouchUIDialogTab[] = [

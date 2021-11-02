@@ -50,6 +50,10 @@ export const template = {
     Template.heading ||
     path.resolve(__dirname, FilePath.Heading)
   ),
+  fieldSet: getFile(
+    Template.fieldSet ||
+    path.resolve(__dirname, FilePath.FieldSet)
+  ),
   tracking: getFile(
     Template.trackingTemplate || path.resolve(__dirname, FilePath.Tracking)
   ),

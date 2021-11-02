@@ -1,0 +1,8 @@
+<ELNAME jcr:primaryType="nt:unstructured" jcr:title="{{TITLE}}" sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+    <items jcr:primaryType="nt:unstructured">
+        {{OPTIONS}}
+    </items>
+</ELNAME>
+
+
+
