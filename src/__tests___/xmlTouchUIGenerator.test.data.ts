@@ -141,6 +141,26 @@ const fields: TouchUIDialogFieldOptions[] = [
 
     ]
   },
+  {
+    type: TouchUIField.RadioGroup,
+    label: "My Text",
+    databaseName: "radioGr",
+    options: [
+      {
+        value: "my-val-1",
+        text: "My text 1",
+        checked: true
+      },
+      {
+        value: "my-val-2",
+        text: "My text 2"
+      },
+      {
+        value: "my-val-3",
+        text: "My text 3"
+      }
+    ]
+  },
 ];
 
 const tabs: TouchUIDialogTab[] = [
