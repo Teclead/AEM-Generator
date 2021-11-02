@@ -17,7 +17,7 @@ import {
   TouchUIField,
   TouchUIFieldOption,
 } from './models';
-import { DatePickerOptions, HeadingOptions, FieldSetOptions } from './models/TouchUIFieldOptions.model';
+import { DatePickerOptions, HeadingOptions, FieldSetOptions, RadioGroupOptions } from './models/TouchUIFieldOptions.model';
 import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator<T = {}> {
   public dialogConfig: AEMTouchUIDialog<T>;
@@ -191,7 +191,7 @@ export class UiGenerator<T = {}> {
       case TouchUIField.Heading:
         return template.heading;
       case TouchUIField.RadioGroup:
-        return template.radioGroup;
+        return template.radioGroup.replace(PlaceHolder.Options, this.getRadios(field));
       case TouchUIField.Number:
         return template.numberfield;
       /* case TouchUIField.Tag:
@@ -211,6 +211,12 @@ export class UiGenerator<T = {}> {
         );
     }
   }
+
+
+  public getRadios(field: RadioGroupOptions): string {
+    return field.options.map((option, index) => `<radio_${index} jcr:primaryType="nt:unstructured" text="${option.text}" value="${option.value}" checked="{Boolean}${!!option.checked}"/>`).join("")
+  }
+
   /**
    * Mapping over the given fields and 
    * execute getField() method for all fields
