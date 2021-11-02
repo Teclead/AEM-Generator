@@ -40,7 +40,11 @@ export const template = {
   ),
   multiFieldNested: getFile(
     Template.multifieldNestedTemplate ||
-      path.resolve(__dirname, FilePath.MultifieldNested)
+    path.resolve(__dirname, FilePath.MultifieldNested)
+  ),
+  datePicker: getFile(
+    Template.datePicker ||
+    path.resolve(__dirname, FilePath.DatePicker)
   ),
   tracking: getFile(
     Template.trackingTemplate || path.resolve(__dirname, FilePath.Tracking)
@@ -50,7 +54,7 @@ export const template = {
   ),
   cqEditConfig: getFile(
     Template.cqEditConfigTemplate ||
-      path.resolve(__dirname, FilePath.CqEditConfig)
+    path.resolve(__dirname, FilePath.CqEditConfig)
   ),
   htmlTag: getFile(
     Template.htmlTagTemplate || path.resolve(__dirname, FilePath.HtmlTag)
@@ -64,7 +68,7 @@ export const template = {
   ),
   cqDesignDialog: getFile(
     Template.cqDesignDialogTemplate ||
-      path.resolve(__dirname, FilePath.CqDesignDialog)
+    path.resolve(__dirname, FilePath.CqDesignDialog)
   ),
   newPar: getFile(
     Template.newParTemplate || path.resolve(__dirname, FilePath.NewPar)

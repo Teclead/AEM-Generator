@@ -20,6 +20,7 @@ export enum FilePath {
   Component = 'templates/component.template.xml',
   Tracking = 'templates/tracking.template.xml',
   MultifieldNested = 'templates/multifieldNested.template.xml',
+  DatePicker = 'templates/datePicker.template.xml',
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',

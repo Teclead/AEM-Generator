@@ -10,15 +10,15 @@ import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 export class DialogGenerator extends TouchUIXMLGenerator {
 
   public getFields(fields: TouchUIDialogFieldOptions[]) {
-      const template =  super.getFields(fields);
-      
-      if (this.has('acs-commons-nested')) {
-        return this.replaceResourceType(template,  'container', 'granite/ui/components/foundation/form/fieldset');
-      }
+    const template = super.getFields(fields);
 
-      return template;
-  } 
-}   
+    if (this.has('acs-commons-nested')) {
+      return this.replaceResourceType(template, 'container', 'granite/ui/components/foundation/form/fieldset');
+    }
+
+    return template;
+  }
+}
 
 const fields: TouchUIDialogFieldOptions[] = [
   {
@@ -66,20 +66,20 @@ const fields: TouchUIDialogFieldOptions[] = [
       { value: 2, name: 'Name 2' },
       { value: 3, name: 'Name 3', selected: true },
     ],
-    hide: ({contentPath}) => contentPath.includes('/de')
+    hide: ({ contentPath }) => contentPath.includes('/de')
   },
   {
     label: 'Mein Dropdown mit DataSource',
     type: TouchUIField.Dropdown,
     databaseName: 'dropdown',
     description: 'Meine Beschreibung für Dropdown',
-    options : {
+    options: {
       dataSource: 'path/to/java/servlet',
-      attributes: { 
-        'mode': 'placeholderOne', 
+      attributes: {
+        'mode': 'placeholderOne',
         'mode1': 'placeholderTwo'
-    }
-      
+      }
+
     },
   },
   {
@@ -87,7 +87,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     type: TouchUIField.Dropdown,
     databaseName: 'dropdown',
     description: 'Meine Beschreibung für Dropdown',
-    options : {
+    options: {
       dataSource: 'path/to/java/servlet'
     },
   },
@@ -108,6 +108,14 @@ const fields: TouchUIDialogFieldOptions[] = [
     label: 'Mein Button',
     type: TouchUIField.Button,
     javaScriptHandler: 'alert(123)',
+  },
+  {
+    label: 'Mein DatePicker',
+    type: TouchUIField.DatePicker,
+    databaseName: "datePicker",
+    minDate: "yesterday",
+    displayedFormat: "YYYY-MM-DD HH:mm",
+    dateType: "datetime"
   },
 ];
 
@@ -154,21 +162,21 @@ const tabs: TouchUIDialogTab[] = [
               { value: 1, name: 'Name 1' },
               { value: 2, name: 'Name 2' },
               { value: 3, name: 'Name 3', selected: true },
-              ]
+            ]
           },
         ]
       },
       {
         label: "6.2 Pathbrowser",
         type: TouchUIField.PathBrowser,
-        databaseName: "pathBrowser",    
+        databaseName: "pathBrowser",
       },
     ],
-    hide: ({contentPath}) => contentPath.includes('/it')
+    hide: ({ contentPath }) => contentPath.includes('/it')
   },
 ];
 
-const ReactTemplate =  './src/templates/react.template.html';
+const ReactTemplate = './src/templates/react.template.html';
 // const ReactTemplate =  fs.readFileSync('./src/templates/react.template.html').toString();
 export const exampleTouchUIDialog: AEMTouchUIDialog<{}> = {
   sightlyTemplate: ReactTemplate,
