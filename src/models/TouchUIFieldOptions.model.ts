@@ -98,13 +98,17 @@ export interface DatePickerOptions extends BaseOptions {
   // type in XML
   dateType: "datetime" | string;
 }
-export interface HeadingOptions {
+
+interface NoneBaseField {
+  [key: string]: any;
+}
+export interface HeadingOptions extends NoneBaseField {
   [OptionKeys.Type]: TouchUIField.Heading;
   text: string;
   // {Long}4
   level: number
 }
-export interface FieldSetOptions<T> {
+export interface FieldSetOptions<T> extends NoneBaseField {
   [OptionKeys.Type]: TouchUIField.FieldSet;
   options: TouchUIDialogFieldOptions<T>[]
   label: string;
