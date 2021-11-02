@@ -54,6 +54,10 @@ export const template = {
     Template.fieldSet ||
     path.resolve(__dirname, FilePath.FieldSet)
   ),
+  radioGroup: getFile(
+    Template.radioGroup ||
+    path.resolve(__dirname, FilePath.RadioGroup)
+  ),
   tracking: getFile(
     Template.trackingTemplate || path.resolve(__dirname, FilePath.Tracking)
   ),

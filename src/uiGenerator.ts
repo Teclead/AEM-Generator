@@ -186,6 +186,12 @@ export class UiGenerator<T = {}> {
         return this.createNestedFields(field);
       case TouchUIField.Imagefield:
         return template.imagefield;
+      case TouchUIField.DatePicker:
+        return template.datePicker;
+      case TouchUIField.Heading:
+        return template.heading;
+      case TouchUIField.RadioGroup:
+        return template.radioGroup;
       case TouchUIField.Number:
         return template.numberfield;
       /* case TouchUIField.Tag:

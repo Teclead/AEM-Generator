@@ -20,6 +20,7 @@ type CustomImagefieldOptions<T> = T extends { [TouchUIField.Imagefield]: unknown
 type CustomDatePickerOptions<T> = T extends { [TouchUIField.DatePicker]: unknown } ? T[TouchUIField.DatePicker] : {}
 type CustomHeadingOptions<T> = T extends { [TouchUIField.Heading]: unknown } ? T[TouchUIField.Heading] : {}
 type CustomFieldSetOptions<T> = T extends { [TouchUIField.FieldSet]: unknown } ? T[TouchUIField.FieldSet] : {}
+type CustomRadioGroupOtions<T> = T extends { [TouchUIField.RadioGroup]: unknown } ? T[TouchUIField.RadioGroup] : {}
 
 export type TouchUIDialogFieldOptions<T = {}> =
   | options.TextOptions & CustomTextOptions<T>
@@ -37,6 +38,7 @@ export type TouchUIDialogFieldOptions<T = {}> =
   | options.DatePickerOptions & CustomDatePickerOptions<T>
   | options.HeadingOptions & CustomHeadingOptions<T>
   | options.FieldSetOptions<T> & CustomFieldSetOptions<T>
+  | options.RadioGroupOptions & CustomRadioGroupOtions<T>
 
 
 export interface AEMTouchUIDialog<T = {}> {

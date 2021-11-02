@@ -23,6 +23,7 @@ export enum FilePath {
   DatePicker = 'templates/datePicker.template.xml',
   Heading = 'templates/heading.template.xml',
   FieldSet = 'templates/fieldset.template.xml',
+  RadioGroup = 'templates/radioGroup.template.xml',
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',
