@@ -31,6 +31,7 @@ export type TouchUIDialogFieldOptions<T = {}> =
   | options.ImagefieldOptions & CustomImagefieldOptions<T>
   | options.ButtonOptions & CustomButtonOptions<T>
   | options.MultifieldNestedOptions<T> & CustomMultifieldNestedOptions<T>
+  | options.DatePickerOptions & CustomTextOptions<T>
   
 
 export interface AEMTouchUIDialog<T = {}> {

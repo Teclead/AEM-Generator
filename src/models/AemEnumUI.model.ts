@@ -61,4 +61,7 @@ export enum PlaceHolder {
   ClientlibsCategories = '{{CATEGORIES}}',
   Container = '{{CONTAINER}}',
   CustomAttribute =  '{{CUSTOM_ATTRIBUTE}}',
+  DisplayFormat =  '{{DISPLAYFORMAT}}',
+  DateType =  '{{DATETYPE}}',
+  MinDate =  '{{MINDATE}}',
 }

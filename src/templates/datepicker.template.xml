@@ -1,0 +1,1 @@
+<ELNAME jcr:primaryType="nt:unstructured" {{COMMON}} sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"  {{MINDATE}} displayedFormat="{{DISPLAYFORMAT}}" type="{{DATETYPE}}"/>

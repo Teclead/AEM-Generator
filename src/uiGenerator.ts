@@ -16,6 +16,7 @@ import {
   TouchUIField,
   TouchUIFieldOption,
 } from './models';
+import { DatePickerOptions } from './models/TouchUIFieldOptions.model';
 import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator<T = {}> {
   public dialogConfig: AEMTouchUIDialog<T>;
@@ -252,6 +253,10 @@ export class UiGenerator<T = {}> {
           PlaceHolder.Description,
           _field.description ? ` fieldDescription="${_field.description}"` : ''
         )
+        // DATE PICKER
+        .replace(PlaceHolder.MinDate, (_field as DatePickerOptions).minDate ? `minDate="${(_field as DatePickerOptions).minDate}"` : "")
+        .replace(PlaceHolder.DateType, (_field as DatePickerOptions).dateType || "")
+        .replace(PlaceHolder.DisplayFormat, (_field as DatePickerOptions).displayedFormat || "")
         /**
          * not used anymore
          * keep for the case of different requirements

@@ -15,4 +15,5 @@ export enum TouchUIField {
   Imagefield = 'imagefield',
   Button = 'button',
   MultifieldNested = 'multifieldNested',
+  DatePicker = "datePicker"
 }
