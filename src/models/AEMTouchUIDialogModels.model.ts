@@ -17,22 +17,25 @@ type CustomNumberOptions<T> = T extends { [TouchUIField.Number]: unknown } ? T[T
 type CustomMultifieldNestedOptions<T> = T extends { [TouchUIField.MultifieldNested]: unknown } ? T[TouchUIField.MultifieldNested] : {}
 type CustomButtonOptions<T> = T extends { [TouchUIField.Button]: unknown } ? T[TouchUIField.Button] : {}
 type CustomImagefieldOptions<T> = T extends { [TouchUIField.Imagefield]: unknown } ? T[TouchUIField.Imagefield] : {}
+type CustomDatePickerOptions<T> = T extends { [TouchUIField.DatePicker]: unknown } ? T[TouchUIField.DatePicker] : {}
+type CustomHeadingOptions<T> = T extends { [TouchUIField.Heading]: unknown } ? T[TouchUIField.Heading] : {}
 
 export type TouchUIDialogFieldOptions<T = {}> =
   | options.TextOptions & CustomTextOptions<T>
-  | options.PathOptions 
+  | options.PathOptions
   | options.PathBrowserOptions & CustomPathOptions<T>
   | options.RichTextOptions & CustomRichTextOptions<T>
   | options.TextAreaOptions & CustomTextAreaOptions<T>
-  | options.CheckboxOptions & CustomCheckboxOptions<T> 
+  | options.CheckboxOptions & CustomCheckboxOptions<T>
   | options.DropdownOptions & CustomDropdownOptions<T>
   | options.NumberOptions & CustomNumberOptions<T>
   | options.MultifieldOptions
   | options.ImagefieldOptions & CustomImagefieldOptions<T>
   | options.ButtonOptions & CustomButtonOptions<T>
   | options.MultifieldNestedOptions<T> & CustomMultifieldNestedOptions<T>
-  | options.DatePickerOptions & CustomTextOptions<T>
-  
+  | options.DatePickerOptions & CustomDatePickerOptions<T>
+  | options.HeadingOptions & CustomHeadingOptions<T>
+
 
 export interface AEMTouchUIDialog<T = {}> {
   sightlyTemplate?: string; // this is the path to a html file.

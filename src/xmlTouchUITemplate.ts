@@ -46,6 +46,10 @@ export const template = {
     Template.datePicker ||
     path.resolve(__dirname, FilePath.DatePicker)
   ),
+  heading: getFile(
+    Template.heading ||
+    path.resolve(__dirname, FilePath.Heading)
+  ),
   tracking: getFile(
     Template.trackingTemplate || path.resolve(__dirname, FilePath.Tracking)
   ),

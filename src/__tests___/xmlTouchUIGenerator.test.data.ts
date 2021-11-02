@@ -117,6 +117,11 @@ const fields: TouchUIDialogFieldOptions[] = [
     displayedFormat: "YYYY-MM-DD HH:mm",
     dateType: "datetime"
   },
+  {
+    type: TouchUIField.Heading,
+    text: "Lorem Ipsum...",
+    level: 2
+  },
 ];
 
 const tabs: TouchUIDialogTab[] = [

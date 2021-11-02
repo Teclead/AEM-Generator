@@ -93,8 +93,14 @@ export interface MultifieldNestedOptions<T> extends BaseOptions {
 
 export interface DatePickerOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.DatePicker;
-  displayedFormat: "YYYY-MM-DD HH:mm" | string;
-  minDate?: "today" | string;
+  displayedFormat: "YYYY-MM-DD HH:mm" | string;
+  minDate?: "today" | string;
   // type in XML
   dateType: "datetime" | string;
+}
+export interface HeadingOptions {
+  [OptionKeys.Type]: TouchUIField.Heading;
+  text: string;
+  // {Long}4
+  level: number
 }

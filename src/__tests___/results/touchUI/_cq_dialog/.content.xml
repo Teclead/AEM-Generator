@@ -239,6 +239,9 @@
     sling:resourceType="granite/ui/components/foundation/button"/><element_11 jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/form/datePicker"
         name="./datePicker" fieldLabel="Mein DatePicker"    minDate="yesterday" displayedFormat="YYYY-MM-DD HH:mm" dateType="datetime"  />
+<element_12 jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/heading"
+        name="./undefined" fieldLabel="undefined"    text="Lorem Ipsum..." level="2"  />
 
             </items>
         </column>
@@ -483,6 +486,9 @@
     sling:resourceType="granite/ui/components/foundation/button"/><element_6 jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/form/datePicker"
         name="./datePicker" fieldLabel="Mein DatePicker"    minDate="yesterday" displayedFormat="YYYY-MM-DD HH:mm" dateType="datetime"  />
+<element_7 jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/heading"
+        name="./undefined" fieldLabel="undefined"    text="Lorem Ipsum..." level="2"  />
 
                 </items>
             </column>

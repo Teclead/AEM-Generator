@@ -21,6 +21,7 @@ export enum FilePath {
   Tracking = 'templates/tracking.template.xml',
   MultifieldNested = 'templates/multifieldNested.template.xml',
   DatePicker = 'templates/datePicker.template.xml',
+  Heading = 'templates/heading.template.xml',
   CqDesignDialog = 'templates/cqDesignDialog.template.xml',
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',
@@ -65,4 +66,6 @@ export enum PlaceHolder {
   DisplayFormat =  '{{DISPLAYFORMAT}}',
   DateType =  '{{DATETYPE}}',
   MinDate =  '{{MINDATE}}',
+  Text =  '{{TEXT}}',
+  Level =  '{{LEVEL}}',
 }
