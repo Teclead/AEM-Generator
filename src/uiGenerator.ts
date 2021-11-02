@@ -1,4 +1,4 @@
-import { CommonOptions } from './../dist/models/TouchUIFieldOptions.model.d';
+
 import * as fs from 'fs';
 import * as path from 'path';
 import {
@@ -17,7 +17,7 @@ import {
   TouchUIField,
   TouchUIFieldOption,
 } from './models';
-import { DatePickerOptions, HeadingOptions, FieldSetOptions, RadioGroupOptions } from './models/TouchUIFieldOptions.model';
+import { DatePickerOptions, HeadingOptions, FieldSetOptions, RadioGroupOptions, CommonOptions } from './models/TouchUIFieldOptions.model';
 import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator<T = {}> {
   public dialogConfig: AEMTouchUIDialog<T>;
