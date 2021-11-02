@@ -8,7 +8,7 @@ export {
   Templates,
   TouchUIAnalytics,
   TouchUIDialogFieldOptions,
-  TouchUIDialogTab,
+  TouchUIDialogTab
 } from './AEMTouchUIDialogModels.model';
 export { CustomFilePath, JavaScriptPlaceHolder } from './CustomAemEnumUI.model';
 export { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';

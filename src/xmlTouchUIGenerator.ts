@@ -4,8 +4,8 @@ import { AEMTouchUIDialog, PlaceHolder } from './models';
 import { UiGenerator } from './uiGenerator';
 import { template } from './xmlTouchUITemplate';
 
-export class TouchUIXMLGenerator extends UiGenerator {
-  constructor(dialogConfig: AEMTouchUIDialog) {
+export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
+  constructor(dialogConfig: AEMTouchUIDialog<T>) {
     super(dialogConfig);
   }
 

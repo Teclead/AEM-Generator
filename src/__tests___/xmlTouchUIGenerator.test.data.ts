@@ -170,7 +170,7 @@ const tabs: TouchUIDialogTab[] = [
 
 const ReactTemplate =  './src/templates/react.template.html';
 // const ReactTemplate =  fs.readFileSync('./src/templates/react.template.html').toString();
-export const exampleTouchUIDialog: AEMTouchUIDialog = {
+export const exampleTouchUIDialog: AEMTouchUIDialog<{}> = {
   sightlyTemplate: ReactTemplate,
   componentName: 'MyTestComponent',
   componentGroup: 'MyTestGroup',

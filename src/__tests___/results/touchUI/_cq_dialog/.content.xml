@@ -55,16 +55,16 @@
     jcr:primaryType="nt:unstructured"
     sling:resourceType="granite/ui/components/coral/foundation/form/select"
     name="./dropdown" fieldLabel="Mein Dropdown mit DataSource"   fieldDescription="Meine Beschreibung für Dropdown"  >
-        <datasource jcr:primaryType="nt:unstructured"  
-              sling:resourceType="path/to/java/servlet"  
+        <datasource jcr:primaryType="nt:unstructured"
+              sling:resourceType="path/to/java/servlet"
               mode="placeholderOne" mode1="placeholderTwo"  />
 </element_6>
 <element_7
     jcr:primaryType="nt:unstructured"
     sling:resourceType="granite/ui/components/coral/foundation/form/select"
     name="./dropdown" fieldLabel="My Dropdown with only dataSource path "   fieldDescription="Meine Beschreibung für Dropdown"  >
-        <datasource jcr:primaryType="nt:unstructured"  
-              sling:resourceType="path/to/java/servlet"  
+        <datasource jcr:primaryType="nt:unstructured"
+              sling:resourceType="path/to/java/servlet"
                />
 </element_7>
 <element_8 jcr:primaryType="nt:unstructured"
@@ -296,16 +296,16 @@
     jcr:primaryType="nt:unstructured"
     sling:resourceType="granite/ui/components/coral/foundation/form/select"
     name="./dropdown" fieldLabel="Mein Dropdown mit DataSource"   fieldDescription="Meine Beschreibung für Dropdown"  >
-        <datasource jcr:primaryType="nt:unstructured"  
-              sling:resourceType="path/to/java/servlet"  
+        <datasource jcr:primaryType="nt:unstructured"
+              sling:resourceType="path/to/java/servlet"
               mode="placeholderOne" mode1="placeholderTwo"  />
 </element_1>
 <element_2
     jcr:primaryType="nt:unstructured"
     sling:resourceType="granite/ui/components/coral/foundation/form/select"
     name="./dropdown" fieldLabel="My Dropdown with only dataSource path "   fieldDescription="Meine Beschreibung für Dropdown"  >
-        <datasource jcr:primaryType="nt:unstructured"  
-              sling:resourceType="path/to/java/servlet"  
+        <datasource jcr:primaryType="nt:unstructured"
+              sling:resourceType="path/to/java/servlet"
                />
 </element_2>
 <element_3 jcr:primaryType="nt:unstructured"
