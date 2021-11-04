@@ -96,7 +96,7 @@ export interface DatePickerOptions extends BaseOptions {
   displayedFormat: "YYYY-MM-DD HH:mm" | string;
   minDate?: "today" | string;
   // type in XML
-  dateType: "datetime" | string;
+  dateType: "datetime" | "date" | "time";
 }
 
 interface NoneBaseField {
