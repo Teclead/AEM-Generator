@@ -20,7 +20,7 @@ export enum FilePath {
   Component = 'templates/component.template.xml',
   Tracking = 'templates/tracking.template.xml',
   MultifieldNested = 'templates/multifieldNested.template.xml',
-  DatePicker = 'templates/datePicker.template.xml',
+  DatePicker = 'templates/datepicker.template.xml',
   Heading = 'templates/heading.template.xml',
   FieldSet = 'templates/fieldset.template.xml',
   RadioGroup = 'templates/radioGroup.template.xml',
