@@ -145,6 +145,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     type: TouchUIField.RadioGroup,
     label: "My Text",
     databaseName: "radioGr",
+    vertical: true,
     options: [
       {
         value: "my-val-1",

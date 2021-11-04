@@ -268,6 +268,7 @@ export class UiGenerator<T = {}> {
           PlaceHolder.Description,
           _field.description ? ` fieldDescription="${_field.description}"` : ''
         )
+        .replace(PlaceHolder.Text, _field.text)
         // DATE PICKER
         .replace(PlaceHolder.MinDate, (_field as DatePickerOptions).minDate ? `minDate="${(_field as DatePickerOptions).minDate}"` : "")
         .replace(PlaceHolder.DateType, (_field as DatePickerOptions).dateType || "")
@@ -275,6 +276,8 @@ export class UiGenerator<T = {}> {
         // Heading
         .replace(PlaceHolder.Level, (_field as HeadingOptions).level?.toString() || "")
         .replace(PlaceHolder.Level, (_field as HeadingOptions).text || "")
+        // RADIO Group
+        .replace(PlaceHolder.Vertical, `${!!_field.vertical}`)
         /**
          * not used anymore
          * keep for the case of different requirements

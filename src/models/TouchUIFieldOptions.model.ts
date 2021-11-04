@@ -116,5 +116,6 @@ export interface FieldSetOptions<T> extends NoneBaseField {
 export interface RadioGroupOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.RadioGroup;
   options: { text: string, value: string, checked?: boolean }[]
+  vertical?: boolean;
 }
 

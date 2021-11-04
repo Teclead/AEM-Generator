@@ -70,4 +70,5 @@ export enum PlaceHolder {
   MinDate =  '{{MINDATE}}',
   Text =  '{{TEXT}}',
   Level =  '{{LEVEL}}',
+  Vertical = "{{VERTICAL}}"
 }
