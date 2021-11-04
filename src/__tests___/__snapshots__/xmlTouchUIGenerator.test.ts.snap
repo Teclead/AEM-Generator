@@ -381,8 +381,8 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     onClick=\\"alert(123)\\"
     text=\\"Mein Button\\"
     selectionMode=\\"single\\"
-    sling:resourceType=\\"granite/ui/components/foundation/button\\"/><element_11 jcr:primaryType=\\"nt:unstructured\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"    minDate=\\"yesterday\\" displayedFormat=\\"YYYY-MM-DD HH:mm\\" dateType=\\"datetime\\"  sling:resourceType=\\"granite/ui/components/coral/foundation/form/datepicker\\"  minDate=\\"yesterday\\" displayedFormat=\\"YYYY-MM-DD HH:mm\\" type=\\"datetime\\"/>
-<element_12 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/heading\\" level=\\"2\\" text=\\"{{TEXT}}\\"/><element_13 jcr:primaryType=\\"nt:unstructured\\" jcr:title=\\"My Text\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/fieldset\\">
+    sling:resourceType=\\"granite/ui/components/foundation/button\\"/><element_11 jcr:primaryType=\\"nt:unstructured\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"     sling:resourceType=\\"granite/ui/components/coral/foundation/form/datepicker\\"  minDate=\\"yesterday\\" displayedFormat=\\"YYYY-MM-DD HH:mm\\" type=\\"datetime\\"/>
+<element_12 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/heading\\" level=\\"2\\" text=\\"Lorem Ipsum...\\"/><element_13 jcr:primaryType=\\"nt:unstructured\\" jcr:title=\\"My Text\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/fieldset\\">
     <items jcr:primaryType=\\"nt:unstructured\\">
         <element_0 jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"granite/ui/components/foundation/form/textarea\\"
@@ -396,11 +396,8 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
 
 
 
-<element_14 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\" deleteHint=\\"{Boolean}false\\" vertical=\\"{Boolean}true\\"
-     name=\\"./radioGr\\" fieldLabel=\\"My Text\\"    >
-<items jcr:primaryType=\\"nt:unstructured\\">
-      <radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" checked=\\"{Boolean}true\\"/><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" checked=\\"{Boolean}false\\"/><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" checked=\\"{Boolean}false\\"/>
-</items>
+<element_14 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\" deleteHint=\\"{Boolean}false\\" name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     vertical=\\"{Boolean}true\\">
+      <items jcr:primaryType=\\"nt:unstructured\\"><radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" checked=\\"{Boolean}true\\"/><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" checked=\\"{Boolean}false\\"/><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" checked=\\"{Boolean}false\\"/></items>
 </element_14>
             </items>
         </column>
@@ -642,8 +639,8 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     onClick=\\"alert(123)\\"
     text=\\"Mein Button\\"
     selectionMode=\\"single\\"
-    sling:resourceType=\\"granite/ui/components/foundation/button\\"/><element_6 jcr:primaryType=\\"nt:unstructured\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"    minDate=\\"yesterday\\" displayedFormat=\\"YYYY-MM-DD HH:mm\\" dateType=\\"datetime\\"  sling:resourceType=\\"granite/ui/components/coral/foundation/form/datepicker\\"  minDate=\\"yesterday\\" displayedFormat=\\"YYYY-MM-DD HH:mm\\" type=\\"datetime\\"/>
-<element_7 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/heading\\" level=\\"2\\" text=\\"{{TEXT}}\\"/><element_8 jcr:primaryType=\\"nt:unstructured\\" jcr:title=\\"My Text\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/fieldset\\">
+    sling:resourceType=\\"granite/ui/components/foundation/button\\"/><element_6 jcr:primaryType=\\"nt:unstructured\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"     sling:resourceType=\\"granite/ui/components/coral/foundation/form/datepicker\\"  minDate=\\"yesterday\\" displayedFormat=\\"YYYY-MM-DD HH:mm\\" type=\\"datetime\\"/>
+<element_7 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/heading\\" level=\\"2\\" text=\\"Lorem Ipsum...\\"/><element_8 jcr:primaryType=\\"nt:unstructured\\" jcr:title=\\"My Text\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/fieldset\\">
     <items jcr:primaryType=\\"nt:unstructured\\">
         <element_0 jcr:primaryType=\\"nt:unstructured\\"
         sling:resourceType=\\"granite/ui/components/foundation/form/textarea\\"
@@ -657,11 +654,8 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
 
 
 
-<element_9 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\" deleteHint=\\"{Boolean}false\\" vertical=\\"{Boolean}true\\"
-     name=\\"./radioGr\\" fieldLabel=\\"My Text\\"    >
-<items jcr:primaryType=\\"nt:unstructured\\">
-      <radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" checked=\\"{Boolean}true\\"/><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" checked=\\"{Boolean}false\\"/><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" checked=\\"{Boolean}false\\"/>
-</items>
+<element_9 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\" deleteHint=\\"{Boolean}false\\" name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     vertical=\\"{Boolean}true\\">
+      <items jcr:primaryType=\\"nt:unstructured\\"><radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" checked=\\"{Boolean}true\\"/><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" checked=\\"{Boolean}false\\"/><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" checked=\\"{Boolean}false\\"/></items>
 </element_9>
                 </items>
             </column>
