@@ -150,7 +150,6 @@ const fields: TouchUIDialogFieldOptions[] = [
       {
         value: "my-val-1",
         text: "My text 1",
-        checked: true
       },
       {
         value: "my-val-2",

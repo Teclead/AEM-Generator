@@ -96,7 +96,7 @@ export interface DatePickerOptions extends BaseOptions {
   displayedFormat: "YYYY-MM-DD HH:mm" | string;
   minDate?: "today" | string;
   // type in XML
-  dateType: "datetime" | "date" | "time";
+  dateType: "datetime" | "date" | "time";
 }
 
 interface NoneBaseField {
@@ -115,7 +115,11 @@ export interface FieldSetOptions<T> extends NoneBaseField {
 }
 export interface RadioGroupOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.RadioGroup;
-  options: { text: string, value: string, checked?: boolean }[]
+  options: {
+    text: string,
+    value: string,
+    // checked?: boolean 
+  }[]
   vertical?: boolean;
 }
 

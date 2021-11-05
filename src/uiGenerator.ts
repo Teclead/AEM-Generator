@@ -214,7 +214,7 @@ export class UiGenerator<T = {}> {
 
 
   public getRadios(field: RadioGroupOptions): string {
-    return field.options.map((option, index) => `<radio_${index} jcr:primaryType="nt:unstructured" text="${option.text}" value="${option.value}" checked="{Boolean}${!!option.checked}"/>`).join("")
+    return field.options.map((option, index) => `<radio_${index} jcr:primaryType="nt:unstructured" text="${option.text}" value="${option.value}" />`).join("")
   }
 
   /**

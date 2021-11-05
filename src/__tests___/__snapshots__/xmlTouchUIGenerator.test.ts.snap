@@ -397,7 +397,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
 
 
 <element_14 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\" deleteHint=\\"{Boolean}false\\" name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     vertical=\\"{Boolean}true\\">
-      <items jcr:primaryType=\\"nt:unstructured\\"><radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" checked=\\"{Boolean}true\\"/><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" checked=\\"{Boolean}false\\"/><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" checked=\\"{Boolean}false\\"/></items>
+      <items jcr:primaryType=\\"nt:unstructured\\"><radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" /><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" /><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" /></items>
 </element_14>
             </items>
         </column>
@@ -655,7 +655,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
 
 
 <element_9 jcr:primaryType=\\"nt:unstructured\\" sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\" deleteHint=\\"{Boolean}false\\" name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     vertical=\\"{Boolean}true\\">
-      <items jcr:primaryType=\\"nt:unstructured\\"><radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" checked=\\"{Boolean}true\\"/><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" checked=\\"{Boolean}false\\"/><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" checked=\\"{Boolean}false\\"/></items>
+      <items jcr:primaryType=\\"nt:unstructured\\"><radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" /><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" /><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" /></items>
 </element_9>
                 </items>
             </column>
