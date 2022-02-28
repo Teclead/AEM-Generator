@@ -24,6 +24,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     description: 'Meine Beschreibung für Textfeld...',
   },
   {
+    // May not be available in some versions of AEM (ex. 6.2)
     label: 'Mein PathField',
     type: TouchUIField.Path,
     databaseName: 'path',
@@ -45,6 +46,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     min: 20,
   },
   {
+    // May not be available in some versions of AEM (ex. 6.2)
     label: 'Mein Imagefield',
     type: TouchUIField.Imagefield,
     databaseName: 'image',
@@ -55,24 +57,27 @@ const fields: TouchUIDialogFieldOptions[] = [
     label: 'Mein Dropdown',
     type: TouchUIField.Dropdown,
     databaseName: 'dropdown',
-    description: 'Meine Beschreibung für Dropdown',
+    description: 'Meine Beschreibung für Dropdown mit OnChange und OnLoad',
     options: [
       { value: 1, name: 'Name 1' },
       { value: 2, name: 'Name 2' },
       { value: 3, name: 'Name 3', selected: true },
     ],
     hide: ({ contentPath }) => contentPath.includes('/de'),
-    onLoad: () => {
-      console.log('Triggered On Load Event');
+    onLoad: ({ contentPath }) => {
+      console.log('Triggered On Load Event', contentPath);
     },
-    // onChange: ({ contentPath, targetElement }) => {},
-    // onChangeTarget: '.coral-Foundation',
+    onChange: ({ contentPath, targetElement }) => {
+      console.log('On Change Triggered', contentPath, targetElement);
+    },
+    targetClassName: 'testClass',
   },
   {
     label: 'Mein Dropdown mit DataSource',
     type: TouchUIField.Dropdown,
     databaseName: 'dropdown',
     description: 'Meine Beschreibung für Dropdown',
+    className: 'testClass',
     options: {
       dataSource: 'path/to/java/servlet',
       attributes: {

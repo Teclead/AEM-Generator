@@ -29,4 +29,7 @@ export enum OptionKeys {
   Text = 'text',
   vertical = 'vertical',
   OnLoadFunction = 'onLoad',
+  OnChangeFunction = 'onChange',
+  TargetClassName = 'targetClassName',
+  ClassName = 'className',
 }

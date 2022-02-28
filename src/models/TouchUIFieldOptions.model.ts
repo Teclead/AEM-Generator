@@ -5,7 +5,7 @@
 import { TouchUIDialogFieldOptions } from './AEMTouchUIDialogModels.model';
 import { TouchUIField } from './TouchUIFieldEnum.model';
 import { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';
-import { HideFunction, OnLoadFunction } from './TouchUIFunction.model';
+import { HideFunction, OnChangeFunction, OnLoadFunction } from './TouchUIFunction.model';
 
 export interface CustomOptionAttribute {
   [key: string]: any;
@@ -18,6 +18,9 @@ export interface CommonOptions extends CustomOptionAttribute {
   [OptionKeys.DefaultValue]?: string | boolean | number;
   [OptionKeys.HideFunction]?: HideFunction;
   [OptionKeys.OnLoadFunction]?: OnLoadFunction;
+  [OptionKeys.OnChangeFunction]?: OnChangeFunction;
+  [OptionKeys.TargetClassName]?: string;
+  [OptionKeys.ClassName]?: string;
 }
 
 export interface DataSourceOptions {

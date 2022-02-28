@@ -8,6 +8,7 @@ import {
   DropdownOptions,
   JavaScriptPlaceHolder,
   JQueryHideModel,
+  JQueryOnChangeModel,
   JQueryOnLoadModel,
   MultifieldNestedOptions,
   MultifieldOptions,
@@ -126,6 +127,10 @@ export class UiGenerator<T = {}> {
       this.clientlibs = [...this.clientlibs, { filename: 'onLoad.js', content: this.buildOnLoadScript() }];
     }
 
+    if (this.hasOnChangeImplementation()) {
+      this.clientlibs = [...this.clientlibs, { filename: 'onChange.js', content: this.buildOnChangeScript() }];
+    }
+
     return this.dialogConfig.tabs
       .map((tab, index) => {
         return template.tab
@@ -149,10 +154,6 @@ export class UiGenerator<T = {}> {
       .replace(JavaScriptPlaceHolder.HideContainer, JSON.stringify(container));
   }
 
-  /**
-   * buildHideScript() replace the placeholder in the hideTab scripts template
-   * and returns buildHideScript template string
-   */
   public buildOnLoadScript(): string {
     const templateFile = getFile(path.resolve(__dirname, CustomFilePath.OnLoad));
     const container: JQueryOnLoadModel[] = [
@@ -164,12 +165,25 @@ export class UiGenerator<T = {}> {
       .replace(JavaScriptPlaceHolder.OnLoadContainer, JSON.stringify(container));
   }
 
+  public buildOnChangeScript(): string {
+    const templateFile = getFile(path.resolve(__dirname, CustomFilePath.OnChange));
+    const container: JQueryOnChangeModel[] = [
+      ...this.getJQueryOnChangeTabModels(),
+      ...this.getJQueryOnChangeDialogFieldModels(),
+    ];
+
+    return templateFile
+      .replace(JavaScriptPlaceHolder.OnChangeComponentName, this.dialogConfig.componentName.toLowerCase())
+      .replace(JavaScriptPlaceHolder.OnChangeContainer, JSON.stringify(container));
+  }
+
   /**
    * buildClientLibs returns cqClientlibs template string
    */
   public buildCqClientLibs(): string {
     return template.clientlibs;
   }
+
   /**
    * getTemplate() check the field type and return
    * the right field template string
@@ -284,6 +298,7 @@ export class UiGenerator<T = {}> {
          * keep for the case of different requirements
          */
         .replace(PlaceHolder.isDisabled, _field.isDisabled ? ` disabled="{Boolean}true" ` : '')
+        .replace(PlaceHolder.ClassName, _field.className ? `granite:class="${_field.className}"` : '')
         .replace(
           PlaceHolder.CustomAttribute,
           additionalCommon
@@ -439,7 +454,7 @@ export class UiGenerator<T = {}> {
 
   public getJQueryOnLoadDialogFieldModels(): JQueryOnLoadModel[] {
     return this.dialogConfig.tabs
-      .map((tab, tabIndex) =>
+      .map((tab) =>
         tab.fields.reduce(
           (prev, curr, index) =>
             (curr as CommonOptions).onLoad
@@ -447,7 +462,6 @@ export class UiGenerator<T = {}> {
                   ...prev,
                   {
                     index,
-                    tabIndex,
                     onLoad: '' + (curr as CommonOptions).onLoad,
                   },
                 ]
@@ -463,6 +477,45 @@ export class UiGenerator<T = {}> {
       (tab) => tab.onLoad !== undefined || tab.fields.some((field) => (field as CommonOptions).onLoad !== undefined)
     );
   }
+
+  public getJQueryOnChangeTabModels(): JQueryOnChangeModel[] {
+    return this.dialogConfig.tabs.reduce(
+      (prev, curr, index) =>
+        curr.onChange
+          ? [...prev, { index, isField: false, onChange: '' + curr.onChange, targetClassName: '' }]
+          : [...prev],
+      [] as JQueryOnChangeModel[]
+    );
+  }
+
+  public getJQueryOnChangeDialogFieldModels(): JQueryOnChangeModel[] {
+    return this.dialogConfig.tabs
+      .map((tab, tabIndex) =>
+        tab.fields.reduce((prev, curr, index) => {
+          console.log('index', index, curr.description, curr.onChange);
+          return (curr as CommonOptions).onChange
+            ? [
+                ...prev,
+                {
+                  index,
+                  tabIndex,
+                  isField: true,
+                  targetClassName: '' + curr.targetClassName,
+                  onChange: '' + (curr as CommonOptions).onChange,
+                },
+              ]
+            : [...prev];
+        }, [] as JQueryOnChangeModel[])
+      )
+      .reduce((acc, val) => acc.concat(val), []);
+  }
+
+  public hasOnChangeImplementation(): boolean {
+    return this.dialogConfig.tabs.some(
+      (tab) => tab.onChange !== undefined || tab.fields.some((field) => (field as CommonOptions).onChange !== undefined)
+    );
+  }
+
   /**
    * buildJQuery creates the jquery files inside a directory
    * and returns the name of the files

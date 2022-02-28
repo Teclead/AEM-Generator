@@ -2,9 +2,9 @@
  * Please use index.ts to import and export the models out of model folder
  */
 
-import { TouchUIField } from '.';
+import { TouchUIField } from './TouchUIFieldEnum.model';
 import * as options from './TouchUIFieldOptions.model';
-import { HideFunction, OnLoadFunction } from './TouchUIFunction.model';
+import { HideFunction, OnChangeFunction, OnLoadFunction } from './TouchUIFunction.model';
 
 // Custom TouchUiField Types
 type CustomTextOptions<T> = T extends { [TouchUIField.Text]: unknown } ? T[TouchUIField.Text] : {};
@@ -90,6 +90,7 @@ export interface TouchUIDialogTab<T = {}> {
   fields: Array<TouchUIDialogFieldOptions<T>>;
   hide?: HideFunction;
   onLoad?: OnLoadFunction;
+  onChange?: OnChangeFunction;
 }
 
 export interface TouchUIAnalytics {
@@ -117,4 +118,6 @@ export interface Templates {
   trackingTemplate: string;
   newParTemplate: string;
   hideFunctionTemplate: string;
+  onLoadFunctionTemplate: string;
+  onChangeFunctionTemplate: string;
 }

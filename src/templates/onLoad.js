@@ -1,12 +1,8 @@
 (function(document, $) {
   var onLoadContainer = '{{ONLOAD_CONTAINER}}';
-  var componentName = "'{{ONLOAD_COMPONENT_NAME}}'";
 
-  $(document).on('dialog-ready', function(e) {
-    var container = e.target;
-    if (container._trackingFeature && container._trackingFeature.includes(componentName)) {
-      onLoad(onLoadContainer);
-    }
+  $(document).on('dialog-ready', function() {
+    onLoad(onLoadContainer);
   });
 
   function onLoad(container) {

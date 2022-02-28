@@ -71,4 +71,5 @@ export enum PlaceHolder {
   Text = '{{TEXT}}',
   Level = '{{LEVEL}}',
   Vertical = '{{VERTICAL}}',
+  ClassName = '{{CLASSNAME}}',
 }

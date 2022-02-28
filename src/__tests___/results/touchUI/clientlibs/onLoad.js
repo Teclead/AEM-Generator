@@ -1,14 +1,8 @@
 (function(document, $) {
-  var onLoadContainer = [{"index":5,"tabIndex":0,"onLoad":"function () {\n            console.log('Triggered On Load Event');\n        }"}];
-  var componentName = "mytestcomponent";
+  var onLoadContainer = [{"index":3,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath;\n            console.log('Triggered On Load Event', contentPath);\n        }"}];
 
-  $(document).on('dialog-ready', function(e) {
-    var container = e.target;
-    if (container._trackingFeature && container._trackingFeature.includes(componentName)) {
-      onLoad(onLoadContainer);
-    }
-    var hideFn = getFunction(func);
-    hideFn();
+  $(document).on('dialog-ready', function() {
+    onLoad(onLoadContainer);
   });
 
   function onLoad(container) {
