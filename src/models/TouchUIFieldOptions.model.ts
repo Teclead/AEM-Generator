@@ -5,8 +5,7 @@
 import { TouchUIDialogFieldOptions } from './AEMTouchUIDialogModels.model';
 import { TouchUIField } from './TouchUIFieldEnum.model';
 import { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';
-import { HideFunction } from './TouchUIFunction.model';
-
+import { HideFunction, OnLoadFunction } from './TouchUIFunction.model';
 
 export interface CustomOptionAttribute {
   [key: string]: any;
@@ -18,6 +17,7 @@ export interface CommonOptions extends CustomOptionAttribute {
   [OptionKeys.Label]: string;
   [OptionKeys.DefaultValue]?: string | boolean | number;
   [OptionKeys.HideFunction]?: HideFunction;
+  [OptionKeys.OnLoadFunction]?: OnLoadFunction;
 }
 
 export interface DataSourceOptions {
@@ -32,6 +32,7 @@ export interface TouchUIFieldOption {
   [OptionKeys.Selected]?: boolean;
   [OptionKeys.Name]: string;
   [OptionKeys.Value]: string | number;
+  [OptionKeys.OnLoadFunction]?: OnLoadFunction;
 }
 export interface TextOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.Text;
@@ -87,16 +88,15 @@ export interface ButtonOptions extends CommonOptions {
 
 export interface MultifieldNestedOptions<T> extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.MultifieldNested;
-  [OptionKeys.MultiFieldOptions]: TouchUIDialogFieldOptions<T>[];
+  [OptionKeys.MultiFieldOptions]: Array<TouchUIDialogFieldOptions<T>>;
 }
-
 
 export interface DatePickerOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.DatePicker;
-  displayedFormat: "YYYY-MM-DD HH:mm" | string;
-  minDate?: "today" | string;
+  displayedFormat: 'YYYY-MM-DD HH:mm' | string;
+  minDate?: 'today' | string;
   // type in XML
-  dateType: "datetime" | "date" | "time";
+  dateType: 'datetime' | 'date' | 'time';
 }
 
 interface NoneBaseField {
@@ -106,20 +106,19 @@ export interface HeadingOptions extends NoneBaseField {
   [OptionKeys.Type]: TouchUIField.Heading;
   text: string;
   // {Long}4
-  level: number
+  level: number;
 }
 export interface FieldSetOptions<T> extends NoneBaseField {
   [OptionKeys.Type]: TouchUIField.FieldSet;
-  options: TouchUIDialogFieldOptions<T>[]
+  options: Array<TouchUIDialogFieldOptions<T>>;
   label: string;
 }
 export interface RadioGroupOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.RadioGroup;
-  options: {
-    text: string,
-    value: string,
-    // checked?: boolean 
-  }[]
+  options: Array<{
+    text: string;
+    value: string;
+    // checked?: boolean
+  }>;
   vertical?: boolean;
 }
-

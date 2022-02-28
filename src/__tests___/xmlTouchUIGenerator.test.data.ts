@@ -1,14 +1,9 @@
 // import * as fs from 'fs';
-import {
-  TouchUIDialogFieldOptions,
-  TouchUIDialogTab,
-  TouchUIField,
-} from '../models';
+import { TouchUIDialogFieldOptions, TouchUIDialogTab, TouchUIField } from '../models';
 import { TouchUIXMLGenerator } from '../xmlTouchUIGenerator';
 import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 
 export class DialogGenerator extends TouchUIXMLGenerator {
-
   public getFields(fields: TouchUIDialogFieldOptions[]) {
     const template = super.getFields(fields);
 
@@ -66,7 +61,12 @@ const fields: TouchUIDialogFieldOptions[] = [
       { value: 2, name: 'Name 2' },
       { value: 3, name: 'Name 3', selected: true },
     ],
-    hide: ({ contentPath }) => contentPath.includes('/de')
+    hide: ({ contentPath }) => contentPath.includes('/de'),
+    onLoad: () => {
+      console.log('Triggered On Load Event');
+    },
+    // onChange: ({ contentPath, targetElement }) => {},
+    // onChangeTarget: '.coral-Foundation',
   },
   {
     label: 'Mein Dropdown mit DataSource',
@@ -76,10 +76,9 @@ const fields: TouchUIDialogFieldOptions[] = [
     options: {
       dataSource: 'path/to/java/servlet',
       attributes: {
-        'mode': 'placeholderOne',
-        'mode1': 'placeholderTwo'
-      }
-
+        mode: 'placeholderOne',
+        mode1: 'placeholderTwo',
+      },
     },
   },
   {
@@ -88,7 +87,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     databaseName: 'dropdown',
     description: 'Meine Beschreibung für Dropdown',
     options: {
-      dataSource: 'path/to/java/servlet'
+      dataSource: 'path/to/java/servlet',
     },
   },
   {
@@ -112,19 +111,19 @@ const fields: TouchUIDialogFieldOptions[] = [
   {
     label: 'Mein DatePicker',
     type: TouchUIField.DatePicker,
-    databaseName: "datePicker",
-    minDate: "yesterday",
-    displayedFormat: "YYYY-MM-DD HH:mm",
-    dateType: "datetime"
+    databaseName: 'datePicker',
+    minDate: 'yesterday',
+    displayedFormat: 'YYYY-MM-DD HH:mm',
+    dateType: 'datetime',
   },
   {
     type: TouchUIField.Heading,
-    text: "Lorem Ipsum...",
-    level: 2
+    text: 'Lorem Ipsum...',
+    level: 2,
   },
   {
     type: TouchUIField.FieldSet,
-    label: "My Text",
+    label: 'My Text',
     options: [
       {
         label: 'Meine Textarea',
@@ -138,28 +137,27 @@ const fields: TouchUIDialogFieldOptions[] = [
         type: TouchUIField.Text,
         databaseName: 'option2',
       },
-
-    ]
+    ],
   },
   {
     type: TouchUIField.RadioGroup,
-    label: "My Text",
-    databaseName: "radioGr",
+    label: 'My Text',
+    databaseName: 'radioGr',
     vertical: true,
     options: [
       {
-        value: "my-val-1",
-        text: "My text 1",
+        value: 'my-val-1',
+        text: 'My text 1',
       },
       {
-        value: "my-val-2",
-        text: "My text 2"
+        value: 'my-val-2',
+        text: 'My text 2',
       },
       {
-        value: "my-val-3",
-        text: "My text 3"
-      }
-    ]
+        value: 'my-val-3',
+        text: 'My text 3',
+      },
+    ],
   },
 ];
 
@@ -194,7 +192,7 @@ const tabs: TouchUIDialogTab[] = [
       {
         label: 'Nested Multifield with JSON storage',
         databaseName: 'multi',
-        'acs-commons-nested': "JSON_STORE",
+        'acs-commons-nested': 'JSON_STORE',
         type: TouchUIField.MultifieldNested,
         multifieldOptions: [
           {
@@ -206,17 +204,17 @@ const tabs: TouchUIDialogTab[] = [
               { value: 1, name: 'Name 1' },
               { value: 2, name: 'Name 2' },
               { value: 3, name: 'Name 3', selected: true },
-            ]
+            ],
           },
-        ]
+        ],
       },
       {
-        label: "6.2 Pathbrowser",
+        label: '6.2 Pathbrowser',
         type: TouchUIField.PathBrowser,
-        databaseName: "pathBrowser",
+        databaseName: 'pathBrowser',
       },
     ],
-    hide: ({ contentPath }) => contentPath.includes('/it')
+    hide: ({ contentPath }) => contentPath.includes('/it'),
   },
 ];
 
