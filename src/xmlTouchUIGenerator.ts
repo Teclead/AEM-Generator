@@ -81,16 +81,16 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
     if (this.dialogConfig.tabs) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_dialog');
 
-      // required condition to create clientlibs
-      const hasCustomFunctions =
-        this.hasHideImplementation() || this.hasOnLoadImplementation() || this.hasOnChangeImplementation();
-
       this.writeDialog();
 
       // remove clientlibs for every rebuild
       if (this.existFolder(this.dialogConfig.componentPath + '/clientlibs')) {
         this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs');
       }
+
+      // required condition to create clientlibs
+      const hasCustomFunctions =
+        this.hasHideImplementation() || this.hasOnLoadImplementation() || this.hasOnChangeImplementation();
 
       if (hasCustomFunctions) {
         this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');

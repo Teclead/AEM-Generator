@@ -5,6 +5,7 @@ export enum CustomFilePath {
   OnLoad = 'templates/onLoad.js',
   OnChange = 'templates/onChange.js',
 }
+
 /**
  * Placeholders for scripts tags inside html templates
  */

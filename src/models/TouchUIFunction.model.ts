@@ -15,7 +15,7 @@ export type OnLoadFunction = (params: OnLoadFunctionProps) => void;
 
 export interface OnChangeFunctionProps {
   contentPath: string;
-  targetElement: HTMLElement | HTMLElement[];
+  targetElement: HTMLElement[];
 }
 
 export type OnChangeFunction = (params: OnChangeFunctionProps) => void;

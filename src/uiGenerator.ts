@@ -144,7 +144,7 @@ export class UiGenerator<T = {}> {
 
   /**
    * buildHideScript() replace the placeholder in the hideTab scripts template
-   * and returns buildHideScript template string
+   * @returns buildHideScript template string
    */
   public buildHideScript(): string {
     const templateFile = getFile(path.resolve(__dirname, CustomFilePath.HideTab));
@@ -154,6 +154,10 @@ export class UiGenerator<T = {}> {
       .replace(JavaScriptPlaceHolder.HideContainer, JSON.stringify(container));
   }
 
+  /**
+   * replaces the placeholder in the onLoad scripts template
+   * @returns buildOnLoadScript template string
+   */
   public buildOnLoadScript(): string {
     const templateFile = getFile(path.resolve(__dirname, CustomFilePath.OnLoad));
     const container: JQueryOnLoadModel[] = [
@@ -165,6 +169,10 @@ export class UiGenerator<T = {}> {
       .replace(JavaScriptPlaceHolder.OnLoadContainer, JSON.stringify(container));
   }
 
+  /**
+   * replaces the placeholder in the onChange scripts template
+   * @returns buildOnChangeScript template string
+   */
   public buildOnChangeScript(): string {
     const templateFile = getFile(path.resolve(__dirname, CustomFilePath.OnChange));
     const container: JQueryOnChangeModel[] = [
@@ -178,7 +186,7 @@ export class UiGenerator<T = {}> {
   }
 
   /**
-   * buildClientLibs returns cqClientlibs template string
+   * @returns cqClientlibs template string
    */
   public buildCqClientLibs(): string {
     return template.clientlibs;
@@ -388,6 +396,7 @@ export class UiGenerator<T = {}> {
   public getMultiField(field: MultifieldOptions) {
     return field.multifieldtype ? field.multifieldtype : 'FIELD-TYPE-ERROR';
   }
+
   /**
    * getMultiFieldNested() calls  getField and returns the field string template
    * @param  field: TouchUIDialogFieldOptions
@@ -398,6 +407,7 @@ export class UiGenerator<T = {}> {
       .map((fieldOption: TouchUIDialogFieldOptions<T>, index: number) => this.getField(fieldOption, index))
       .join('');
   }
+
   /**
    * getSightlyTemplate() creates the sightly Template file if we have sightlyTemplate
    * in config

@@ -9,17 +9,21 @@ based on a TypeScript file, which describes the structure of the dialog and the 
 
 ## Development
 
-The library can be run by executing builder.js. It is recommended to implement a script in the package.json, that looks like this
+The library can be run by executing builder.js. It is recommended to implement a script in the `package.json`, that looks like this
 
 ```json
 “build:dialogues”: “node node_modules/@teclead/aem-generator/builder.js”,
 ```
 
-Building the dialogues can then be executed by running npm run build:dialogues
+Building the dialogues can then be executed by running 
+
+```bash
+npm run build:dialogues
+```
 
 ## Touch UI fields
 
-The default props for the touch ui fields will be define with TouchUIFieldOptionKeysEnum.model.ts
+The default props for the touch ui fields will be define with `TouchUIFieldOptionKeysEnum.model.ts`
 Expand the default props with the enum
 
 ## API
@@ -89,10 +93,10 @@ export const dialog: AEMTouchUIDialog = {
 new TouchUIXMLGenerator(dialog).writeFilesToAEM();
 ```
 
-The variable fields: TouchUIDialogFieldOptions[] describes the individual fields of the Dialog. Label, type, databaseName are always required,
-all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. You can add custom additional common keys for own implementations on touch ui dialog field level. The hide property is optional and can be used to hide a dialog field inside a specific condition. This property uses a function where return a boolean. For further information check out the individual interfaces for the different field types.
+The variable fields: `TouchUIDialogFieldOptions[]` describes the individual fields of the Dialog. `label`, `type`, `databaseName` are always required,
+all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. You can add custom additional common keys for own implementations on touch ui dialog field level. 
 
-Side-Node: The button offers to execute javaScript code with the onClick listener by adding the javaScriptHandler-Property.
+The `hide` property is optional and can be used to hide a dialog field inside a specific condition. This property uses a function where return a boolean.
 
 ```typescript
 const fields: TouchUIDialogFieldOptions[] = [{
@@ -107,7 +111,51 @@ const fields: TouchUIDialogFieldOptions[] = [{
 ];
 ```
 
-The variable tabs: TouchUiDialogTab[] describes the required tabs for the dialog, it hold a title and a field property. The field property should hold the value of the fields: TouchUIDialogFieldOptions[] variable. If more than one tab is used, then obviously more than one fields: TouchUIDialogFieldOptions[] variable needs to be configured. The hide property is optional and can be used to hide a tab inside a specific condition. This property uses a function where return a boolean.
+The `onLoad` property is optional and can be used to execute a function after the dialog is loaded. This property uses a function where return a void.
+
+```typescript
+const fields: TouchUIDialogFieldOptions[] = [{
+    label: 'Mein Button',
+    type: TouchUIField.Button,
+    databaseName: 'btn',
+    onLoad: ({ contentPath }) => {
+      console.log(contentPath);
+    },
+},
+...
+];
+```
+
+The `onChange` property is optional and can be used to execute a function after a TouchUI field has changed. This property uses a function where return a void. The `targetElement` is an HTMLElement or an array of HTMLElements which can be used to manipulate the DOM. To get this to work, you need to setup the field `targetClassName` and if you want to use a custom class name, you have to set the property `className` in the target field. 
+
+```typescript
+const fields: TouchUIDialogFieldOptions[] = [
+  {
+    label: 'Mein Dropdown',
+    type: TouchUIField.Dropdown,
+    databaseName: 'dropdown',
+    onChange: ({ contentPath, targetElement }) => {
+      console.log(contentPath, targetElement);
+    },
+    targetClassName: 'my-button-class',
+  },
+  {
+    label: 'Mein Button',
+    type: TouchUIField.Button,
+    databaseName: 'btn',
+    className: 'my-button-class',
+  } 
+...
+];
+```
+
+For further information check out the individual interfaces for the different field types.
+
+Side-Node: The button offers to execute javaScript code with the `onClick` listener by adding the `javaScriptHandler`-Property.
+
+---
+
+The variable tabs: `TouchUiDialogTab[]` describes the required tabs for the dialog, it hold a title and a field property. The field property should hold the value of the fields: `TouchUIDialogFieldOptions[]` variable. If more than one tab is used, then obviously more than one fields: `TouchUIDialogFieldOptions[]` variable needs to be configured. The `hide` property is optional and can be used to `hide` a tab inside a specific condition. This property uses a function where return a boolean.
 
 ```typescript
 const tabs: TouchUIDialogTab[] = [
@@ -122,7 +170,7 @@ The sightlyTemplate variable is referencing the HTMl-Template that is used to bu
 const sightlyTemplate = "<h1>my custom template...</h1>";
 ```
 
-The exampleTouchUiDialog: AEMTouchUIDialog variable describes the configuration of the AEM component. It holds the reference to the sightlyTemplate, the component name, the component group, the component description, tabs and the component path (destination path) as required inputs and a couple of optional properties than can be configured. For more Information check out the Interfaces.
+The exampleTouchUiDialog: `AEMTouchUIDialog` variable describes the configuration of the AEM component. It holds the reference to the sightlyTemplate, the component name, the component group, the component description, tabs and the component path (destination path) as required inputs and a couple of optional properties than can be configured. For more Information check out the Interfaces.
 
 ```typescript
 export const exampleTouchUIDialog: AEMTouchUIDialog = {
@@ -252,7 +300,7 @@ Does the implementation behave as expected?
 Are all important branches covered by unit tests?
 Does the code style fulfill the standards of this library?
 Important notice: Pull requests that are opened while they're still being worked on should have the prefix 'WIP:', which will signal ongoing changes on the branch and that the pull request is not ready to be merged.
-Collapse
+
 
 ## License
 
