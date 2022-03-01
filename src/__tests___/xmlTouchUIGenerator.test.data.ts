@@ -24,6 +24,24 @@ const fields: TouchUIDialogFieldOptions[] = [
     description: 'Meine Beschreibung für Textfeld...',
   },
   {
+    label: 'Mein Nested Multifield',
+    type: TouchUIField.MultifieldNested,
+    description: 'Meine Beschreibung für Multifield Nested...',
+    databaseName: 'multifieldNested',
+    onChange: ({ targetElement }) => {
+      console.log('Multifield Target', targetElement);
+    },
+    targetClassName: 'nested-custom-class',
+    multifieldOptions: [
+      {
+        label: 'Mein Textfield',
+        type: TouchUIField.Text,
+        databaseName: 'label',
+        className: 'nested-custom-class',
+      },
+    ],
+  },
+  {
     // May not be available in some versions of AEM (ex. 6.2)
     label: 'Mein PathField',
     type: TouchUIField.Path,

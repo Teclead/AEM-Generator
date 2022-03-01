@@ -1,7 +1,6 @@
 (function(document, $) {
-  var onChangeContainer = [{"index":3,"tabIndex":0,"isField":true,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"}];
+  var onChangeContainer = [{"index":1,"tabIndex":0,"isField":true,"targetClassName":"nested-custom-class","onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isField":true,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"}];
   var componentName = "mytestcomponent";
-
   $(document).on('foundation-contentloaded', function() {
     onChange(onChangeContainer);
   });
@@ -26,15 +25,25 @@
         var targetElement = $(`.${onChangeElement.targetClassName}`);
         var fields = $(getTabPaneFieldsByPaneId(tabPaneId));
 
-        fields.children().each((index, field) => {
-          if (index === onChangeElement.index && targetElement.length) {
-            var onChangeFn = getFunction(onChangeElement.onChange);
+        fields
+          .children()
+          .filter(function() {
+            return $(this).attr('type') !== 'hidden';
+          })
+          .each((index, field) => {
+            if (index === onChangeElement.index) {
+              var onChangeFn = getFunction(onChangeElement.onChange);
+              var multifield = $(field).find('div.coral-Multifield');
 
-            $(field).change(function() {
-              onChangeFn({ contentPath: getContentPath(), targetElement: targetElement.get() });
-            });
-          }
-        });
+              if (multifield.length) {
+                onChangeFn({ contentPath: getContentPath(), targetElement: targetElement.get() });
+              } else {
+                $(field).change(function() {
+                  onChangeFn({ contentPath: getContentPath(), targetElement: targetElement.get() });
+                });
+              }
+            }
+          });
       }
     });
   }

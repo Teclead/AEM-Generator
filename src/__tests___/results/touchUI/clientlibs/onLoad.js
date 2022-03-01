@@ -1,5 +1,5 @@
 (function(document, $) {
-  var onLoadContainer = [{"index":3,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath;\n            console.log('Triggered On Load Event', contentPath);\n        }"}];
+  var onLoadContainer = [{"index":6,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath;\n            console.log('Triggered On Load Event', contentPath);\n        }"}];
 
   $(document).on('dialog-ready', function() {
     onLoad(onLoadContainer);

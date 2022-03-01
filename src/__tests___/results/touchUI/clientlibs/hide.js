@@ -1,5 +1,5 @@
 (function(document, $) {
-  var hideContainer = [{"index":3,"isTab":true,"hide":"function (_a) {\n            var contentPath = _a.contentPath;\n            return contentPath.includes('/it');\n        }"},{"index":3,"tabIndex":0,"isTab":false,"hide":"function (_a) {\n            var contentPath = _a.contentPath;\n            return contentPath.includes('/de');\n        }"}]; // tabs to hide
+  var hideContainer = [{"index":3,"isTab":true,"hide":"function (_a) {\n            var contentPath = _a.contentPath;\n            return contentPath.includes('/it');\n        }"},{"index":6,"tabIndex":0,"isTab":false,"hide":"function (_a) {\n            var contentPath = _a.contentPath;\n            return contentPath.includes('/de');\n        }"}]; // tabs to hide
   var componentName = "mytestcomponent"; // execute js only inside this component
 
   // when dialog gets injected

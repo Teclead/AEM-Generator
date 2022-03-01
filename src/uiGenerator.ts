@@ -501,21 +501,22 @@ export class UiGenerator<T = {}> {
   public getJQueryOnChangeDialogFieldModels(): JQueryOnChangeModel[] {
     return this.dialogConfig.tabs
       .map((tab, tabIndex) =>
-        tab.fields.reduce((prev, curr, index) => {
-          console.log('index', index, curr.description, curr.onChange);
-          return (curr as CommonOptions).onChange
-            ? [
-                ...prev,
-                {
-                  index,
-                  tabIndex,
-                  isField: true,
-                  targetClassName: '' + curr.targetClassName,
-                  onChange: '' + (curr as CommonOptions).onChange,
-                },
-              ]
-            : [...prev];
-        }, [] as JQueryOnChangeModel[])
+        tab.fields.reduce(
+          (prev, curr, index) =>
+            (curr as CommonOptions).onChange
+              ? [
+                  ...prev,
+                  {
+                    index,
+                    tabIndex,
+                    isField: true,
+                    targetClassName: '' + curr.targetClassName,
+                    onChange: '' + (curr as CommonOptions).onChange,
+                  },
+                ]
+              : [...prev],
+          [] as JQueryOnChangeModel[]
+        )
       )
       .reduce((acc, val) => acc.concat(val), []);
   }
