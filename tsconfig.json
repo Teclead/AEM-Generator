@@ -36,6 +36,6 @@
     "dist",
     "**/*.js",
     "coverage",
-    "__tests__"
+    "src/__tests___"
   ]
 }

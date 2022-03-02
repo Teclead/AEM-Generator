@@ -40,11 +40,7 @@
    * @returns {void} calls the function
    */
   function getFunction(str) {
-    const func = function () {
-      return str;
-    };
-
-    return func();
+    return new Function('return ' + str)();
   }
 
   /**
