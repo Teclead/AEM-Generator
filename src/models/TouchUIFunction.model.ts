@@ -1,24 +1,24 @@
 /**
  * Please use index.ts to import and export the models out of model folder
  */
-export interface HideFunctionProps {
+export interface HideFunctionProperties {
   contentPath: string;
 }
 
-export type HideFunction = (params: HideFunctionProps) => boolean;
+export type HideFunction = (parameters: HideFunctionProperties) => boolean;
 
-export interface OnLoadFunctionProps {
+export interface OnLoadFunctionProperties {
   contentPath: string;
 }
 
-export type OnLoadFunction = (params: OnLoadFunctionProps) => void;
+export type OnLoadFunction = (parameters: OnLoadFunctionProperties) => void;
 
-export interface OnChangeFunctionProps {
+export interface OnChangeFunctionProperties {
   contentPath: string;
   targetElement: HTMLElement[];
 }
 
-export type OnChangeFunction = (params: OnChangeFunctionProps) => void;
+export type OnChangeFunction = (parameters: OnChangeFunctionProperties) => void;
 
 export interface TouchUIFunction {
   hide: HideFunction;

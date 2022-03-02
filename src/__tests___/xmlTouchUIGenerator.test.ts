@@ -1,32 +1,42 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
 import { TouchUIField } from '../models';
 import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 import { TouchUIXMLGenerator } from './../xmlTouchUIGenerator';
-import { DialogGenerator, exampleTouchUIDialog } from './xmlTouchUIGenerator.test.data';
+import {
+  DialogGenerator,
+  exampleTouchUIDialog,
+} from './xmlTouchUIGenerator.test.data';
 
 describe('xml generator for touch ui aem dialogs', () => {
   const UIGenerator = new TouchUIXMLGenerator(exampleTouchUIDialog);
 
-  const touchUIDialogPath = './src/__tests___/results/touchUI/_cq_dialog/.content.xml';
-  const analyticsPath = './src/__tests___/results/touchUI/analytics/.content.xml';
+  const touchUIDialogPath =
+    './src/__tests___/results/touchUI/_cq_dialog/.content.xml';
+  const analyticsPath =
+    './src/__tests___/results/touchUI/analytics/.content.xml';
   const configPath = './src/__tests___/results/touchUI/.content.xml';
   const reactPath = './src/__tests___/results/touchUI/touchUI.html';
   const cqConfigPath = './src/__tests___/results/touchUI/_cq_editConfig.xml';
-  const cqDesignDialogPath = './src/__tests___/results/touchUI/_cq_design_dialog/.content.xml';
-  const htmlTagPath = './src/__tests___/results/touchUI/_cq_htmlTag/.content.xml';
+  const cqDesignDialogPath =
+    './src/__tests___/results/touchUI/_cq_design_dialog/.content.xml';
+  const htmlTagPath =
+    './src/__tests___/results/touchUI/_cq_htmlTag/.content.xml';
   const newParPath = './src/__tests___/results/touchUI/new/.content.xml';
 
-  const externalReactAppTemplate = './src/templates/reactExternal.template.html';
+  const externalReactAppTemplate =
+    './src/templates/reactExternal.template.html';
 
-  const clientlibsPath = './src/__tests___/results/touchUI/clientlibs/.content.xml';
+  const clientlibsPath =
+    './src/__tests___/results/touchUI/clientlibs/.content.xml';
 
-  [touchUIDialogPath, analyticsPath, configPath].forEach((file) => {
+  for (const file of [touchUIDialogPath, analyticsPath, configPath]) {
     try {
       fs.unlinkSync(file);
-    } catch (e) {
+    } catch {
       //
     }
-  });
+  }
+
   UIGenerator.writeFilesToAEM();
 
   it('should print the touchUI dialog', () => {
@@ -76,9 +86,10 @@ describe('xml generator for touch ui aem dialogs', () => {
 
   it('should print a template for a external react app', () => {
     const externalReactAppPath = './src/__tests___/results/externalReactApp';
-    const externalreactPath = './src/__tests___/results/externalReactApp/externalReactApp.html';
+    const externalreactPath =
+      './src/__tests___/results/externalReactApp/externalReactApp.html';
 
-    const config: AEMTouchUIDialog<{}> = {
+    const config: AEMTouchUIDialog<object> = {
       componentName: 'externalApp',
       sightlyTemplate: externalReactAppTemplate,
       componentGroup: 'External Group',
@@ -93,9 +104,10 @@ describe('xml generator for touch ui aem dialogs', () => {
   });
 
   it('should print a template for a extended version of TouchUIXMLGenerator', () => {
-    const externalExtendedPath = './src/__tests___/results/extendedTouchUIXMLGenerator';
+    const externalExtendedPath =
+      './src/__tests___/results/extendedTouchUIXMLGenerator';
 
-    const dialog: AEMTouchUIDialog<{}> = {
+    const dialog: AEMTouchUIDialog<object> = {
       componentName: 'extended',
       sightlyTemplate: '<h1>my custom template...</h1>',
       componentGroup: 'Extended',
@@ -131,7 +143,8 @@ describe('xml generator for touch ui aem dialogs', () => {
 
     new DialogGenerator(dialog).writeFilesToAEM();
 
-    const touchUIDialogExtendedPath = './src/__tests___/results/extendedTouchUIXMLGenerator/_cq_dialog/.content.xml';
+    const touchUIDialogExtendedPath =
+      './src/__tests___/results/extendedTouchUIXMLGenerator/_cq_dialog/.content.xml';
 
     const renderedFile = fs.readFileSync(touchUIDialogExtendedPath).toString();
     expect(renderedFile).toMatchSnapshot();

@@ -1,27 +1,47 @@
-(function(document, $) {
-  var onLoadContainer = '{{ONLOAD_CONTAINER}}';
+(function (document, $) {
+  'use strict';
 
-  $(document).on('dialog-ready', function() {
-    onLoad(onLoadContainer);
-  });
+  const onLoadContainer = '{{ONLOAD_CONTAINER}}';
 
+  /**
+   * @param {string} str function that should be retured
+   * @returns {void} calls the function
+   */
+  function getFunction(str) {
+    const func = function () {
+      return str;
+    };
+
+    return func();
+  }
+
+  /**
+   * @returns {HTMLElement} the first found dialog form
+   */
+  function getDialogForm() {
+    return $('.coral-TabPanel-navigation').closest('form')[0];
+  }
+
+  /**
+   * @returns {string} the content path of the form
+   */
+  function getContentPath() {
+    const form = getDialogForm();
+
+    return new URL(form.action).pathname;
+  }
+
+  /**
+   * @param {any[]} container array of jquery models
+   */
   function onLoad(container) {
     container.forEach((onLoadElement) => {
-      var onLoadFn = getFunction(onLoadElement.onLoad);
+      const onLoadFn = getFunction(onLoadElement.onLoad);
       onLoadFn({ contentPath: getContentPath() });
     });
   }
 
-  function getFunction(str) {
-    return new Function('return ' + str)();
-  }
-
-  function getContentPath() {
-    var form = getDialogForm();
-    return new URL(form.action).pathname;
-  }
-
-  function getDialogForm() {
-    return $('.coral-TabPanel-navigation').closest('form')[0];
-  }
+  $(document).on('dialog-ready', function () {
+    onLoad(onLoadContainer);
+  });
 })(document, Granite.$);

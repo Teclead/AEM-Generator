@@ -1,14 +1,22 @@
 // import * as fs from 'fs';
-import { TouchUIDialogFieldOptions, TouchUIDialogTab, TouchUIField } from '../models';
+import {
+  TouchUIDialogFieldOptions,
+  TouchUIDialogTab,
+  TouchUIField,
+} from '../models';
 import { TouchUIXMLGenerator } from '../xmlTouchUIGenerator';
 import { AEMTouchUIDialog } from './../models/AEMTouchUIDialogModels.model';
 
 export class DialogGenerator extends TouchUIXMLGenerator {
-  public getFields(fields: TouchUIDialogFieldOptions[]) {
-    const template = super.getFields(fields);
+  public getFields(options: TouchUIDialogFieldOptions[]): string {
+    const template = super.getFields(options);
 
     if (this.has('acs-commons-nested')) {
-      return this.replaceResourceType(template, 'container', 'granite/ui/components/foundation/form/fieldset');
+      return this.replaceResourceType(
+        template,
+        'container',
+        'granite/ui/components/foundation/form/fieldset'
+      );
     }
 
     return template;
@@ -243,7 +251,7 @@ const tabs: TouchUIDialogTab[] = [
 
 const ReactTemplate = './src/templates/react.template.html';
 // const ReactTemplate =  fs.readFileSync('./src/templates/react.template.html').toString();
-export const exampleTouchUIDialog: AEMTouchUIDialog<{}> = {
+export const exampleTouchUIDialog: AEMTouchUIDialog<object> = {
   sightlyTemplate: ReactTemplate,
   componentName: 'MyTestComponent',
   componentGroup: 'MyTestGroup',

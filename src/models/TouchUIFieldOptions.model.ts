@@ -5,7 +5,11 @@
 import { TouchUIDialogFieldOptions } from './AEMTouchUIDialogModels.model';
 import { TouchUIField } from './TouchUIFieldEnum.model';
 import { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';
-import { HideFunction, OnChangeFunction, OnLoadFunction } from './TouchUIFunction.model';
+import {
+  HideFunction,
+  OnChangeFunction,
+  OnLoadFunction,
+} from './TouchUIFunction.model';
 
 export interface CustomOptionAttribute {
   [key: string]: any;

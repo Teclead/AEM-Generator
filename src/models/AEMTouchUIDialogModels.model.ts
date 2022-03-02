@@ -4,41 +4,65 @@
 
 import { TouchUIField } from './TouchUIFieldEnum.model';
 import * as options from './TouchUIFieldOptions.model';
-import { HideFunction, OnChangeFunction, OnLoadFunction } from './TouchUIFunction.model';
+import {
+  HideFunction,
+  OnChangeFunction,
+  OnLoadFunction,
+} from './TouchUIFunction.model';
 
 // Custom TouchUiField Types
-type CustomTextOptions<T> = T extends { [TouchUIField.Text]: unknown } ? T[TouchUIField.Text] : {};
-type CustomRichTextOptions<T> = T extends { [TouchUIField.RichText]: unknown } ? T[TouchUIField.RichText] : {};
-type CustomTextAreaOptions<T> = T extends { [TouchUIField.TextArea]: unknown } ? T[TouchUIField.TextArea] : {};
-type CustomCheckboxOptions<T> = T extends { [TouchUIField.Checkbox]: unknown } ? T[TouchUIField.Checkbox] : {};
-type CustomDropdownOptions<T> = T extends { [TouchUIField.Dropdown]: unknown } ? T[TouchUIField.Dropdown] : {};
-type CustomPathOptions<T> = T extends { [TouchUIField.PathBrowser]: unknown } ? T[TouchUIField.PathBrowser] : {};
-type CustomNumberOptions<T> = T extends { [TouchUIField.Number]: unknown } ? T[TouchUIField.Number] : {};
+type CustomTextOptions<T> = T extends { [TouchUIField.Text]: unknown }
+  ? T[TouchUIField.Text]
+  : object;
+type CustomRichTextOptions<T> = T extends { [TouchUIField.RichText]: unknown }
+  ? T[TouchUIField.RichText]
+  : object;
+type CustomTextAreaOptions<T> = T extends { [TouchUIField.TextArea]: unknown }
+  ? T[TouchUIField.TextArea]
+  : object;
+type CustomCheckboxOptions<T> = T extends { [TouchUIField.Checkbox]: unknown }
+  ? T[TouchUIField.Checkbox]
+  : object;
+type CustomDropdownOptions<T> = T extends { [TouchUIField.Dropdown]: unknown }
+  ? T[TouchUIField.Dropdown]
+  : object;
+type CustomPathOptions<T> = T extends { [TouchUIField.PathBrowser]: unknown }
+  ? T[TouchUIField.PathBrowser]
+  : object;
+type CustomNumberOptions<T> = T extends { [TouchUIField.Number]: unknown }
+  ? T[TouchUIField.Number]
+  : object;
 type CustomMultifieldNestedOptions<T> = T extends {
   [TouchUIField.MultifieldNested]: unknown;
 }
   ? T[TouchUIField.MultifieldNested]
-  : {};
-type CustomButtonOptions<T> = T extends { [TouchUIField.Button]: unknown } ? T[TouchUIField.Button] : {};
+  : object;
+type CustomButtonOptions<T> = T extends { [TouchUIField.Button]: unknown }
+  ? T[TouchUIField.Button]
+  : object;
 type CustomImagefieldOptions<T> = T extends {
   [TouchUIField.Imagefield]: unknown;
 }
   ? T[TouchUIField.Imagefield]
-  : {};
+  : object;
 type CustomDatePickerOptions<T> = T extends {
   [TouchUIField.DatePicker]: unknown;
 }
   ? T[TouchUIField.DatePicker]
-  : {};
-type CustomHeadingOptions<T> = T extends { [TouchUIField.Heading]: unknown } ? T[TouchUIField.Heading] : {};
-type CustomFieldSetOptions<T> = T extends { [TouchUIField.FieldSet]: unknown } ? T[TouchUIField.FieldSet] : {};
+  : object;
+type CustomHeadingOptions<T> = T extends { [TouchUIField.Heading]: unknown }
+  ? T[TouchUIField.Heading]
+  : object;
+type CustomFieldSetOptions<T> = T extends { [TouchUIField.FieldSet]: unknown }
+  ? T[TouchUIField.FieldSet]
+  : object;
 type CustomRadioGroupOtions<T> = T extends {
   [TouchUIField.RadioGroup]: unknown;
 }
   ? T[TouchUIField.RadioGroup]
-  : {};
+  : object;
 
-export type TouchUIDialogFieldOptions<T = {}> =
+export type TouchUIDialogFieldOptions<T = object> =
   | (options.TextOptions & CustomTextOptions<T>)
   | options.PathOptions
   | (options.PathBrowserOptions & CustomPathOptions<T>)
@@ -55,8 +79,18 @@ export type TouchUIDialogFieldOptions<T = {}> =
   | (options.HeadingOptions & CustomHeadingOptions<T>)
   | (options.FieldSetOptions<T> & CustomFieldSetOptions<T>)
   | (options.RadioGroupOptions & CustomRadioGroupOtions<T>);
-
-export interface AEMTouchUIDialog<T = {}> {
+export interface TouchUIDialogTab<T = object> {
+  title: string;
+  fields: Array<TouchUIDialogFieldOptions<T>>;
+  hide?: HideFunction;
+  onLoad?: OnLoadFunction;
+  onChange?: OnChangeFunction;
+}
+export interface TouchUIAnalytics {
+  events?: string[] | string;
+  values?: string[] | string;
+}
+export interface AEMTouchUIDialog<T = object> {
   sightlyTemplate?: string; // this is the path to a html file.
   componentName: string; // componentName for selection in AEM.
   componentGroup: string; // componentGroup which contains the component.
@@ -85,39 +119,32 @@ export interface AEMTouchUIDialog<T = {}> {
   newPar?: boolean; // conditionally generate a new par component for containers
 }
 
-export interface TouchUIDialogTab<T = {}> {
-  title: string;
-  fields: Array<TouchUIDialogFieldOptions<T>>;
-  hide?: HideFunction;
-  onLoad?: OnLoadFunction;
-  onChange?: OnChangeFunction;
-}
-
-export interface TouchUIAnalytics {
-  events?: string[] | string;
-  values?: string[] | string;
-}
-
 export interface Templates {
   buttonTemplate: string;
+  checkboxTemplate: string;
+  clientlibs: string;
   componentTemplate: string;
   cqDesignDialogTemplate: string;
   cqEditConfigTemplate: string;
+  datePicker: string;
   dialogTemplate: string;
   dropdownTemplate: string;
+  fieldSet: string;
+  heading: string;
+  hideFunctionTemplate: string;
   htmlTagTemplate: string;
   imagefieldTemplate: string;
-  multifieldTemplate: string;
   multifieldNestedTemplate: string;
+  multifieldTemplate: string;
+  newParTemplate: string;
   numberfieldTemplate: string;
+  onChangeFunctionTemplate: string;
+  onLoadFunctionTemplate: string;
   pathfieldTemplate: string;
+  radioGroup: string;
   richtextTemplate: string;
-  checkboxTemplate: string;
   tabTemplate: string;
+  tagTemplate: string;
   textfieldTemplate: string;
   trackingTemplate: string;
-  newParTemplate: string;
-  hideFunctionTemplate: string;
-  onLoadFunctionTemplate: string;
-  onChangeFunctionTemplate: string;
 }
