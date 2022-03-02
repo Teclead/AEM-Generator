@@ -1,0 +1,44 @@
+name: 'Project Test on Pull Request'
+
+on:
+  pull_request:
+    branches: ['master']
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Run ESLint
+        run: yarn lint
+
+  tsc:
+    needs: lint
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        node: [ '12', '14', '16' ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Run tsc --noEmit
+        run: yarn lint:tsc
+
+  jest:
+    needs: tsc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Run test
+        run: yarn test:ci
