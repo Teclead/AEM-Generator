@@ -1,6 +1,6 @@
 {
   "name": "@teclead/aem-generator",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "private": false,
   "description": "AEM Dialog and Component Generator based on Typescript Interfaces",
   "main": "index.js",
@@ -38,8 +38,8 @@
     "prettier:write": "npm run prettier:base -- --write \"src/*.{ts,tsx}\" \"src/**/*.{ts,tsx}\" \"__tests__/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\""
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Teclead/AEM-Generator"
+    "type": "git",
+    "url": "https://github.com/Teclead/AEM-Generator"
   },
   "author": "Teclead / Tony Schumacher",
   "license": "ISC"

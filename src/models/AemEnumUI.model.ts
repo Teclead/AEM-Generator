@@ -28,7 +28,7 @@ export enum FilePath {
   HtmlTag = 'templates/htmlTag.template.xml',
   CqEditConfig = 'templates/cqEditConfig.template.xml',
   NewPar = 'templates/newPar.template.xml',
-  Clientlibs = 'templates/cqClientlibs.template.xml', 
+  Clientlibs = 'templates/cqClientlibs.template.xml',
 }
 
 export enum PlaceHolder {
@@ -64,11 +64,12 @@ export enum PlaceHolder {
   Tariffspinner = '{{TARIFFSPINNER}}',
   ClientlibsCategories = '{{CATEGORIES}}',
   Container = '{{CONTAINER}}',
-  CustomAttribute =  '{{CUSTOM_ATTRIBUTE}}',
-  DisplayFormat =  '{{DISPLAYFORMAT}}',
-  DateType =  '{{DATETYPE}}',
-  MinDate =  '{{MINDATE}}',
-  Text =  '{{TEXT}}',
-  Level =  '{{LEVEL}}',
-  Vertical = "{{VERTICAL}}"
+  CustomAttribute = '{{CUSTOM_ATTRIBUTE}}',
+  DisplayFormat = '{{DISPLAYFORMAT}}',
+  DateType = '{{DATETYPE}}',
+  MinDate = '{{MINDATE}}',
+  Text = '{{TEXT}}',
+  Level = '{{LEVEL}}',
+  Vertical = '{{VERTICAL}}',
+  ClassName = '{{CLASSNAME}}',
 }

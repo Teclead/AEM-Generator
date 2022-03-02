@@ -1,4 +1,3 @@
-
 import * as fs from 'fs';
 import * as path from 'path';
 import {
@@ -9,6 +8,8 @@ import {
   DropdownOptions,
   JavaScriptPlaceHolder,
   JQueryHideModel,
+  JQueryOnChangeModel,
+  JQueryOnLoadModel,
   MultifieldNestedOptions,
   MultifieldOptions,
   OptionKeys,
@@ -17,12 +18,18 @@ import {
   TouchUIField,
   TouchUIFieldOption,
 } from './models';
-import { DatePickerOptions, HeadingOptions, FieldSetOptions, RadioGroupOptions, CommonOptions } from './models/TouchUIFieldOptions.model';
+import {
+  CommonOptions,
+  DatePickerOptions,
+  FieldSetOptions,
+  HeadingOptions,
+  RadioGroupOptions,
+} from './models/TouchUIFieldOptions.model';
 import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator<T = {}> {
   public dialogConfig: AEMTouchUIDialog<T>;
 
-  protected clientlibs: Array<{ filename: string, content: string }> = [];
+  protected clientlibs: Array<{ filename: string; content: string }> = [];
 
   constructor(dialogConfig: AEMTouchUIDialog<T>) {
     this.dialogConfig = dialogConfig;
@@ -63,54 +70,47 @@ export class UiGenerator<T = {}> {
    */
   public getHtmlTag() {
     return template.htmlTag
-      .replace(
-        PlaceHolder.Tag,
-        this.dialogConfig.tag ? this.dialogConfig.tag : 'div'
-      )
-      .replace(
-        PlaceHolder.Class,
-        this.dialogConfig.css ? this.dialogConfig.css : ''
-      );
+      .replace(PlaceHolder.Tag, this.dialogConfig.tag ? this.dialogConfig.tag : 'div')
+      .replace(PlaceHolder.Class, this.dialogConfig.css ? this.dialogConfig.css : '');
   }
 
   /**
    * Filter additional common option keys from the default common options keys
    */
   public getAdditionalCommonKeys(field: TouchUIDialogFieldOptions<T[]>): string[] {
-    return Object.keys(field).filter(x => !Object.values(OptionKeys).includes(x as any));
+    return Object.keys(field).filter((x) => !Object.values(OptionKeys).includes(x as any));
   }
 
   /**
    * Returns key value pairs as object from given touch ui dialog fields and additional common option keys
    */
-  public getAdditionalCommon(field: TouchUIDialogFieldOptions<T[]>, additionalCommonKeys: string[]): CustomOptionAttribute {
-    return Object
-      .entries(field)
-      .reduce(
-        (total, [key, value]) => (additionalCommonKeys.includes(key)) ? { ...total, [key]: value } : { ...total }, {}
-      );
+  public getAdditionalCommon(
+    field: TouchUIDialogFieldOptions<T[]>,
+    additionalCommonKeys: string[]
+  ): CustomOptionAttribute {
+    return Object.entries(field).reduce(
+      (total, [key, value]) => (additionalCommonKeys.includes(key) ? { ...total, [key]: value } : { ...total }),
+      {}
+    );
   }
   /**
-   * Check have a given key inside touch ui dialog fields 
-   * @param {string} key 
+   * Check have a given key inside touch ui dialog fields
+   * @param {string} key
    * @return {boolean}
    */
   public has(key: string): boolean {
-    return this.dialogConfig.tabs
-      .some((tab) => tab.fields
-        .some((dialogField) => (dialogField as CommonOptions)[key])
-      );
+    return this.dialogConfig.tabs.some((tab) => tab.fields.some((dialogField) => (dialogField as CommonOptions)[key]));
   }
 
   /**
-   * replaceResourceType() replace sling:resourcesType of a field 
+   * replaceResourceType() replace sling:resourcesType of a field
    * with given type to replace it with the new type
    * @param {string} tmp - template string to replace with
    * @param {TouchUIField | string} type - touch ui field type to replace
-   * @param {string} replace - replace value 
+   * @param {string} replace - replace value
    */
   public replaceResourceType(tmp: string, type: TouchUIField | string = 'container', replace: string): string {
-    const regex = '(granite\/ui\/components\/coral\/foundation\/' + type + ')';
+    const regex = '(granite/ui/components/coral/foundation/' + type + ')';
     return tmp.replace(new RegExp(regex), replace);
   }
 
@@ -123,24 +123,28 @@ export class UiGenerator<T = {}> {
       this.clientlibs = [...this.clientlibs, { filename: 'hide.js', content: this.buildHideScript() }];
     }
 
+    if (this.hasOnLoadImplementation()) {
+      this.clientlibs = [...this.clientlibs, { filename: 'onLoad.js', content: this.buildOnLoadScript() }];
+    }
+
+    if (this.hasOnChangeImplementation()) {
+      this.clientlibs = [...this.clientlibs, { filename: 'onChange.js', content: this.buildOnChangeScript() }];
+    }
+
     return this.dialogConfig.tabs
       .map((tab, index) => {
         return template.tab
           .replace(PlaceHolder.Element, 'tab_' + index)
           .replace('/' + PlaceHolder.Element, '/tab_' + index)
           .replace(PlaceHolder.Title, tab.title)
-          .replace(
-            PlaceHolder.Fields,
-            this.getFields(tab.fields)
-
-          );
+          .replace(PlaceHolder.Fields, this.getFields(tab.fields));
       })
       .join('');
   }
 
   /**
-   * buildHideScript() replace the placeholder in the hideTab scripts template 
-   * and returns buildHideScript template string
+   * buildHideScript() replace the placeholder in the hideTab scripts template
+   * @returns buildHideScript template string
    */
   public buildHideScript(): string {
     const templateFile = getFile(path.resolve(__dirname, CustomFilePath.HideTab));
@@ -148,14 +152,46 @@ export class UiGenerator<T = {}> {
     return templateFile
       .replace(JavaScriptPlaceHolder.HideComponentName, this.dialogConfig.componentName.toLowerCase())
       .replace(JavaScriptPlaceHolder.HideContainer, JSON.stringify(container));
-
   }
+
   /**
-   * buildClientLibs returns cqClientlibs template string
+   * replaces the placeholder in the onLoad scripts template
+   * @returns buildOnLoadScript template string
+   */
+  public buildOnLoadScript(): string {
+    const templateFile = getFile(path.resolve(__dirname, CustomFilePath.OnLoad));
+    const container: JQueryOnLoadModel[] = [
+      ...this.getJQueryOnLoadTabModels(),
+      ...this.getJQueryOnLoadDialogFieldModels(),
+    ];
+    return templateFile
+      .replace(JavaScriptPlaceHolder.OnLoadComponentName, this.dialogConfig.componentName.toLowerCase())
+      .replace(JavaScriptPlaceHolder.OnLoadContainer, JSON.stringify(container));
+  }
+
+  /**
+   * replaces the placeholder in the onChange scripts template
+   * @returns buildOnChangeScript template string
+   */
+  public buildOnChangeScript(): string {
+    const templateFile = getFile(path.resolve(__dirname, CustomFilePath.OnChange));
+    const container: JQueryOnChangeModel[] = [
+      ...this.getJQueryOnChangeTabModels(),
+      ...this.getJQueryOnChangeDialogFieldModels(),
+    ];
+
+    return templateFile
+      .replace(JavaScriptPlaceHolder.OnChangeComponentName, this.dialogConfig.componentName.toLowerCase())
+      .replace(JavaScriptPlaceHolder.OnChangeContainer, JSON.stringify(container));
+  }
+
+  /**
+   * @returns cqClientlibs template string
    */
   public buildCqClientLibs(): string {
     return template.clientlibs;
   }
+
   /**
    * getTemplate() check the field type and return
    * the right field template string
@@ -167,19 +203,16 @@ export class UiGenerator<T = {}> {
       case TouchUIField.Path:
         return template.pathfield;
       case TouchUIField.PathBrowser:
-        return template.pathfield
-          .replace(
-            "granite/ui/components/coral/foundation/form/pathfield",
-            "granite/ui/components/coral/foundation/form/pathbrowser");
+        return template.pathfield.replace(
+          'granite/ui/components/coral/foundation/form/pathfield',
+          'granite/ui/components/coral/foundation/form/pathbrowser'
+        );
       case TouchUIField.Checkbox:
         return template.checkbox;
       case TouchUIField.Dropdown:
         return this.createDropdownFields(field);
       case TouchUIField.Multifield:
-        return template.multiField.replace(
-          PlaceHolder.Field,
-          this.getMultiField(field)
-        );
+        return template.multiField.replace(PlaceHolder.Field, this.getMultiField(field));
       case TouchUIField.MultifieldNested:
         return this.createNestedFields(field);
       case TouchUIField.FieldSet:
@@ -199,34 +232,30 @@ export class UiGenerator<T = {}> {
       case TouchUIField.RichText:
         return template.richtext;
       case TouchUIField.Button:
-        return template.button.replace(
-          PlaceHolder.JavaScript,
-          field.javaScriptHandler || ''
-        );
+        return template.button.replace(PlaceHolder.JavaScript, field.javaScriptHandler || '');
       default:
         // text, bumber, error
-        return template.textfield.replace(
-          'textfield',
-          field.type || 'FIELDERROR'
-        );
+        return template.textfield.replace('textfield', field.type || 'FIELDERROR');
     }
   }
 
-
   public getRadios(field: RadioGroupOptions): string {
-    return field.options.map((option, index) => `<radio_${index} jcr:primaryType="nt:unstructured" text="${option.text}" value="${option.value}" />`).join("")
+    return field.options
+      .map(
+        (option, index) =>
+          `<radio_${index} jcr:primaryType="nt:unstructured" text="${option.text}" value="${option.value}" />`
+      )
+      .join('');
   }
 
   /**
-   * Mapping over the given fields and 
+   * Mapping over the given fields and
    * execute getField() method for all fields
    * @param {TouchUIDialogFieldOptions[]} fields
    * @returns {string}
    */
-  public getFields(fields: TouchUIDialogFieldOptions<T>[]): string {
-    return fields
-      .map((field, fieldIndex) => this.getField(field, fieldIndex))
-      .join('');
+  public getFields(fields: Array<TouchUIDialogFieldOptions<T>>): string {
+    return fields.map((field, fieldIndex) => this.getField(field, fieldIndex)).join('');
   }
 
   /**
@@ -248,50 +277,43 @@ export class UiGenerator<T = {}> {
     return (
       this.getTemplate(field)
         .replace(PlaceHolder.Common, template.commonField)
-        .replace(
-          PlaceHolder.MaxLength,
-          _field.maxLength ? ` maxlength="${_field.maxLength}" ` : ''
-        )
+        .replace(PlaceHolder.MaxLength, _field.maxLength ? ` maxlength="${_field.maxLength}" ` : '')
         .replace(PlaceHolder.Max, _field.max ? ` max="${_field.max}" ` : '')
         .replace(PlaceHolder.Min, _field.min ? ` min="${_field.min}" ` : '')
-        .replace(
-          PlaceHolder.Required,
-          _field.isRequired ? ` required="{Boolean}true" ` : ''
-        )
+        .replace(PlaceHolder.Required, _field.isRequired ? ` required="{Boolean}true" ` : '')
         .replace(PlaceHolder.Element, 'element_' + i)
         .replace('/' + PlaceHolder.Element, '/element_' + i)
         .replace(PlaceHolder.Title, _field.label)
         .replace(PlaceHolder.Value, this.getFieldValue(field))
         .replace(PlaceHolder.Database, `./${_field.databaseName}`)
         .replace(PlaceHolder.Checked, _field.checked ? 'checked="true"' : '')
-        .replace(
-          PlaceHolder.Description,
-          _field.description ? ` fieldDescription="${_field.description}"` : ''
-        )
+        .replace(PlaceHolder.Description, _field.description ? ` fieldDescription="${_field.description}"` : '')
         .replace(PlaceHolder.Text, _field.text)
         // DATE PICKER
-        .replace(PlaceHolder.MinDate, (_field as DatePickerOptions).minDate ? `minDate="${(_field as DatePickerOptions).minDate}"` : "")
-        .replace(PlaceHolder.DateType, (_field as DatePickerOptions).dateType || "")
-        .replace(PlaceHolder.DisplayFormat, (_field as DatePickerOptions).displayedFormat || "")
+        .replace(
+          PlaceHolder.MinDate,
+          (_field as DatePickerOptions).minDate ? `minDate="${(_field as DatePickerOptions).minDate}"` : ''
+        )
+        .replace(PlaceHolder.DateType, (_field as DatePickerOptions).dateType || '')
+        .replace(PlaceHolder.DisplayFormat, (_field as DatePickerOptions).displayedFormat || '')
         // Heading
-        .replace(PlaceHolder.Level, (_field as HeadingOptions).level?.toString() || "")
-        .replace(PlaceHolder.Level, (_field as HeadingOptions).text || "")
+        .replace(PlaceHolder.Level, (_field as HeadingOptions).level?.toString() || '')
+        .replace(PlaceHolder.Level, (_field as HeadingOptions).text || '')
         // RADIO Group
         .replace(PlaceHolder.Vertical, `${!!_field.vertical}`)
         /**
          * not used anymore
          * keep for the case of different requirements
          */
-        .replace(
-          PlaceHolder.isDisabled,
-          _field.isDisabled ? ` disabled="{Boolean}true" ` : ''
-        )
+        .replace(PlaceHolder.isDisabled, _field.isDisabled ? ` disabled="{Boolean}true" ` : '')
+        .replace(PlaceHolder.ClassName, _field.className ? `granite:class="${_field.className}"` : '')
         .replace(
           PlaceHolder.CustomAttribute,
-          additionalCommon ? (Object.entries(additionalCommon)
-            .map(([key, value]) => `${key}="${value}" `)
-            .join('')
-          ) : ''
+          additionalCommon
+            ? Object.entries(additionalCommon)
+                .map(([key, value]) => `${key}="${value}" `)
+                .join('')
+            : ''
         )
     );
   }
@@ -299,12 +321,11 @@ export class UiGenerator<T = {}> {
   /**
    * createDropdownFields() create
    * the right dropdown option template string for a data source
-   * or normal selected items 
+   * or normal selected items
    * @param {DropdownOptions} field
    * @returns {string}
    */
   public createDropdownFields(field: DropdownOptions): string {
-
     if (this.isDataSourceOption(field)) {
       return template.dropdown
         .replace(/(<i([^>]+)>)/g, '')
@@ -312,24 +333,20 @@ export class UiGenerator<T = {}> {
         .replace(/^\s*\n/gm, '')
         .replace(
           PlaceHolder.Options,
-          field.options
-            ? this.getDataSource(field.options as DataSourceOptions)
-            : 'OPTIONERROR'
-        )
+          field.options ? this.getDataSource(field.options as DataSourceOptions) : 'OPTIONERROR'
+        );
     }
 
     return template.dropdown.replace(
       PlaceHolder.Options,
       field.options
-        ? (field.options as TouchUIFieldOption[])
-          .map((option, i) => this.getOption(option, i))
-          .join('')
+        ? (field.options as TouchUIFieldOption[]).map((option, i) => this.getOption(option, i)).join('')
         : 'OPTIONERROR'
     );
   }
-  /**  
+  /**
    * createMultiFieldNested create
-   * a nested multi field template string 
+   * a nested multi field template string
    * @param {MultifieldNestedOptions} field
    * @returns {string}
    */
@@ -337,7 +354,6 @@ export class UiGenerator<T = {}> {
     return (field.type === TouchUIField.MultifieldNested ? template.multiFieldNested : template.fieldSet)
       .replace(PlaceHolder.Title, (field as MultifieldNestedOptions<T>).label)
       .replace(PlaceHolder.Options, this.getNestedFields(field));
-
   }
 
   public getFieldValue(field: TouchUIDialogFieldOptions<T>): string {
@@ -362,10 +378,11 @@ export class UiGenerator<T = {}> {
    * @returns {string}
    */
   public getDataSource({ dataSource, attributes }: DataSourceOptions): string {
-    const attrs = (attributes) ? (
-      Object.entries(attributes).map(([key, value]) => `${key}="${value}" `)
-        .join('')
-    ) : '';
+    const attrs = attributes
+      ? Object.entries(attributes)
+          .map(([key, value]) => `${key}="${value}" `)
+          .join('')
+      : '';
     return `<datasource jcr:primaryType="nt:unstructured"
               sling:resourceType="${dataSource}"
               ${attrs} />`;
@@ -379,6 +396,7 @@ export class UiGenerator<T = {}> {
   public getMultiField(field: MultifieldOptions) {
     return field.multifieldtype ? field.multifieldtype : 'FIELD-TYPE-ERROR';
   }
+
   /**
    * getMultiFieldNested() calls  getField and returns the field string template
    * @param  field: TouchUIDialogFieldOptions
@@ -389,6 +407,7 @@ export class UiGenerator<T = {}> {
       .map((fieldOption: TouchUIDialogFieldOptions<T>, index: number) => this.getField(fieldOption, index))
       .join('');
   }
+
   /**
    * getSightlyTemplate() creates the sightly Template file if we have sightlyTemplate
    * in config
@@ -403,25 +422,109 @@ export class UiGenerator<T = {}> {
 
   public getJQueryHideTabModels(): JQueryHideModel[] {
     return this.dialogConfig.tabs.reduce(
-      (prev, curr, index) => (curr.hide) ? [...prev, { index, isTab: true, hide: '' + curr.hide }] : [...prev],
-      [] as JQueryHideModel[]);
+      (prev, curr, index) => (curr.hide ? [...prev, { index, isTab: true, hide: '' + curr.hide }] : [...prev]),
+      [] as JQueryHideModel[]
+    );
   }
 
   public getJQueryHideDialogFieldModels(): JQueryHideModel[] {
-    return this.dialogConfig.tabs.map(
-      (tab, tabIndex) => tab.fields.reduce(
-        (prev, curr, index) => ((curr as CommonOptions).hide) ? [...prev, { index, tabIndex, isTab: false, hide: '' + (curr as CommonOptions).hide }] : [...prev],
-        [] as JQueryHideModel[])
-    ).reduce((acc, val) => acc.concat(val), []);
+    return this.dialogConfig.tabs
+      .map((tab, tabIndex) =>
+        tab.fields.reduce(
+          (prev, curr, index) =>
+            (curr as CommonOptions).hide
+              ? [
+                  ...prev,
+                  {
+                    index,
+                    tabIndex,
+                    isTab: false,
+                    hide: '' + (curr as CommonOptions).hide,
+                  },
+                ]
+              : [...prev],
+          [] as JQueryHideModel[]
+        )
+      )
+      .reduce((acc, val) => acc.concat(val), []);
   }
 
   public hasHideImplementation(): boolean {
+    return this.dialogConfig.tabs.some(
+      (tab) => tab.hide !== undefined || tab.fields.some((field) => (field as CommonOptions).hide !== undefined)
+    );
+  }
+
+  public getJQueryOnLoadTabModels(): JQueryOnLoadModel[] {
+    return this.dialogConfig.tabs.reduce(
+      (prev, curr, index) => (curr.onLoad ? [...prev, { index, onLoad: '' + curr.onLoad }] : [...prev]),
+      [] as JQueryOnLoadModel[]
+    );
+  }
+
+  public getJQueryOnLoadDialogFieldModels(): JQueryOnLoadModel[] {
     return this.dialogConfig.tabs
-      .some((tab) => tab.hide !== undefined || (
-        tab.fields.some(
-          (field) => (field as CommonOptions).hide !== undefined)
+      .map((tab) =>
+        tab.fields.reduce(
+          (prev, curr, index) =>
+            (curr as CommonOptions).onLoad
+              ? [
+                  ...prev,
+                  {
+                    index,
+                    onLoad: '' + (curr as CommonOptions).onLoad,
+                  },
+                ]
+              : [...prev],
+          [] as JQueryOnLoadModel[]
+        )
       )
-      );
+      .reduce((acc, val) => acc.concat(val), []);
+  }
+
+  public hasOnLoadImplementation(): boolean {
+    return this.dialogConfig.tabs.some(
+      (tab) => tab.onLoad !== undefined || tab.fields.some((field) => (field as CommonOptions).onLoad !== undefined)
+    );
+  }
+
+  public getJQueryOnChangeTabModels(): JQueryOnChangeModel[] {
+    return this.dialogConfig.tabs.reduce(
+      (prev, curr, index) =>
+        curr.onChange
+          ? [...prev, { index, isField: false, onChange: '' + curr.onChange, targetClassName: '' }]
+          : [...prev],
+      [] as JQueryOnChangeModel[]
+    );
+  }
+
+  public getJQueryOnChangeDialogFieldModels(): JQueryOnChangeModel[] {
+    return this.dialogConfig.tabs
+      .map((tab, tabIndex) =>
+        tab.fields.reduce(
+          (prev, curr, index) =>
+            (curr as CommonOptions).onChange
+              ? [
+                  ...prev,
+                  {
+                    index,
+                    tabIndex,
+                    isField: true,
+                    targetClassName: '' + curr.targetClassName,
+                    onChange: '' + (curr as CommonOptions).onChange,
+                  },
+                ]
+              : [...prev],
+          [] as JQueryOnChangeModel[]
+        )
+      )
+      .reduce((acc, val) => acc.concat(val), []);
+  }
+
+  public hasOnChangeImplementation(): boolean {
+    return this.dialogConfig.tabs.some(
+      (tab) => tab.onChange !== undefined || tab.fields.some((field) => (field as CommonOptions).onChange !== undefined)
+    );
   }
 
   /**
@@ -429,14 +532,16 @@ export class UiGenerator<T = {}> {
    * and returns the name of the files
    */
   protected buildJQuery(dir: string): string {
-    if (this.clientlibs.length === 0) { return ''; }
+    if (this.clientlibs.length === 0) {
+      return '';
+    }
     return this.clientlibs
       .map(({ filename, content }): string => {
         const file = dir + filename;
-        fs.writeFileSync(path.resolve(file,), content);
+        fs.writeFileSync(path.resolve(file), content);
         return filename;
       })
-      .join(' ');
+      .join('\n');
   }
 
   private parseFieldValue(_field: TouchUIDialogFieldOptions<T>): string {

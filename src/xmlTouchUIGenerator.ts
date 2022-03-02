@@ -21,14 +21,8 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
       : template.tracking
           .replace(PlaceHolder.Title, this.dialogConfig.componentName)
           .replace(PlaceHolder.Group, this.dialogConfig.componentGroup)
-          .replace(
-            PlaceHolder.TrackingEvents,
-            this.getAnalyticsElements('events')
-          )
-          .replace(
-            PlaceHolder.TrackingVars,
-            this.getAnalyticsElements('values')
-          )
+          .replace(PlaceHolder.TrackingEvents, this.getAnalyticsElements('events'))
+          .replace(PlaceHolder.TrackingVars, this.getAnalyticsElements('values'))
           .replace(PlaceHolder.Group, this.dialogConfig.componentGroup);
   }
 
@@ -43,33 +37,18 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
       ? template.component.replace(PlaceHolder.ResourceSuperType, '')
       : (template.component = template.component.replace(
           PlaceHolder.ResourceSuperType,
-          'sling:resourceSuperType="' +
-            this.dialogConfig.resourceSuperType +
-            '"'
+          'sling:resourceSuperType="' + this.dialogConfig.resourceSuperType + '"'
         ));
 
     return template.component
       .replace(PlaceHolder.Title, this.dialogConfig.componentName)
       .replace(PlaceHolder.Group, this.dialogConfig.componentGroup)
-      .replace(
-        PlaceHolder.ComponentDescription,
-        this.dialogConfig.componentDescription
-      )
+      .replace(PlaceHolder.ComponentDescription, this.dialogConfig.componentDescription)
       .replace(
         PlaceHolder.NoDecoration,
-        '{Boolean}' +
-          String(
-            this.dialogConfig.noDecoration
-              ? this.dialogConfig.noDecoration
-              : false
-          )
+        '{Boolean}' + String(this.dialogConfig.noDecoration ? this.dialogConfig.noDecoration : false)
       )
-      .replace(
-        PlaceHolder.IsContainer,
-        String(
-          this.dialogConfig.isContainer ? this.dialogConfig.isContainer : false
-        )
-      );
+      .replace(PlaceHolder.IsContainer, String(this.dialogConfig.isContainer ? this.dialogConfig.isContainer : false));
   }
 
   /**
@@ -94,7 +73,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
 
   /**
    * writeFilesToAEM() calls makeFolder() to create the folders
-   * /_cq_dialog, /_cq_htmlTagm,/analytics, /_cq_design_dialog, /clientlibs 
+   * /_cq_dialog, /_cq_htmlTagm,/analytics, /_cq_design_dialog, /clientlibs
    * and calls the write*-methods to create the AEM files
    */
   public writeFilesToAEM() {
@@ -102,19 +81,20 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
     if (this.dialogConfig.tabs) {
       this.makeFolder(this.dialogConfig.componentPath + '/_cq_dialog');
 
-      // required condition to create clientlibs
-      const hasHideFunction = this.hasHideImplementation();
-
       this.writeDialog();
-      
-      if (hasHideFunction) {
+
+      // remove clientlibs for every rebuild
+      if (this.existFolder(this.dialogConfig.componentPath + '/clientlibs')) {
+        this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs');
+      }
+
+      // required condition to create clientlibs
+      const hasCustomFunctions =
+        this.hasHideImplementation() || this.hasOnLoadImplementation() || this.hasOnChangeImplementation();
+
+      if (hasCustomFunctions) {
         this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
         this.writeClientLibs();
-      } 
-
-      // remove clientlibs if required condition for clientlibs not exist
-      if(this.existFolder(this.dialogConfig.componentPath + '/clientlibs') && !hasHideFunction) {
-        this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs');
       }
 
       // Optional html-tag values for the component.
@@ -176,17 +156,18 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    * @param {string} folderPath
    */
   public deleteFolder(folderPath: string): void {
-    if(!this.existFolder(folderPath)) return;
+    if (!this.existFolder(folderPath)) {
+      return;
+    }
     try {
-
       const files = fs.readdirSync(folderPath);
-      if(!files) { 
-        fs.rmdirSync(folderPath)
-      } else {
-        files.forEach(file => {
+      if (!files) {
+        fs.rmdirSync(folderPath);
+      } else {
+        files.forEach((file) => {
           fs.unlinkSync(path.resolve(folderPath + '/' + file));
         });
-        fs.rmdirSync(folderPath)
+        fs.rmdirSync(folderPath);
       }
     } catch (e) {
       console.warn(e);
@@ -198,17 +179,15 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    * folder in the file system if exist
    * @param {string} folderPath
    */
-  public existFolder(folderPath: string): boolean{
-    return fs.existsSync(path.resolve(folderPath))
+  public existFolder(folderPath: string): boolean {
+    return fs.existsSync(path.resolve(folderPath));
   }
   /**
    * writeDialog() create the /_cq_dialog/.content.xml file and
    * calls getDialog() to replace the placeholders in the dialog-template
    */
   public writeDialog() {
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/_cq_dialog/.content.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/_cq_dialog/.content.xml');
     fs.writeFileSync(path.resolve(filePath), this.getDialog());
     console.info('AEM Touch UI Dialog built: ' + filePath);
   }
@@ -222,9 +201,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
       return;
     }
 
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/_cq_htmlTag/.content.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/_cq_htmlTag/.content.xml');
     fs.writeFileSync(path.resolve(filePath), this.getHtmlTag());
     console.info('AEM Touch UI HTML-Tag built: ' + filePath);
   }
@@ -234,9 +211,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    *  calls getAnalytics() to replace the placeholders in the analytics-template
    */
   public writeAnalytics() {
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/analytics/.content.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/analytics/.content.xml');
     fs.writeFileSync(path.resolve(filePath), this.getAnalytics());
     console.info('AEM Analtics XML built: ' + filePath);
   }
@@ -246,9 +221,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    * and calls getAEMConfig() to replace the placeholders in the AEMConfig-template
    */
   public writeAEMConfig() {
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/.content.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/.content.xml');
     fs.writeFileSync(path.resolve(filePath), this.getAEMConfig());
     console.info('AEM Config XML built: ' + filePath);
   }
@@ -258,9 +231,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    * and replaces the placesholders in the CqConfig-template
    */
   public writeCqConfig() {
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/_cq_editConfig.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/_cq_editConfig.xml');
     fs.writeFileSync(path.resolve(filePath), this.getCqConfig());
     console.info('AEM Cq Edit Config XML built: ' + filePath);
   }
@@ -269,9 +240,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    * writeNewParConfig() creates the /new/.content.xml file
    */
   public writeNewParConfig() {
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/new/.content.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/new/.content.xml');
 
     fs.writeFileSync(path.resolve(filePath), this.getNewParConfig());
     console.info('AEM New Par Component built: ' + filePath);
@@ -283,9 +252,7 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
    *  file in the file system
    */
   public writeCqDesignDialog() {
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/_cq_design_dialog/.content.xml'
-    );
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/_cq_design_dialog/.content.xml');
 
     try {
       fs.writeFileSync(path.resolve(filePath), this.getCqDesignDialog());
@@ -304,23 +271,19 @@ export class TouchUIXMLGenerator<T = {}> extends UiGenerator<T> {
       console.log('No Sightly Template', this.dialogConfig.componentName);
       return;
     }
-    const file = this.dialogConfig.componentPath.split('/')[
-      this.dialogConfig.componentPath.split('/').length - 1
-    ];
-    const filePath = path.resolve(
-      this.dialogConfig.componentPath + '/' + file + '.html'
-    );
+    const file = this.dialogConfig.componentPath.split('/')[this.dialogConfig.componentPath.split('/').length - 1];
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/' + file + '.html');
     fs.writeFileSync(path.resolve(filePath), this.getSightlyTemplate());
     console.info('REACT Template built: ' + filePath);
   }
 
   public writeClientLibs() {
-      const filePath = path.resolve(this.dialogConfig.componentPath + '/clientlibs/.content.xml');
-      fs.writeFileSync(path.resolve(filePath),  this.buildCqClientLibs());
-    
-      const txtFile = path.resolve(this.dialogConfig.componentPath + '/clientlibs/js.txt');
-      fs.writeFileSync(path.resolve(txtFile),  this.buildJQuery(this.dialogConfig.componentPath + '/clientlibs/'));
+    const filePath = path.resolve(this.dialogConfig.componentPath + '/clientlibs/.content.xml');
+    fs.writeFileSync(path.resolve(filePath), this.buildCqClientLibs());
 
-      console.info('Clientlibs built: ' + filePath);
+    const txtFile = path.resolve(this.dialogConfig.componentPath + '/clientlibs/js.txt');
+    fs.writeFileSync(path.resolve(txtFile), this.buildJQuery(this.dialogConfig.componentPath + '/clientlibs/'));
+
+    console.info('Clientlibs built: ' + filePath);
   }
 }

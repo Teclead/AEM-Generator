@@ -8,15 +8,17 @@ export {
   Templates,
   TouchUIAnalytics,
   TouchUIDialogFieldOptions,
-  TouchUIDialogTab
+  TouchUIDialogTab,
 } from './AEMTouchUIDialogModels.model';
 export { CustomFilePath, JavaScriptPlaceHolder } from './CustomAemEnumUI.model';
-export { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';
+export * from './JQueryModels.model';
 export { TouchUIField } from './TouchUIFieldEnum.model';
+export { OptionKeys } from './TouchUIFieldOptionKeysEnum.model';
 export {
   ButtonOptions,
   CheckboxOptions,
   CustomOptionAttribute,
+  DataSourceOptions,
   DropdownOptions,
   ImagefieldOptions,
   MultifieldNestedOptions,
@@ -27,8 +29,5 @@ export {
   TextAreaOptions,
   TextOptions,
   TouchUIFieldOption,
-  DataSourceOptions,
 } from './TouchUIFieldOptions.model';
-
 export * from './TouchUIFunction.model';
-export * from './JQueryModels.model';
