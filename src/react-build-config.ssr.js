@@ -1,8 +1,8 @@
 // this file is only used in AEM repositories with a create React App config
 
-const fs = require("fs");
-const Path = require("path");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const fs = require('fs');
+const Path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const rootLevel = './../../../';
 const package = require(`${rootLevel}package.json`);
@@ -12,60 +12,61 @@ const appsPath = package.tecleadConfig.appsFolder;
 const aemAppsPath = package.tecleadConfig.appsPath;
 
 if (!assetPath) {
-    throw Error("assetPath in tecleadConfig is not definied");
+  throw Error('assetPath in tecleadConfig is not definied');
 }
+
 if (!appsPath) {
-    throw Error("appsFolder in tecleadConfig is not definied");
+  throw Error('appsFolder in tecleadConfig is not definied');
 }
-console.info("Build Teclead AEM React in:", assetPath, appsPath);
+
+console.info('Build Teclead AEM React in:', assetPath, appsPath);
 
 const appsFolder = Path.resolve(__dirname, rootLevel, appsPath);
 const components = fs.readdirSync(appsFolder);
 
-
 // {appName: indexPath}
 const appsEntry = {};
 
-components.forEach(componentFolder => {
-    const folderPath = Path.resolve(appsFolder, componentFolder);
-    const indexFilePath = Path.resolve(folderPath, 'ssr.jsx');
-    const hasIndex = fs.existsSync(indexFilePath);
-    if (hasIndex) {
-        appsEntry[componentFolder] = indexFilePath;
-    }
-})
+components.forEach((componentFolder) => {
+  const folderPath = Path.resolve(appsFolder, componentFolder);
+  const indexFilePath = Path.resolve(folderPath, 'ssr.jsx');
+  const hasIndex = fs.existsSync(indexFilePath);
 
-console.log("React Components to scan:", components);
-console.log("AEM React Apps SSR: ", appsEntry);
+  if (hasIndex) {
+    appsEntry[componentFolder] = indexFilePath;
+  }
+});
 
+console.log('React Components to scan:', components);
+console.log('AEM React Apps SSR: ', appsEntry);
 
 const overrideWebpackConfig = ({ webpackConfig }) => {
-    webpackConfig.entry = appsEntry;
-    webpackConfig.output.filename = '../' + aemAppsPath + '[name]/ssrbundle.js';
-    // webpackConfig.output.chunkFilename = '../' + aemAppsPath + 'js/[name].[contenthash:8].chunk.js';
-    webpackConfig.optimization.runtimeChunk = false;
-    webpackConfig.optimization.splitChunks = {
-        cacheGroups: {
-            default: false
-        }
-    };
+  webpackConfig.entry = appsEntry;
+  webpackConfig.output.filename = '../' + aemAppsPath + '[name]/ssrbundle.js';
+  // webpackConfig.output.chunkFilename = '../' + aemAppsPath + 'js/[name].[contenthash:8].chunk.js';
+  webpackConfig.optimization.runtimeChunk = false;
+  webpackConfig.optimization.splitChunks = {
+    cacheGroups: {
+      default: false,
+    },
+  };
 
-    const cssPlugin = new MiniCssExtractPlugin({
-        filename: '../' + assetPath + 'css/[name].[contenthash:8].css',
-        chunkFilename: '../' + assetPath + 'css/[name].[contenthash:8].chunk.css',
-    });
+  const cssPlugin = new MiniCssExtractPlugin({
+    filename: '../' + assetPath + 'css/[name].[contenthash:8].css',
+    chunkFilename: '../' + assetPath + 'css/[name].[contenthash:8].chunk.css',
+  });
 
-    // overwrite manufest plugin 
-    webpackConfig.plugins[6].opts.generate = (a, b, c) => []
-    webpackConfig.plugins = [...webpackConfig.plugins, cssPlugin];
-    return webpackConfig;
+  // overwrite manufest plugin
+  webpackConfig.plugins[6].opts.generate = () => [];
+  webpackConfig.plugins = [...webpackConfig.plugins, cssPlugin];
+
+  return webpackConfig;
 };
 
 module.exports = {
-    plugins: [
-        {
-            plugin: { overrideWebpackConfig }
-        }
-    ]
+  plugins: [
+    {
+      plugin: { overrideWebpackConfig },
+    },
+  ],
 };
-

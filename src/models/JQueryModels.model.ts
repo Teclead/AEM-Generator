@@ -1,7 +1,11 @@
 /**
  * Please use index.ts to import and export the models out of model folder
  */
-import { HideFunction, OnChangeFunction, OnLoadFunction } from './TouchUIFunction.model';
+import {
+  HideFunction,
+  OnChangeFunction,
+  OnLoadFunction,
+} from './TouchUIFunction.model';
 
 export interface JQueryHideModel {
   index: number;

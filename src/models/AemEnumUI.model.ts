@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /**
  * Please use index.ts to import and export the models out of model folder
  */
@@ -45,7 +46,7 @@ export enum PlaceHolder {
   Checked = '{{CHECKED}}',
   Group = '{{GROUP}}',
   TrackingEvents = '{{EVENTS}}',
-  TrackingVars = '{{VARS}}',
+  TrackingVariables = '{{VARS}}',
   Required = '{{REQUIRED}}',
   MaxLength = '{{MAXLENGTH}}',
   isDisabled = '{{DISABLED}}',
