@@ -1,6 +1,6 @@
 {
   "name": "@teclead/aem-generator",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": false,
   "description": "AEM Dialog and Component Generator based on Typescript Interfaces",
   "main": "index.js",
