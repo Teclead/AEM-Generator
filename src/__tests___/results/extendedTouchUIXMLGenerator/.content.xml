@@ -8,5 +8,4 @@
   cq:noDecoration="{Boolean}false"
   cq:isContainer="false"
   jcr:title="extended"
-  componentGroup="Extended"
-  sling:resourceSuperType="core/wcm/components/text/v2/text" />
+  componentGroup="Extended" sling:resourceSuperType="core/wcm/components/text/v2/text" />

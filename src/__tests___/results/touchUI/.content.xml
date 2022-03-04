@@ -8,5 +8,4 @@
   cq:noDecoration="{Boolean}false"
   cq:isContainer="false"
   jcr:title="MyTestComponent"
-  componentGroup="MyTestGroup"
-  sling:resourceSuperType="core/wcm/components/text/v2/text" />
+  componentGroup="MyTestGroup" sling:resourceSuperType="core/wcm/components/text/v2/text" />

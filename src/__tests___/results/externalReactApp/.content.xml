@@ -8,5 +8,4 @@
   cq:noDecoration="{Boolean}false"
   cq:isContainer="false"
   jcr:title="externalApp"
-  componentGroup="External Group"
-  sling:resourceSuperType="core/wcm/components/text/v2/text" />
+  componentGroup="External Group" sling:resourceSuperType="core/wcm/components/text/v2/text" />
