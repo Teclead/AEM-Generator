@@ -20,6 +20,17 @@
   }
 
   /**
+   * @param {any} onChangeElement element of container array
+   * @returns {HTMLElement[]} found elements by className
+   */
+  function getTargetElement(onChangeElement) {
+    const form = getDialogForm();
+    const targetElement = $(form).find(`.${onChangeElement.targetClassName}`);
+
+    return targetElement.get();
+  }
+
+  /**
    * @param {HTMLElement} tab the tab to get the pane
    * @returns {HTMLElement} the tab pane with the attribute `aria-controls`
    */
@@ -61,7 +72,28 @@
     return getTabPane(paneId).children[0];
   }
 
-  // const componentName = "'{{ONCHANGE_COMPONENT_NAME}}'";
+  /**
+   * @param {any} multifield multifield jquery object
+   * @param {any} onChangeElement element of container array
+   */
+  function handleMultiFieldOnChange(multifield, onChangeElement) {
+    const onChangeFn = getFunction(onChangeElement.onChange);
+
+    $(multifield).on('click', '.coral-Multifield-add', function () {
+      onChangeFn({
+        contentPath: getContentPath(),
+        targetElement: getTargetElement(onChangeElement),
+      });
+    });
+
+    $(multifield).on('click', '.coral-Multifield-remove', function () {
+      onChangeFn({
+        contentPath: getContentPath(),
+        targetElement: getTargetElement(onChangeElement),
+      });
+    });
+  }
+
   /**
    * @param {any[]} container array of jquery models
    */
@@ -84,7 +116,6 @@
       }
 
       if (isField && tabPaneId) {
-        const targetElement = $(`.${onChangeElement.targetClassName}`);
         const fields = $(getTabPaneFieldsByPaneId(tabPaneId));
 
         fields
@@ -94,19 +125,16 @@
           })
           .each((i, field) => {
             if (i === onChangeElement.index) {
-              const onChangeFn = getFunction(onChangeElement.onChange);
               const multifield = $(field).find('div.coral-Multifield');
 
               if (multifield.length) {
-                onChangeFn({
-                  contentPath: getContentPath(),
-                  targetElement: targetElement.get(),
-                });
+                handleMultiFieldOnChange(multifield, onChangeElement);
               } else {
                 $(field).change(function () {
+                  const onChangeFn = getFunction(onChangeElement.onChange);
                   onChangeFn({
                     contentPath: getContentPath(),
-                    targetElement: targetElement.get(),
+                    targetElement: getTargetElement(onChangeElement),
                   });
                 });
               }
