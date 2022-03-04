@@ -32,7 +32,9 @@
    * @returns {HTMLElement} the tab by index
    */
   function getTab(index) {
-    return $('.coral-TabPanel-navigation').children()[index];
+    const form = getDialogForm();
+
+    return $(form).find('.coral-TabPanel-navigation').children()[index];
   }
 
   /**

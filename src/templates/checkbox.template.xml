@@ -2,6 +2,7 @@
     jcr:primaryType="nt:unstructured"
     sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
     name="{{DATABASE}}"
-    text="{{TITLE}}" {{CHECKED}} {{REQUIRED}} {{DESC}} {{DISABLED}}
+    text="{{TITLE}}"
     uncheckedValue="false"
-    value="true"/>
+    value="true"
+    {{CHECKED}} {{REQUIRED}} {{DESC}} {{DISABLED}} {{CLASSNAME}} />
