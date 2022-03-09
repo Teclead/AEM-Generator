@@ -107,15 +107,15 @@
       const tab = getTab(index);
       const tabPaneId = getTabPaneId(tab);
 
-      const isField = onChangeElement.isField;
+      const isTab = onChangeElement.isTab;
 
-      if (!isField) {
+      if (isTab) {
         if (tabIndex === onChangeElement.index) {
           tabIndex++;
         }
       }
 
-      if (isField && tabPaneId) {
+      if (!isTab && tabPaneId) {
         const fields = $(getTabPaneFieldsByPaneId(tabPaneId));
 
         fields

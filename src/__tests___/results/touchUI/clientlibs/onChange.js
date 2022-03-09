@@ -1,7 +1,7 @@
 (function (document, $) {
   'use strict';
 
-  const onChangeContainer = [{"index":1,"tabIndex":0,"isField":true,"targetClassName":"nested-custom-class","onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isField":true,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"}];
+  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"targetClassName":"nested-custom-class","onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isTab":false,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"}];
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -107,15 +107,15 @@
       const tab = getTab(index);
       const tabPaneId = getTabPaneId(tab);
 
-      const isField = onChangeElement.isField;
+      const isTab = onChangeElement.isTab;
 
-      if (!isField) {
+      if (isTab) {
         if (tabIndex === onChangeElement.index) {
           tabIndex++;
         }
       }
 
-      if (isField && tabPaneId) {
+      if (!isTab && tabPaneId) {
         const fields = $(getTabPaneFieldsByPaneId(tabPaneId));
 
         fields
