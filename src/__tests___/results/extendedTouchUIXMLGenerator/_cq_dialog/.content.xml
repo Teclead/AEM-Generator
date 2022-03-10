@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
-          xmlns:cq="http://www.day.com/jcr/cq/1.0"
-          xmlns:jcr="http://www.jcp.org/jcr/1.0"
-          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
-          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
-          jcr:primaryType="nt:unstructured"
-          sling:resourceType="cq/gui/components/authoring/dialog"
-          jcr:title="extended">
+<jcr:root
+    xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    xmlns:cq="http://www.day.com/jcr/cq/1.0"
+    xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    jcr:title="extended">
     <content
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/container">
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/container">
         <layout
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/layouts/tabs"
-                type="nav"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+            type="nav" />
         <items jcr:primaryType="nt:unstructured">
             <tab_0
-        jcr:primaryType="nt:unstructured"
-        jcr:title="Mein viertes Tab"
-        sling:resourceType="granite/ui/components/foundation/section">
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Mein viertes Tab"
+    sling:resourceType="granite/ui/components/foundation/section">
     <layout
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns" />
     <items jcr:primaryType="nt:unstructured">
-        <column jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/container">
+        <column
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
             <items jcr:primaryType="nt:unstructured">
-                <element_0 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/multifield" composite="{Boolean}true" fieldLabel="Nested Multifield with JSON storage">
-    <field jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/foundation/form/fieldset" name="./multi" fieldLabel="Nested Multifield with JSON storage"     acs-commons-nested="JSON_STORE" >
+                <element_0
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+    composite="{Boolean}true"
+    fieldLabel="Nested Multifield with JSON storage">
+    <field
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/form/fieldset" name="./multi" fieldLabel="Nested Multifield with JSON storage"     acs-commons-nested="JSON_STORE" >
         <items jcr:primaryType="nt:unstructured">
-            <column jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
                      <element_0
     jcr:primaryType="nt:unstructured"
-    sling:resourceType="granite/ui/components/coral/foundation/form/select"
-    name="./dropdown" fieldLabel="Mein Dropdown"   fieldDescription="Meine Beschreibung für Dropdown"   >
+    sling:resourceType="granite/ui/components/coral/foundation/form/select" name="./dropdown" fieldLabel="Mein Dropdown"   fieldDescription="Meine Beschreibung für Dropdown"   >
     <items jcr:primaryType="nt:unstructured">
         <option_0 jcr:primaryType="nt:unstructured"  value="1" text="Name 1"/><option_1 jcr:primaryType="nt:unstructured"  value="2" text="Name 2"/><option_2 jcr:primaryType="nt:unstructured" selected="true" value="3" text="Name 3"/>
     </items>
 </element_0>
-
                 </items>
             </column>
         </items>
@@ -49,7 +57,6 @@
         </column>
     </items>
 </tab_0>
-
         </items>
     </content>
 </jcr:root>

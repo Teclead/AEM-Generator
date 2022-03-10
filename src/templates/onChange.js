@@ -20,6 +20,17 @@
   }
 
   /**
+   * @param {any} onChangeElement element of container array
+   * @returns {HTMLElement[]} found elements by className
+   */
+  function getTargetElement(onChangeElement) {
+    const form = getDialogForm();
+    const targetElement = $(form).find(`.${onChangeElement.targetClassName}`);
+
+    return targetElement.get();
+  }
+
+  /**
    * @param {HTMLElement} tab the tab to get the pane
    * @returns {HTMLElement} the tab pane with the attribute `aria-controls`
    */
@@ -32,7 +43,9 @@
    * @returns {HTMLElement} the tab by index
    */
   function getTab(index) {
-    return $('.coral-TabPanel-navigation').children()[index];
+    const form = getDialogForm();
+
+    return $(form).find('.coral-TabPanel-navigation').children()[index];
   }
 
   /**
@@ -59,7 +72,59 @@
     return getTabPane(paneId).children[0];
   }
 
-  // const componentName = "'{{ONCHANGE_COMPONENT_NAME}}'";
+  /**
+   * @param {any} multifield multifield jquery object
+   * @param {any} onChangeElement element of container array
+   */
+  function handleNestedFields(multifield, onChangeElement) {
+    const children = $(multifield).find('.coral-Form-fieldset').children();
+
+    $(children).each((i, child) => {
+      const fields = $(child).children();
+      $(fields).each((index, field) => {
+        onChangeElement.multifields.forEach((element) => {
+          if (element.index === index) {
+            $(field).change(function () {
+              const onChangeFn = getFunction(element.onChange);
+              onChangeFn({
+                contentPath: getContentPath(),
+                targetElement: getTargetElement(element),
+              });
+            });
+          }
+        });
+      });
+    });
+  }
+
+  /**
+   * @param {any} multifield multifield jquery object
+   * @param {any} onChangeElement element of container array
+   */
+  function handleMultiFieldOnChange(multifield, onChangeElement) {
+    if (onChangeElement.multifields) {
+      handleNestedFields(multifield, onChangeElement);
+    }
+
+    if (onChangeElement.onChange && onChangeElement.onChange !== 'undefined') {
+      const onChangeFn = getFunction(onChangeElement.onChange);
+
+      $(multifield).on('click', '.coral-Multifield-add', function () {
+        onChangeFn({
+          contentPath: getContentPath(),
+          targetElement: getTargetElement(onChangeElement),
+        });
+      });
+
+      $(multifield).on('click', '.coral-Multifield-remove', function () {
+        onChangeFn({
+          contentPath: getContentPath(),
+          targetElement: getTargetElement(onChangeElement),
+        });
+      });
+    }
+  }
+
   /**
    * @param {any[]} container array of jquery models
    */
@@ -73,16 +138,15 @@
       const tab = getTab(index);
       const tabPaneId = getTabPaneId(tab);
 
-      const isField = onChangeElement.isField;
+      const isTab = onChangeElement.isTab;
 
-      if (!isField) {
+      if (isTab) {
         if (tabIndex === onChangeElement.index) {
           tabIndex++;
         }
       }
 
-      if (isField && tabPaneId) {
-        const targetElement = $(`.${onChangeElement.targetClassName}`);
+      if (!isTab && tabPaneId) {
         const fields = $(getTabPaneFieldsByPaneId(tabPaneId));
 
         fields
@@ -92,19 +156,16 @@
           })
           .each((i, field) => {
             if (i === onChangeElement.index) {
-              const onChangeFn = getFunction(onChangeElement.onChange);
               const multifield = $(field).find('div.coral-Multifield');
 
               if (multifield.length) {
-                onChangeFn({
-                  contentPath: getContentPath(),
-                  targetElement: targetElement.get(),
-                });
+                handleMultiFieldOnChange(multifield, onChangeElement);
               } else {
                 $(field).change(function () {
+                  const onChangeFn = getFunction(onChangeElement.onChange);
                   onChangeFn({
                     contentPath: getContentPath(),
-                    targetElement: targetElement.get(),
+                    targetElement: getTargetElement(onChangeElement),
                   });
                 });
               }

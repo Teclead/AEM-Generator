@@ -1,18 +1,14 @@
 (function (document, $) {
   'use strict';
 
-  const onLoadContainer = [{"index":6,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath;\n            console.log('Triggered On Load Event', contentPath);\n        }"}];
+  const onLoadContainer = [{"index":6,"isTab":false,"tabIndex":0,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath;\n            console.log('Triggered On Load Event', contentPath);\n        }"}];
 
   /**
    * @param {string} str function that should be retured
    * @returns {void} calls the function
    */
   function getFunction(str) {
-    const func = function () {
-      return str;
-    };
-
-    return func();
+    return new Function('return ' + str)();
   }
 
   /**

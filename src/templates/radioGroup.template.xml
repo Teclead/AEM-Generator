@@ -1,3 +1,9 @@
-<ELNAME jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup" deleteHint="{Boolean}false" {{COMMON}} vertical="{Boolean}{{VERTICAL}}">
-      <items jcr:primaryType="nt:unstructured">{{OPTIONS}}</items>
+<ELNAME
+      jcr:primaryType="nt:unstructured"
+      sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup"
+      deleteHint="{Boolean}false"
+      vertical="{Boolean}{{VERTICAL}}" {{COMMON}}>
+      <items jcr:primaryType="nt:unstructured">
+            {{OPTIONS}}
+      </items>
 </ELNAME>

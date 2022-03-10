@@ -1,5 +1,6 @@
-<ELNAME jcr:primaryType="nt:unstructured"
+<ELNAME
+    jcr:primaryType="nt:unstructured"
     onClick="{{javascript}}"
     text="{{TITLE}}"
     selectionMode="single"
-    sling:resourceType="granite/ui/components/foundation/button"/>
+    sling:resourceType="granite/ui/components/foundation/button" {{CLASSNAME}} />

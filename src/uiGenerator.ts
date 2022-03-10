@@ -1,6 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import {
+  HideGenerator,
+  OnChangeGenerator,
+  OnLoadGenerator,
+} from './jqueryGenerators';
+import {
   AEMTouchUIDialog,
   CustomFilePath,
   CustomOptionAttribute,
@@ -28,11 +33,16 @@ import {
 import { getFile, template } from './xmlTouchUITemplate';
 export class UiGenerator<T = object> {
   public dialogConfig: AEMTouchUIDialog<T>;
-
   protected clientlibs: Array<{ filename: string; content: string }> = [];
+  protected onChangeGenerator: OnChangeGenerator;
+  protected onLoadGenerator: OnLoadGenerator;
+  protected hideGenerator: HideGenerator;
 
   public constructor(dialogConfig: AEMTouchUIDialog<T>) {
     this.dialogConfig = dialogConfig;
+    this.onChangeGenerator = new OnChangeGenerator(dialogConfig);
+    this.onLoadGenerator = new OnLoadGenerator(dialogConfig);
+    this.hideGenerator = new HideGenerator(dialogConfig);
   }
 
   /**
@@ -156,21 +166,21 @@ export class UiGenerator<T = object> {
    * @returns {string} buildTabs template string
    */
   public buildTabs(): string {
-    if (this.hasHideImplementation()) {
+    if (this.hideGenerator.hasImplementation) {
       this.clientlibs = [
         ...this.clientlibs,
         { filename: 'hide.js', content: this.buildHideScript() },
       ];
     }
 
-    if (this.hasOnLoadImplementation()) {
+    if (this.onLoadGenerator.hasImplementation) {
       this.clientlibs = [
         ...this.clientlibs,
         { filename: 'onLoad.js', content: this.buildOnLoadScript() },
       ];
     }
 
-    if (this.hasOnChangeImplementation()) {
+    if (this.onChangeGenerator.hasImplementation) {
       this.clientlibs = [
         ...this.clientlibs,
         { filename: 'onChange.js', content: this.buildOnChangeScript() },
@@ -198,8 +208,8 @@ export class UiGenerator<T = object> {
       path.resolve(__dirname, CustomFilePath.HideTab)
     );
     const container: JQueryHideModel[] = [
-      ...this.getJQueryHideTabModels(),
-      ...this.getJQueryHideDialogFieldModels(),
+      ...this.hideGenerator.tabs,
+      ...this.hideGenerator.dialogFields,
     ];
 
     return templateFile
@@ -220,8 +230,8 @@ export class UiGenerator<T = object> {
       path.resolve(__dirname, CustomFilePath.OnLoad)
     );
     const container: JQueryOnLoadModel[] = [
-      ...this.getJQueryOnLoadTabModels(),
-      ...this.getJQueryOnLoadDialogFieldModels(),
+      ...this.onLoadGenerator.tabs,
+      ...this.onLoadGenerator.dialogFields,
     ];
 
     return templateFile
@@ -245,8 +255,8 @@ export class UiGenerator<T = object> {
       path.resolve(__dirname, CustomFilePath.OnChange)
     );
     const container: JQueryOnChangeModel[] = [
-      ...this.getJQueryOnChangeTabModels(),
-      ...this.getJQueryOnChangeDialogFieldModels(),
+      ...this.onChangeGenerator.tabs,
+      ...this.onChangeGenerator.dialogFields,
     ];
 
     return templateFile
@@ -566,131 +576,6 @@ export class UiGenerator<T = object> {
    */
   public getSightlyTemplate(): string {
     return this.dialogConfig.sightlyTemplate || '';
-  }
-
-  public getJQueryHideTabModels(): JQueryHideModel[] {
-    return this.dialogConfig.tabs.reduce(
-      (previous, current, index) =>
-        current.hide
-          ? [...previous, { index, isTab: true, hide: '' + current.hide }]
-          : [...previous],
-      [] as JQueryHideModel[]
-    );
-  }
-
-  public getJQueryHideDialogFieldModels(): JQueryHideModel[] {
-    return this.dialogConfig.tabs.flatMap((tab, tabIndex) =>
-      tab.fields.reduce(
-        (previous, current, index) =>
-          (current as CommonOptions).hide
-            ? [
-                ...previous,
-                {
-                  index,
-                  tabIndex,
-                  isTab: false,
-                  hide: '' + (current as CommonOptions).hide,
-                },
-              ]
-            : [...previous],
-        [] as JQueryHideModel[]
-      )
-    );
-  }
-
-  public hasHideImplementation(): boolean {
-    return this.dialogConfig.tabs.some(
-      (tab) =>
-        tab.hide !== undefined ||
-        tab.fields.some((field) => (field as CommonOptions).hide !== undefined)
-    );
-  }
-
-  public getJQueryOnLoadTabModels(): JQueryOnLoadModel[] {
-    return this.dialogConfig.tabs.reduce(
-      (previous, current, index) =>
-        current.onLoad
-          ? [...previous, { index, onLoad: '' + current.onLoad }]
-          : [...previous],
-      [] as JQueryOnLoadModel[]
-    );
-  }
-
-  public getJQueryOnLoadDialogFieldModels(): JQueryOnLoadModel[] {
-    return this.dialogConfig.tabs.flatMap((tab) =>
-      tab.fields.reduce(
-        (previous, current, index) =>
-          (current as CommonOptions).onLoad
-            ? [
-                ...previous,
-                {
-                  index,
-                  onLoad: '' + (current as CommonOptions).onLoad,
-                },
-              ]
-            : [...previous],
-        [] as JQueryOnLoadModel[]
-      )
-    );
-  }
-
-  public hasOnLoadImplementation(): boolean {
-    return this.dialogConfig.tabs.some(
-      (tab) =>
-        tab.onLoad !== undefined ||
-        tab.fields.some(
-          (field) => (field as CommonOptions).onLoad !== undefined
-        )
-    );
-  }
-
-  public getJQueryOnChangeTabModels(): JQueryOnChangeModel[] {
-    return this.dialogConfig.tabs.reduce(
-      (previous, current, index) =>
-        current.onChange
-          ? [
-              ...previous,
-              {
-                index,
-                isField: false,
-                onChange: '' + current.onChange,
-                targetClassName: '',
-              },
-            ]
-          : [...previous],
-      [] as JQueryOnChangeModel[]
-    );
-  }
-
-  public getJQueryOnChangeDialogFieldModels(): JQueryOnChangeModel[] {
-    return this.dialogConfig.tabs.flatMap((tab, tabIndex) =>
-      tab.fields.reduce(
-        (previous, current, index) =>
-          (current as CommonOptions).onChange
-            ? [
-                ...previous,
-                {
-                  index,
-                  tabIndex,
-                  isField: true,
-                  targetClassName: '' + current.targetClassName,
-                  onChange: '' + (current as CommonOptions).onChange,
-                },
-              ]
-            : [...previous],
-        [] as JQueryOnChangeModel[]
-      )
-    );
-  }
-
-  public hasOnChangeImplementation(): boolean {
-    return this.dialogConfig.tabs.some(
-      (tab) =>
-        tab.onChange !== undefined ||
-        tab.fields.some(
-          (field) => (field as CommonOptions).onChange !== undefined
-        )
-    );
   }
 
   /**

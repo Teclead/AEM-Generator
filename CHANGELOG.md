@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.4
+- Updated XML template properties & order
+- Handle onChange function in nested multifields
+
 ## 2.1.0
 - Added onChange handler for fields
 - Added onLoad handler for fields
