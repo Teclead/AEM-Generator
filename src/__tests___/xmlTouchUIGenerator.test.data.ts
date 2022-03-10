@@ -46,6 +46,10 @@ const fields: TouchUIDialogFieldOptions[] = [
         type: TouchUIField.Text,
         databaseName: 'label',
         className: 'nested-custom-class',
+        onChange: ({ targetElement }) => {
+          console.log('Nested Multifield Change', targetElement);
+        },
+        targetClassName: 'nested-custom-class',
       },
     ],
   },

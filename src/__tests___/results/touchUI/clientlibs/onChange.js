@@ -1,7 +1,7 @@
 (function (document, $) {
   'use strict';
 
-  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"targetClassName":"nested-custom-class","onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isTab":false,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"}];
+  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"targetClassName":"nested-custom-class","multifields":[{"index":0,"isTab":false,"onChange":"function (_a) {\n                    var targetElement = _a.targetElement;\n                    console.log('Nested Multifield Change', targetElement);\n                }","targetClassName":"nested-custom-class"}],"onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isTab":false,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"},{"index":0,"tabIndex":2,"isTab":false,"multifields":[{"index":1,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }","targetClassName":"testClass"}],"onChange":""}];
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -76,22 +76,53 @@
    * @param {any} multifield multifield jquery object
    * @param {any} onChangeElement element of container array
    */
+  function handleNestedFields(multifield, onChangeElement) {
+    const children = $(multifield).find('.coral-Form-fieldset').children();
+
+    $(children).each((i, child) => {
+      const fields = $(child).children();
+      $(fields).each((index, field) => {
+        onChangeElement.multifields.forEach((element) => {
+          if (element.index === index) {
+            $(field).change(function () {
+              const onChangeFn = getFunction(element.onChange);
+              onChangeFn({
+                contentPath: getContentPath(),
+                targetElement: getTargetElement(element),
+              });
+            });
+          }
+        });
+      });
+    });
+  }
+
+  /**
+   * @param {any} multifield multifield jquery object
+   * @param {any} onChangeElement element of container array
+   */
   function handleMultiFieldOnChange(multifield, onChangeElement) {
-    const onChangeFn = getFunction(onChangeElement.onChange);
+    if (onChangeElement.multifields) {
+      handleNestedFields(multifield, onChangeElement);
+    }
 
-    $(multifield).on('click', '.coral-Multifield-add', function () {
-      onChangeFn({
-        contentPath: getContentPath(),
-        targetElement: getTargetElement(onChangeElement),
-      });
-    });
+    if (onChangeElement.onChange && onChangeElement.onChange !== 'undefined') {
+      const onChangeFn = getFunction(onChangeElement.onChange);
 
-    $(multifield).on('click', '.coral-Multifield-remove', function () {
-      onChangeFn({
-        contentPath: getContentPath(),
-        targetElement: getTargetElement(onChangeElement),
+      $(multifield).on('click', '.coral-Multifield-add', function () {
+        onChangeFn({
+          contentPath: getContentPath(),
+          targetElement: getTargetElement(onChangeElement),
+        });
       });
-    });
+
+      $(multifield).on('click', '.coral-Multifield-remove', function () {
+        onChangeFn({
+          contentPath: getContentPath(),
+          targetElement: getTargetElement(onChangeElement),
+        });
+      });
+    }
   }
 
   /**

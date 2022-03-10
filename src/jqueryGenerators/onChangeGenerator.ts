@@ -1,4 +1,8 @@
-import { JQueryGenerator, JQueryOnChangeModel } from '../models';
+import {
+  JQueryGenerator,
+  JQueryOnChangeModel,
+  TouchUIDialogFieldOptions,
+} from '../models';
 import { CommonOptions } from '../models/TouchUIFieldOptions.model';
 
 export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
@@ -11,7 +15,7 @@ export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
               {
                 index,
                 isTab: true,
-                onChange: '' + current.onChange,
+                onChange: `${current.onChange || ''}`,
                 targetClassName: '',
               },
             ]
@@ -24,15 +28,17 @@ export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
     return this.dialogConfig.tabs.flatMap((tab, tabIndex) =>
       tab.fields.reduce(
         (previous, current, index) =>
-          (current as CommonOptions).onChange
+          (current as CommonOptions).onChange ||
+          this.getMultifields(current)?.length
             ? [
                 ...previous,
                 {
                   index,
                   tabIndex,
                   isTab: false,
-                  targetClassName: '' + current.targetClassName,
-                  onChange: '' + (current as CommonOptions).onChange,
+                  targetClassName: current.targetClassName,
+                  multifields: this.getMultifields(current),
+                  onChange: `${(current as CommonOptions).onChange || ''}`,
                 },
               ]
             : [...previous],
@@ -45,9 +51,37 @@ export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
     return this.dialogConfig.tabs.some(
       (tab) =>
         tab.onChange !== undefined ||
+        !!tab.onChange ||
         tab.fields.some(
           (field) => (field as CommonOptions).onChange !== undefined
+        ) ||
+        tab.fields.some(
+          (field) =>
+            field.multifieldOptions?.length &&
+            field.multifieldOptions.some(
+              (option: TouchUIDialogFieldOptions) => !!option.onChange
+            )
         )
     );
+  }
+
+  protected getMultifields(
+    field: TouchUIDialogFieldOptions
+  ): JQueryOnChangeModel[] | undefined {
+    if (!this.isMultifield(field) || !field.multifieldOptions?.length) {
+      return undefined;
+    }
+
+    const options = field.multifieldOptions as TouchUIDialogFieldOptions[];
+    const model: JQueryOnChangeModel[] = options
+      .map((option, index) => ({
+        index,
+        isTab: false,
+        onChange: `${option.onChange || ''}`,
+        targetClassName: option.targetClassName,
+      }))
+      .filter(({ onChange }) => !!onChange);
+
+    return model.length ? model : undefined;
   }
 }
