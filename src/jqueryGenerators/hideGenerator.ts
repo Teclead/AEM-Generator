@@ -1,6 +1,11 @@
 import { JQueryGenerator, JQueryHideModel } from '../models';
 import { CommonOptions } from '../models/TouchUIFieldOptions.model';
 
+/**
+ * Generate JQuery model for hide functions in dialog fields
+ *
+ * @see `templates/hide.js` for usage
+ */
 export class HideGenerator extends JQueryGenerator<JQueryHideModel> {
   public get tabs(): JQueryHideModel[] {
     return this.dialogConfig.tabs.reduce(

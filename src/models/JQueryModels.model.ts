@@ -34,8 +34,17 @@ export interface JQueryOnChangeModel extends JQueryModel {
   multifields?: JQueryOnChangeModel[];
 }
 
+/**
+ * Abstract class to generate JQuery models for clientlibs
+ *
+ * @see `jqueryGenerators/*` for examples
+ */
 export abstract class JQueryGenerator<T extends JQueryModel> {
   protected dialogConfig: AEMTouchUIDialog;
+
+  /**
+   * @param {AEMTouchUIDialog} dialogConfig AEM Touch UI dialog configurationn
+   */
   public constructor(dialogConfig: AEMTouchUIDialog) {
     this.dialogConfig = dialogConfig;
   }

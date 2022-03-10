@@ -5,6 +5,11 @@ import {
 } from '../models';
 import { CommonOptions } from '../models/TouchUIFieldOptions.model';
 
+/**
+ * Generate JQuery model for onChange functions in dialog fields
+ *
+ * @see `templates/onChange.js` for usage
+ */
 export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
   public get tabs(): JQueryOnChangeModel[] {
     return this.dialogConfig.tabs.reduce(

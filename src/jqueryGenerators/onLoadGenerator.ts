@@ -1,6 +1,11 @@
 import { JQueryGenerator, JQueryOnLoadModel } from '../models';
 import { CommonOptions } from '../models/TouchUIFieldOptions.model';
 
+/**
+ * Generate JQuery model for hide functions in dialog fields
+ *
+ * @see `templates/onLoad.js` for usage
+ */
 export class OnLoadGenerator extends JQueryGenerator<JQueryOnLoadModel> {
   public get tabs(): JQueryOnLoadModel[] {
     return this.dialogConfig.tabs.reduce(
