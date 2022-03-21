@@ -2,4 +2,4 @@
   jcr:primaryType="nt:unstructured"
   sling:resourceType="granite/ui/components/coral/foundation/heading"
   level="{{LEVEL}}"
-  text="{{TEXT}}" />
+  text="{{TEXT}}" {{CLASSNAME}} />
