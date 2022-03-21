@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0
+- Changed onChange Model from `targetClassName` to `onChangeTarget`
+- Added `{{CLASSNAME}}` to heading template
+
 ## 2.1.4
 - Updated XML template properties & order
 - Handle onChange function in nested multifields
