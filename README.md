@@ -126,7 +126,7 @@ const fields: TouchUIDialogFieldOptions[] = [{
 ];
 ```
 
-The `onChange` property is optional and can be used to execute a function after a TouchUI field has changed. This property uses a function where return a void. The `targetElement` is an HTMLElement or an array of HTMLElements which can be used to manipulate the DOM. To get this to work, you need to setup the field `targetClassName` and if you want to use a custom class name, you have to set the property `className` in the target field. 
+The `onChange` property is optional and can be used to execute a function after a TouchUI field has changed. This property uses a function where return a void. The `targetElement` is an HTMLElement or an array of HTMLElements which can be used to manipulate the DOM. To get this to work, you need to setup the field `onChangeTarget` and if you want to use a custom class name, you have to set the property `className` in the target field. 
 
 ```typescript
 const fields: TouchUIDialogFieldOptions[] = [
@@ -137,7 +137,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     onChange: ({ contentPath, targetElement }) => {
       console.log(contentPath, targetElement);
     },
-    targetClassName: 'my-button-class',
+    onChangeTarget: 'my-button-class',
   },
   {
     label: 'Mein Button',
