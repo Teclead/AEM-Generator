@@ -269,7 +269,7 @@
   jcr:primaryType="nt:unstructured"
   sling:resourceType="granite/ui/components/coral/foundation/heading"
   level="2"
-  text="Lorem Ipsum..." /><element_14
+  text="Lorem Ipsum..."  /><element_14
     jcr:primaryType="nt:unstructured"
     jcr:title="My Text"
     sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
@@ -550,7 +550,7 @@
   jcr:primaryType="nt:unstructured"
   sling:resourceType="granite/ui/components/coral/foundation/heading"
   level="2"
-  text="Lorem Ipsum..." /><element_9
+  text="Lorem Ipsum..."  /><element_9
     jcr:primaryType="nt:unstructured"
     jcr:title="My Text"
     sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">

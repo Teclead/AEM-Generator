@@ -39,7 +39,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     onChange: ({ targetElement }) => {
       console.log('Multifield Target', targetElement);
     },
-    targetClassName: 'nested-custom-class',
+    onChangeTarget: 'nested-custom-class',
     multifieldOptions: [
       {
         label: 'Mein Textfield',
@@ -49,7 +49,7 @@ const fields: TouchUIDialogFieldOptions[] = [
         onChange: ({ targetElement }) => {
           console.log('Nested Multifield Change', targetElement);
         },
-        targetClassName: 'nested-custom-class',
+        onChangeTarget: 'nested-custom-class',
       },
     ],
   },
@@ -100,7 +100,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     onChange: ({ contentPath, targetElement }) => {
       console.log('On Change Triggered', contentPath, targetElement);
     },
-    targetClassName: 'testClass',
+    onChangeTarget: 'testClass',
   },
   {
     label: 'Mein Dropdown mit DataSource',

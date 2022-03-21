@@ -1,7 +1,7 @@
 (function (document, $) {
   'use strict';
 
-  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"targetClassName":"nested-custom-class","multifields":[{"index":0,"isTab":false,"onChange":"function (_a) {\n                    var targetElement = _a.targetElement;\n                    console.log('Nested Multifield Change', targetElement);\n                }","targetClassName":"nested-custom-class"}],"onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isTab":false,"targetClassName":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"},{"index":0,"tabIndex":2,"isTab":false,"multifields":[{"index":1,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }","targetClassName":"testClass"}],"onChange":""}];
+  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"onChangeTarget":"nested-custom-class","multifields":[{"index":0,"isTab":false,"onChange":"function (_a) {\n                    var targetElement = _a.targetElement;\n                    console.log('Nested Multifield Change', targetElement);\n                }","onChangeTarget":"nested-custom-class"}],"onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }"},{"index":6,"tabIndex":0,"isTab":false,"onChangeTarget":"testClass","onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }"},{"index":0,"tabIndex":2,"isTab":false,"multifields":[{"index":1,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }","onChangeTarget":"testClass"}],"onChange":""}];
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -25,7 +25,7 @@
    */
   function getTargetElement(onChangeElement) {
     const form = getDialogForm();
-    const targetElement = $(form).find(`.${onChangeElement.targetClassName}`);
+    const targetElement = $(form).find(`.${onChangeElement.onChangeTarget}`);
 
     return targetElement.get();
   }

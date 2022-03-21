@@ -21,7 +21,7 @@ export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
                 index,
                 isTab: true,
                 onChange: `${current.onChange || ''}`,
-                targetClassName: '',
+                onChangeTarget: '',
               },
             ]
           : [...previous],
@@ -41,7 +41,7 @@ export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
                   index,
                   tabIndex,
                   isTab: false,
-                  targetClassName: current.targetClassName,
+                  onChangeTarget: current.onChangeTarget,
                   multifields: this.getMultifields(current),
                   onChange: `${(current as CommonOptions).onChange || ''}`,
                 },
@@ -83,7 +83,7 @@ export class OnChangeGenerator extends JQueryGenerator<JQueryOnChangeModel> {
         index,
         isTab: false,
         onChange: `${option.onChange || ''}`,
-        targetClassName: option.targetClassName,
+        onChangeTarget: option.onChangeTarget,
       }))
       .filter(({ onChange }) => !!onChange);
 

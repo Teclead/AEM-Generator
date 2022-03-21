@@ -30,7 +30,7 @@ export interface JQueryOnLoadModel extends JQueryModel {
 
 export interface JQueryOnChangeModel extends JQueryModel {
   onChange: OnChangeFunction | string;
-  targetClassName: string;
+  onChangeTarget: string;
   multifields?: JQueryOnChangeModel[];
 }
 

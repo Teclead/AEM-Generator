@@ -31,6 +31,6 @@ export enum OptionKeys {
   vertical = 'vertical',
   OnLoadFunction = 'onLoad',
   OnChangeFunction = 'onChange',
-  TargetClassName = 'targetClassName',
+  OnChangeTarget = 'onChangeTarget',
   ClassName = 'className',
 }

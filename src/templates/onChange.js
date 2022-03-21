@@ -25,7 +25,7 @@
    */
   function getTargetElement(onChangeElement) {
     const form = getDialogForm();
-    const targetElement = $(form).find(`.${onChangeElement.targetClassName}`);
+    const targetElement = $(form).find(`.${onChangeElement.onChangeTarget}`);
 
     return targetElement.get();
   }
