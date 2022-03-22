@@ -25,20 +25,5 @@ All notable changes to this project will be documented in this file. See [standa
 
 * tsnode compiler options ([93f1329](https://github.com/Teclead/AEM-Generator/commit/93f13297e73cfe256468d90d4bce255be9346123))
 
-## 2.2.0
-- Changed onChange Model from `targetClassName` to `onChangeTarget`
-- Added `{{CLASSNAME}}` to heading template
-
-## 2.1.4
-- Updated XML template properties & order
-- Handle onChange function in nested multifields
-
-## 2.1.0
-- Added onChange handler for fields
-- Added onLoad handler for fields
-- Added targetClassName to handle onChange targets
-- Added className property to set custom class names for fields
-- Adjusted clientlib generation
-
 ## 1.0.0
 - first version of the public aem generator by Teclead
