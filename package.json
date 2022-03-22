@@ -30,7 +30,7 @@
     "typescript": "~4.1.6"
   },
   "scripts": {
-    "build": "npm run build:clean && npm run build:ts && cp package.json dist/ && cp README.md dist/ && cp src/react-build-config.js dist/",
+    "build": "npm run build:clean && npm run build:ts && cp package.json dist/ && cp README.md dist/ && cp CHANGELOG.md dist/ && cp src/react-build-config.js dist/",
     "build-aem": "node src/builder.js",
     "build:beta": "tsc --project tsconfig.build.json && cp -r src/templates dist/ && cp src/builder.js dist/ && cp -r dist/ ../react-components/react-components/node_modules/@eg/dialog-generator/",
     "build:clean": "rm -rf dist",
