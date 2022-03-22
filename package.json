@@ -54,8 +54,8 @@
     "type": "git",
     "url": "https://github.com/Teclead/AEM-Generator"
   },
-  "author": "Teclead / Tony Schumacher",
-  "license": "ISC",
+  "author": "Teclead Ventures GmbH",
+  "license": "MIT",
   "lint-staged": {
     "./src/**/*.{js,ts,tsx,jsx}": [
       "npm run lint:fix",
