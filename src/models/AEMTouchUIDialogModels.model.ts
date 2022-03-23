@@ -84,7 +84,9 @@ export interface TouchUIDialogTab<T = object> {
   fields: Array<TouchUIDialogFieldOptions<T>>;
   hide?: HideFunction;
   onLoad?: OnLoadFunction;
+  onLoadTarget?: string;
   onChange?: OnChangeFunction;
+  onChangeTaget?: string;
 }
 export interface TouchUIAnalytics {
   events?: string[] | string;

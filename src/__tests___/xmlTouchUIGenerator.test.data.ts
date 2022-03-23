@@ -82,6 +82,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     databaseName: 'image',
     description: 'Meine Beschreibung für Imagefield',
     isRequired: true,
+    className: 'testLoadClass',
   },
   {
     label: 'Mein Dropdown',
@@ -94,20 +95,21 @@ const fields: TouchUIDialogFieldOptions[] = [
       { value: 3, name: 'Name 3', selected: true },
     ],
     hide: ({ contentPath }) => contentPath.includes('/de'),
-    onLoad: ({ contentPath }) => {
-      console.log('Triggered On Load Event', contentPath);
+    onLoad: ({ contentPath, targetElement }) => {
+      console.log('Triggered On Load Event', contentPath, targetElement);
     },
     onChange: ({ contentPath, targetElement }) => {
       console.log('On Change Triggered', contentPath, targetElement);
     },
-    onChangeTarget: 'testClass',
+    onChangeTarget: 'testChangeClass',
+    onLoadTarget: 'testLoadClass',
   },
   {
     label: 'Mein Dropdown mit DataSource',
     type: TouchUIField.Dropdown,
     databaseName: 'dropdown',
     description: 'Meine Beschreibung für Dropdown',
-    className: 'testClass',
+    className: 'testChangeClass',
     options: {
       dataSource: 'path/to/java/servlet',
       attributes: {
