@@ -1,16 +1,7 @@
 (function (document, $) {
   'use strict';
 
-  const onLoadContainer = [
-    {
-      index: 6,
-      isTab: false,
-      tabIndex: 0,
-      onLoad:
-        "function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('Triggered On Load Event', contentPath, targetElement);\n        }",
-      onLoadTarget: 'testLoadClass',
-    },
-  ];
+  const onLoadContainer = [{"index":6,"isTab":false,"tabIndex":0,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('Triggered On Load Event', contentPath, targetElement);\n        }","onLoadTarget":"testLoadClass"}];
 
   /**
    * @param {string} str function that should be retured
