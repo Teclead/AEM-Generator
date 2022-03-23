@@ -25,6 +25,7 @@ export interface JQueryHideModel extends JQueryModel {
 
 export interface JQueryOnLoadModel extends JQueryModel {
   onLoad: OnLoadFunction | string;
+  onLoadTarget: string;
   multifields?: JQueryOnLoadModel[];
 }
 

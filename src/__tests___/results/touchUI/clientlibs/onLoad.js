@@ -1,7 +1,7 @@
 (function (document, $) {
   'use strict';
 
-  const onLoadContainer = [{"index":6,"isTab":false,"tabIndex":0,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath;\n            console.log('Triggered On Load Event', contentPath);\n        }"}];
+  const onLoadContainer = [{"index":6,"isTab":false,"tabIndex":0,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('Triggered On Load Event', contentPath, targetElement);\n        }","onLoadTarget":"testLoadClass"}];
 
   /**
    * @param {string} str function that should be retured
@@ -28,12 +28,30 @@
   }
 
   /**
+   * @param {any} onLoadElement element of container array
+   * @returns {HTMLElement[]} found elements by className
+   */
+  function getTargetElement(onLoadElement) {
+    if (!onLoadElement.onLoadTarget) {
+      return [];
+    }
+
+    const form = getDialogForm();
+    const targetElement = $(form).find(`.${onLoadElement.onLoadTarget}`);
+
+    return targetElement.get();
+  }
+
+  /**
    * @param {any[]} container array of jquery models
    */
   function onLoad(container) {
     container.forEach((onLoadElement) => {
       const onLoadFn = getFunction(onLoadElement.onLoad);
-      onLoadFn({ contentPath: getContentPath() });
+      onLoadFn({
+        contentPath: getContentPath(),
+        targetElement: getTargetElement(onLoadElement),
+      });
     });
   }
 

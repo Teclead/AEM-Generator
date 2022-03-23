@@ -22,6 +22,7 @@ export interface CommonOptions extends CustomOptionAttribute {
   [OptionKeys.DefaultValue]?: string | boolean | number;
   [OptionKeys.HideFunction]?: HideFunction;
   [OptionKeys.OnLoadFunction]?: OnLoadFunction;
+  [OptionKeys.OnLoadTarget]?: string;
   [OptionKeys.OnChangeFunction]?: OnChangeFunction;
   [OptionKeys.OnChangeTarget]?: string;
   [OptionKeys.ClassName]?: string;

@@ -11,7 +11,15 @@ export class OnLoadGenerator extends JQueryGenerator<JQueryOnLoadModel> {
     return this.dialogConfig.tabs.reduce(
       (previous, current, index) =>
         current.onLoad
-          ? [...previous, { index, isTab: true, onLoad: '' + current.onLoad }]
+          ? [
+              ...previous,
+              {
+                index,
+                isTab: true,
+                onLoad: '' + current.onLoad,
+                onLoadTarget: current.onLoadTarget || '',
+              },
+            ]
           : [...previous],
       [] as JQueryOnLoadModel[]
     );
@@ -29,6 +37,7 @@ export class OnLoadGenerator extends JQueryGenerator<JQueryOnLoadModel> {
                   isTab: false,
                   tabIndex,
                   onLoad: '' + (current as CommonOptions).onLoad,
+                  onLoadTarget: (current as CommonOptions).onLoadTarget || '',
                 },
               ]
             : [...previous],

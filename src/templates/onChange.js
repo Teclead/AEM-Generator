@@ -24,6 +24,10 @@
    * @returns {HTMLElement[]} found elements by className
    */
   function getTargetElement(onChangeElement) {
+    if (!onChangeElement.onChangeTarget) {
+      return [];
+    }
+
     const form = getDialogForm();
     const targetElement = $(form).find(`.${onChangeElement.onChangeTarget}`);
 

@@ -28,12 +28,30 @@
   }
 
   /**
+   * @param {any} onLoadElement element of container array
+   * @returns {HTMLElement[]} found elements by className
+   */
+  function getTargetElement(onLoadElement) {
+    if (!onLoadElement.onLoadTarget) {
+      return [];
+    }
+
+    const form = getDialogForm();
+    const targetElement = $(form).find(`.${onLoadElement.onLoadTarget}`);
+
+    return targetElement.get();
+  }
+
+  /**
    * @param {any[]} container array of jquery models
    */
   function onLoad(container) {
     container.forEach((onLoadElement) => {
       const onLoadFn = getFunction(onLoadElement.onLoad);
-      onLoadFn({ contentPath: getContentPath() });
+      onLoadFn({
+        contentPath: getContentPath(),
+        targetElement: getTargetElement(onLoadElement),
+      });
     });
   }
 

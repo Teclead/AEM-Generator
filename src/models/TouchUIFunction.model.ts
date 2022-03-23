@@ -9,6 +9,7 @@ export type HideFunction = (parameters: HideFunctionProps) => boolean;
 
 export interface OnLoadFunctionProps {
   contentPath: string;
+  targetElement: HTMLElement[];
 }
 
 export type OnLoadFunction = (parameters: OnLoadFunctionProps) => void;
