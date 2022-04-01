@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/Teclead/AEM-Generator/compare/v2.2.0...v2.3.0) (2022-04-01)
+
+
+### Features
+
+* add sourceElement to onChange & onLoad ([d2ada0f](https://github.com/Teclead/AEM-Generator/commit/d2ada0f4258100fff9bcbaeda0aa4fb0bc63237e)), closes [#32](https://github.com/Teclead/AEM-Generator/issues/32)
+* add targetElement to onLoad() ([8cfeb9a](https://github.com/Teclead/AEM-Generator/commit/8cfeb9a16f0ad6d487334d7498c3fef5adfdf9dc)), closes [#31](https://github.com/Teclead/AEM-Generator/issues/31)
+
 ## 2.2.0 (2022-03-22)
 
 
