@@ -19,12 +19,54 @@
   }
 
   /**
+   * @param {string} id the id of the tab pane
+   * @returns {HTMLElement} the tab pane
+   */
+  function getTabPane(id) {
+    return document.getElementById(id);
+  }
+
+  /**
+   * @param {HTMLElement} tab the tab to get the pane
+   * @returns {HTMLElement} the tab pane with the attribute `aria-controls`
+   */
+  function getTabPaneId(tab) {
+    return $(tab).attr('aria-controls');
+  }
+
+  /**
+   * @param {number} index index of the tab
+   * @returns {HTMLElement} the tab by index
+   */
+  function getTab(index) {
+    const form = getDialogForm();
+
+    return $(form).find('.coral-TabPanel-navigation').children()[index];
+  }
+
+  /**
+   * @param {string} paneId the id of the pane
+   * @returns {HTMLElement} the tab pane fiels of the tab pane
+   */
+  function getTabPaneFieldsByPaneId(paneId) {
+    return getTabPane(paneId).children[0];
+  }
+
+  /**
    * @returns {string} the content path of the form
    */
   function getContentPath() {
     const form = getDialogForm();
 
     return new URL(form.action).pathname;
+  }
+
+  /**
+   * @param {any} field the field where the function is used
+   * @returns {HTMLElement[]} the field(s) as HTMLElement
+   */
+  function getSourceElement(field) {
+    return $(field).get();
   }
 
   /**
@@ -47,11 +89,41 @@
    */
   function onLoad(container) {
     container.forEach((onLoadElement) => {
-      const onLoadFn = getFunction(onLoadElement.onLoad);
-      onLoadFn({
-        contentPath: getContentPath(),
-        targetElement: getTargetElement(onLoadElement),
-      });
+      const index =
+        onLoadElement.tabIndex || onLoadElement.tabIndex === 0
+          ? onLoadElement.tabIndex
+          : onLoadElement.index;
+      const tab = getTab(index);
+      const tabPaneId = getTabPaneId(tab);
+
+      const isTab = onLoadElement.isTab;
+
+      if (isTab) {
+        if (tabIndex === onLoadElement.index) {
+          tabIndex++;
+        }
+      }
+
+      if (!isTab && tabPaneId) {
+        const fields = $(getTabPaneFieldsByPaneId(tabPaneId));
+
+        fields
+          .children()
+          .filter(function () {
+            return $(this).attr('type') !== 'hidden';
+          })
+          .each((i, field) => {
+            if (i === onLoadElement.index) {
+              const onLoadFn = getFunction(onLoadElement.onLoad);
+
+              onLoadFn({
+                contentPath: getContentPath(),
+                targetElement: getTargetElement(onLoadElement),
+                sourceElement: getSourceElement(field),
+              });
+            }
+          });
+      }
     });
   }
 

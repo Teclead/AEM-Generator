@@ -20,6 +20,14 @@
   }
 
   /**
+   * @param {any} field the field where the function is used
+   * @returns {HTMLElement[]} the field(s) as HTMLElement
+   */
+  function getSourceElement(field) {
+    return $(field).get();
+  }
+
+  /**
    * @param {any} onChangeElement element of container array
    * @returns {HTMLElement[]} found elements by className
    */
@@ -93,6 +101,7 @@
               onChangeFn({
                 contentPath: getContentPath(),
                 targetElement: getTargetElement(element),
+                sourceElement: getSourceElement(field),
               });
             });
           }
@@ -117,6 +126,7 @@
         onChangeFn({
           contentPath: getContentPath(),
           targetElement: getTargetElement(onChangeElement),
+          sourceElement: getSourceElement(multifield),
         });
       });
 
@@ -124,6 +134,7 @@
         onChangeFn({
           contentPath: getContentPath(),
           targetElement: getTargetElement(onChangeElement),
+          sourceElement: getSourceElement(multifield),
         });
       });
     }
@@ -170,6 +181,7 @@
                   onChangeFn({
                     contentPath: getContentPath(),
                     targetElement: getTargetElement(onChangeElement),
+                    sourceElement: getSourceElement(field),
                   });
                 });
               }
