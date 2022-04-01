@@ -36,8 +36,8 @@ const fields: TouchUIDialogFieldOptions[] = [
     type: TouchUIField.MultifieldNested,
     description: 'Meine Beschreibung für Multifield Nested...',
     databaseName: 'multifieldNested',
-    onChange: ({ targetElement }) => {
-      console.log('Multifield Target', targetElement);
+    onChange: ({ targetElement, sourceElement }) => {
+      console.log('Multifield Target', targetElement, sourceElement);
     },
     onChangeTarget: 'nested-custom-class',
     multifieldOptions: [
@@ -95,11 +95,19 @@ const fields: TouchUIDialogFieldOptions[] = [
       { value: 3, name: 'Name 3', selected: true },
     ],
     hide: ({ contentPath }) => contentPath.includes('/de'),
-    onLoad: ({ contentPath, targetElement }) => {
-      console.log('Triggered On Load Event', contentPath, targetElement);
+    onLoad: ({ contentPath, targetElement, sourceElement }) => {
+      console.log('Triggered On Load Event', {
+        contentPath,
+        targetElement,
+        sourceElement,
+      });
     },
-    onChange: ({ contentPath, targetElement }) => {
-      console.log('On Change Triggered', contentPath, targetElement);
+    onChange: ({ contentPath, targetElement, sourceElement }) => {
+      console.log('On Change Triggered', {
+        contentPath,
+        targetElement,
+        sourceElement,
+      });
     },
     onChangeTarget: 'testChangeClass',
     onLoadTarget: 'testLoadClass',

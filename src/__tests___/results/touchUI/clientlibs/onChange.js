@@ -1,7 +1,7 @@
 (function (document, $) {
   'use strict';
 
-  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"multifields":[{"index":0,"isTab":false,"onChange":"function (_a) {\n                    var targetElement = _a.targetElement;\n                    console.log('Nested Multifield Change', targetElement);\n                }","onChangeTarget":"nested-custom-class"}],"onChange":"function (_a) {\n            var targetElement = _a.targetElement;\n            console.log('Multifield Target', targetElement);\n        }","onChangeTarget":"nested-custom-class"},{"index":6,"tabIndex":0,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }","onChangeTarget":"testChangeClass"},{"index":0,"tabIndex":2,"isTab":false,"multifields":[{"index":1,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement;\n            console.log('On Change Triggered', contentPath, targetElement);\n        }","onChangeTarget":"testChangeClass"}],"onChange":"undefined","onChangeTarget":""}];
+  const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"multifields":[{"index":0,"isTab":false,"onChange":"function (_a) {\n                    var targetElement = _a.targetElement;\n                    console.log('Nested Multifield Change', targetElement);\n                }","onChangeTarget":"nested-custom-class"}],"onChange":"function (_a) {\n            var targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('Multifield Target', targetElement, sourceElement);\n        }","onChangeTarget":"nested-custom-class"},{"index":6,"tabIndex":0,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('On Change Triggered', {\n                contentPath: contentPath,\n                targetElement: targetElement,\n                sourceElement: sourceElement,\n            });\n        }","onChangeTarget":"testChangeClass"},{"index":0,"tabIndex":2,"isTab":false,"multifields":[{"index":1,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('On Change Triggered', {\n                contentPath: contentPath,\n                targetElement: targetElement,\n                sourceElement: sourceElement,\n            });\n        }","onChangeTarget":"testChangeClass"}],"onChange":"undefined","onChangeTarget":""}];
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -17,6 +17,14 @@
     const form = getDialogForm();
 
     return new URL(form.action).pathname;
+  }
+
+  /**
+   * @param {any} field the field where the function is used
+   * @returns {HTMLElement[]} the field(s) as HTMLElement
+   */
+  function getSourceElement(field) {
+    return $(field).get();
   }
 
   /**
@@ -93,6 +101,7 @@
               onChangeFn({
                 contentPath: getContentPath(),
                 targetElement: getTargetElement(element),
+                sourceElement: getSourceElement(field),
               });
             });
           }
@@ -117,6 +126,7 @@
         onChangeFn({
           contentPath: getContentPath(),
           targetElement: getTargetElement(onChangeElement),
+          sourceElement: getSourceElement(multifield),
         });
       });
 
@@ -124,6 +134,7 @@
         onChangeFn({
           contentPath: getContentPath(),
           targetElement: getTargetElement(onChangeElement),
+          sourceElement: getSourceElement(multifield),
         });
       });
     }
@@ -170,6 +181,7 @@
                   onChangeFn({
                     contentPath: getContentPath(),
                     targetElement: getTargetElement(onChangeElement),
+                    sourceElement: getSourceElement(field),
                   });
                 });
               }

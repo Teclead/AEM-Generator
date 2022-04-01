@@ -10,6 +10,7 @@ export type HideFunction = (parameters: HideFunctionProps) => boolean;
 export interface OnLoadFunctionProps {
   contentPath: string;
   targetElement: HTMLElement[];
+  sourceElement: HTMLElement[];
 }
 
 export type OnLoadFunction = (parameters: OnLoadFunctionProps) => void;
@@ -17,10 +18,7 @@ export type OnLoadFunction = (parameters: OnLoadFunctionProps) => void;
 export interface OnChangeFunctionProps {
   contentPath: string;
   targetElement: HTMLElement[];
+  sourceElement: HTMLElement[];
 }
 
 export type OnChangeFunction = (parameters: OnChangeFunctionProps) => void;
-
-export interface TouchUIFunction {
-  hide: HideFunction;
-}
