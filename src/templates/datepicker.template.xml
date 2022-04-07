@@ -2,4 +2,4 @@
   jcr:primaryType="nt:unstructured"
   sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"
   displayedFormat="{{DISPLAYFORMAT}}"
-  type="{{DATETYPE}}" {{MINDATE}} {{COMMON}} />
+  type="{{DATETYPE}}" {{MINDATE}} {{VALUE}} {{COMMON}} />

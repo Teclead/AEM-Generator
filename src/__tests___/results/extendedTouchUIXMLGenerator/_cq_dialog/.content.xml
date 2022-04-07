@@ -43,7 +43,7 @@
                 <items jcr:primaryType="nt:unstructured">
                      <element_0
     jcr:primaryType="nt:unstructured"
-    sling:resourceType="granite/ui/components/coral/foundation/form/select" name="./dropdown" fieldLabel="Mein Dropdown"   fieldDescription="Meine Beschreibung für Dropdown"   >
+    sling:resourceType="granite/ui/components/coral/foundation/form/select"  name="./dropdown" fieldLabel="Mein Dropdown"   fieldDescription="Meine Beschreibung für Dropdown"   >
     <items jcr:primaryType="nt:unstructured">
         <option_0 jcr:primaryType="nt:unstructured"  value="1" text="Name 1"/><option_1 jcr:primaryType="nt:unstructured"  value="2" text="Name 2"/><option_2 jcr:primaryType="nt:unstructured" selected="true" value="3" text="Name 3"/>
     </items>

@@ -38,6 +38,7 @@ export enum PlaceHolder {
   Element = 'ELNAME',
   Title = '{{TITLE}}',
   Value = '{{VALUE}}',
+  DefaultValue = '{{DEFAULT_VALUE}}',
   Fields = '{{FIELDS}}',
   Field = '{{FIELD}}',
   Database = '{{DATABASE}}',

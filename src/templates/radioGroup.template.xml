@@ -2,7 +2,7 @@
       jcr:primaryType="nt:unstructured"
       sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup"
       deleteHint="{Boolean}false"
-      vertical="{Boolean}{{VERTICAL}}" {{COMMON}}>
+      vertical="{Boolean}{{VERTICAL}}" {{VALUE}} {{COMMON}}>
       <items jcr:primaryType="nt:unstructured">
             {{OPTIONS}}
       </items>
