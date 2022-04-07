@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/Teclead/AEM-Generator/compare/v2.3.0...v3.0.0) (2022-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* `defaultValue` property is now handled differently than the `value` property
+
+### Features
+
+* handle correct value and default value ([12a7df4](https://github.com/Teclead/AEM-Generator/commit/12a7df46d7c778d575990ae40b03a8179ef8f9d1))
+
 ## [2.3.0](https://github.com/Teclead/AEM-Generator/compare/v2.2.0...v2.3.0) (2022-04-01)
 
 
