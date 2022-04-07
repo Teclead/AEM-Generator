@@ -1,6 +1,6 @@
 <ELNAME
     jcr:primaryType="nt:unstructured"
-    sling:resourceType="granite/ui/components/coral/foundation/form/select" {{COMMON}}>
+    sling:resourceType="granite/ui/components/coral/foundation/form/select" {{VALUE}} {{COMMON}}>
     <items jcr:primaryType="nt:unstructured">
         {{OPTIONS}}
     </items>

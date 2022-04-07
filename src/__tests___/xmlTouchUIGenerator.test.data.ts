@@ -70,8 +70,9 @@ const fields: TouchUIDialogFieldOptions[] = [
   {
     label: 'Mein Numberfield',
     type: TouchUIField.Number,
-    databaseName: 'numbwr',
+    databaseName: 'number',
     description: 'Meine Beschreibung für Numberfield...',
+    defaultValue: 20,
     max: 50,
     min: 20,
   },
@@ -160,6 +161,7 @@ const fields: TouchUIDialogFieldOptions[] = [
     minDate: 'yesterday',
     displayedFormat: 'YYYY-MM-DD HH:mm',
     dateType: 'datetime',
+    value: 'today',
   },
   {
     type: TouchUIField.Heading,

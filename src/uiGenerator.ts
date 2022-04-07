@@ -397,7 +397,16 @@ export class UiGenerator<T = object> {
         .replace(PlaceHolder.Element, 'element_' + index)
         .replace('/' + PlaceHolder.Element, '/element_' + index)
         .replace(PlaceHolder.Title, _field.label)
-        .replace(PlaceHolder.Value, this.getFieldValue(field))
+        .replace(
+          PlaceHolder.Value,
+          _field.value ? ` value="${this.parseFieldValue(field)}"` : ''
+        )
+        .replace(
+          PlaceHolder.DefaultValue,
+          _field.defaultValue
+            ? ` defaultValue="${this.parseFieldValue(field)}"`
+            : ''
+        )
         .replace(PlaceHolder.Database, `./${_field.databaseName}`)
         .replace(PlaceHolder.Checked, _field.checked ? 'checked="true"' : '')
         .replace(
@@ -501,12 +510,6 @@ export class UiGenerator<T = object> {
       .replace(PlaceHolder.Options, this.getNestedFields(field));
   }
 
-  public getFieldValue(field: TouchUIDialogFieldOptions<T>): string {
-    return typeof (field as CommonOptions).defaultValue === 'undefined'
-      ? ''
-      : ` value="${this.parseFieldValue(field)}"`;
-  }
-
   /**
    * getOption() returns string element
    *
@@ -601,15 +604,15 @@ export class UiGenerator<T = object> {
   }
 
   private parseFieldValue(_field: TouchUIDialogFieldOptions<T>): string {
-    const field = _field as CommonOptions;
+    const value = _field.defaultValue || _field.value;
 
-    switch (typeof field.defaultValue) {
+    switch (typeof value) {
       case 'boolean':
-        return `{Boolean}${field.defaultValue ? 'true' : 'false'}`;
+        return `{Boolean}${value ? 'true' : 'false'}`;
       case 'number':
-        return `{Double}${field.defaultValue}`;
+        return `{Double}${value}`;
       case 'string':
-        return field.defaultValue;
+        return value;
       default:
         return '';
     }

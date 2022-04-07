@@ -6,7 +6,7 @@ export const getFile = (filePath: string): string =>
   fs.readFileSync(filePath).toString();
 
 const CommonField =
-  'name="{{DATABASE}}" fieldLabel="{{TITLE}}"{{VALUE}} {{REQUIRED}} {{DESC}} {{DISABLED}} {{CLASSNAME}} {{CUSTOM_ATTRIBUTE}}';
+  'name="{{DATABASE}}" fieldLabel="{{TITLE}}" {{REQUIRED}} {{DESC}} {{DISABLED}} {{CLASSNAME}} {{CUSTOM_ATTRIBUTE}}';
 
 // here we may get costum template path or we use the defuelt template
 export const template = {

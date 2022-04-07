@@ -19,7 +19,6 @@ export interface CommonOptions extends CustomOptionAttribute {
   [OptionKeys.Description]?: string;
   [OptionKeys.IsRequired]?: boolean;
   [OptionKeys.Label]: string;
-  [OptionKeys.DefaultValue]?: string | boolean | number;
   [OptionKeys.HideFunction]?: HideFunction;
   [OptionKeys.OnLoadFunction]?: OnLoadFunction;
   [OptionKeys.OnLoadTarget]?: string;
@@ -52,6 +51,7 @@ export interface PathOptions extends BaseOptions {
 
 export interface PathBrowserOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.PathBrowser;
+  [OptionKeys.Value]?: string;
 }
 
 export interface RichTextOptions extends BaseOptions {
@@ -72,12 +72,15 @@ export interface CheckboxOptions extends BaseOptions {
 export interface DropdownOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.Dropdown;
   [OptionKeys.Options]: TouchUIFieldOption[] | DataSourceOptions;
+  [OptionKeys.Value]?: string | number;
 }
 
 export interface NumberOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.Number;
   [OptionKeys.Max]?: number;
   [OptionKeys.Min]?: number;
+  [OptionKeys.Value]?: number | string;
+  [OptionKeys.DefaultValue]?: number | string;
 }
 
 export interface MultifieldOptions extends BaseOptions {
@@ -101,6 +104,7 @@ export interface MultifieldNestedOptions<T> extends BaseOptions {
 
 export interface DatePickerOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.DatePicker;
+  [OptionKeys.Value]?: string;
   displayedFormat: 'YYYY-MM-DD HH:mm' | string;
   minDate?: 'today' | string;
   // type in XML
@@ -123,6 +127,7 @@ export interface FieldSetOptions<T> extends NoneBaseField {
 }
 export interface RadioGroupOptions extends BaseOptions {
   [OptionKeys.Type]: TouchUIField.RadioGroup;
+  [OptionKeys.Value]?: string | number;
   options: Array<{
     text: string;
     value: string;
