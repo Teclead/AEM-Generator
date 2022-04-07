@@ -46,7 +46,7 @@ exports[`xml generator for touch ui aem dialogs should print a template for a ex
                 <items jcr:primaryType=\\"nt:unstructured\\">
                      <element_0
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
@@ -220,7 +220,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     </field>
 </element_1><element_2
         jcr:primaryType=\\"nt:unstructured\\"
-        sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathfield\\" name=\\"./path\\" fieldLabel=\\"Mein PathField\\"   fieldDescription=\\"Meine Beschreibung für PathField...\\"    /><element_3
+        sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathfield\\"  name=\\"./path\\" fieldLabel=\\"Mein PathField\\"   fieldDescription=\\"Meine Beschreibung für PathField...\\"    /><element_3
     jcr:primaryType=\\"nt:unstructured\\"
     sling:resourceType=\\"granite/ui/components/coral/foundation/form/checkbox\\"
     name=\\"./select\\"
@@ -229,7 +229,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     value=\\"true\\"
     checked=\\"true\\"   fieldDescription=\\"Meine Beschreibung für Select...\\"   /><element_4
         jcr:primaryType=\\"nt:unstructured\\"
-        sling:resourceType=\\"granite/ui/components/foundation/form/numberfield\\" name=\\"./numbwr\\" fieldLabel=\\"Mein Numberfield\\"   fieldDescription=\\"Meine Beschreibung für Numberfield...\\"     max=\\"50\\"   min=\\"20\\"  /><element_5
+        sling:resourceType=\\"granite/ui/components/foundation/form/numberfield\\" name=\\"./number\\" fieldLabel=\\"Mein Numberfield\\"   fieldDescription=\\"Meine Beschreibung für Numberfield...\\"     max=\\"50\\"   min=\\"20\\"    defaultValue=\\"{Double}20\\" /><element_5
   fieldLabel=\\"Mein Imagefield\\"
   fileReferenceParameter=\\"./image\\"
   name=\\"./srcField\\"
@@ -244,19 +244,19 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
   uploadUrl=\\"\${suffix.path}\\"
   useHTML5=\\"{Boolean}true\\"  required=\\"{Boolean}true\\"  granite:class=\\"testLoadClass\\" /><element_6
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown mit OnChange und OnLoad\\"   >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown mit OnChange und OnLoad\\"   >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
 </element_6><element_7
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  granite:class=\\"testChangeClass\\" >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  granite:class=\\"testChangeClass\\" >
         <datasource jcr:primaryType=\\"nt:unstructured\\"
               sling:resourceType=\\"path/to/java/servlet\\"
               mode=\\"placeholderOne\\" mode1=\\"placeholderTwo\\"  />
 </element_7><element_8
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"My Dropdown with only dataSource path \\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"My Dropdown with only dataSource path \\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
         <datasource jcr:primaryType=\\"nt:unstructured\\"
               sling:resourceType=\\"path/to/java/servlet\\"
                />
@@ -433,7 +433,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
   jcr:primaryType=\\"nt:unstructured\\"
   sling:resourceType=\\"granite/ui/components/coral/foundation/form/datepicker\\"
   displayedFormat=\\"YYYY-MM-DD HH:mm\\"
-  type=\\"datetime\\" minDate=\\"yesterday\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"      /><element_13
+  type=\\"datetime\\" minDate=\\"yesterday\\"  value=\\"today\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"      /><element_13
   jcr:primaryType=\\"nt:unstructured\\"
   sling:resourceType=\\"granite/ui/components/coral/foundation/heading\\"
   level=\\"2\\"
@@ -452,7 +452,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
       jcr:primaryType=\\"nt:unstructured\\"
       sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\"
       deleteHint=\\"{Boolean}false\\"
-      vertical=\\"{Boolean}true\\" name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     >
+      vertical=\\"{Boolean}true\\"  name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     >
       <items jcr:primaryType=\\"nt:unstructured\\">
             <radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" /><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" /><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" />
       </items>
@@ -525,19 +525,19 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
   uploadUrl=\\"\${suffix.path}\\"
   useHTML5=\\"{Boolean}true\\"  required=\\"{Boolean}true\\"  granite:class=\\"testLoadClass\\" /><element_1
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown mit OnChange und OnLoad\\"   >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown mit OnChange und OnLoad\\"   >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
 </element_1><element_2
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  granite:class=\\"testChangeClass\\" >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown mit DataSource\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"  granite:class=\\"testChangeClass\\" >
         <datasource jcr:primaryType=\\"nt:unstructured\\"
               sling:resourceType=\\"path/to/java/servlet\\"
               mode=\\"placeholderOne\\" mode1=\\"placeholderTwo\\"  />
 </element_2><element_3
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"My Dropdown with only dataSource path \\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"My Dropdown with only dataSource path \\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
         <datasource jcr:primaryType=\\"nt:unstructured\\"
               sling:resourceType=\\"path/to/java/servlet\\"
                />
@@ -714,7 +714,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
   jcr:primaryType=\\"nt:unstructured\\"
   sling:resourceType=\\"granite/ui/components/coral/foundation/form/datepicker\\"
   displayedFormat=\\"YYYY-MM-DD HH:mm\\"
-  type=\\"datetime\\" minDate=\\"yesterday\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"      /><element_8
+  type=\\"datetime\\" minDate=\\"yesterday\\"  value=\\"today\\" name=\\"./datePicker\\" fieldLabel=\\"Mein DatePicker\\"      /><element_8
   jcr:primaryType=\\"nt:unstructured\\"
   sling:resourceType=\\"granite/ui/components/coral/foundation/heading\\"
   level=\\"2\\"
@@ -733,7 +733,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
       jcr:primaryType=\\"nt:unstructured\\"
       sling:resourceType=\\"granite/ui/components/coral/foundation/form/radiogroup\\"
       deleteHint=\\"{Boolean}false\\"
-      vertical=\\"{Boolean}true\\" name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     >
+      vertical=\\"{Boolean}true\\"  name=\\"./radioGr\\" fieldLabel=\\"My Text\\"     >
       <items jcr:primaryType=\\"nt:unstructured\\">
             <radio_0 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 1\\" value=\\"my-val-1\\" /><radio_1 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 2\\" value=\\"my-val-2\\" /><radio_2 jcr:primaryType=\\"nt:unstructured\\" text=\\"My text 3\\" value=\\"my-val-3\\" />
       </items>
@@ -773,7 +773,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
                 <items jcr:primaryType=\\"nt:unstructured\\">
                      <element_0
     jcr:primaryType=\\"nt:unstructured\\"
-    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\" name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
+    sling:resourceType=\\"granite/ui/components/coral/foundation/form/select\\"  name=\\"./dropdown\\" fieldLabel=\\"Mein Dropdown\\"   fieldDescription=\\"Meine Beschreibung für Dropdown\\"   >
     <items jcr:primaryType=\\"nt:unstructured\\">
         <option_0 jcr:primaryType=\\"nt:unstructured\\"  value=\\"1\\" text=\\"Name 1\\"/><option_1 jcr:primaryType=\\"nt:unstructured\\"  value=\\"2\\" text=\\"Name 2\\"/><option_2 jcr:primaryType=\\"nt:unstructured\\" selected=\\"true\\" value=\\"3\\" text=\\"Name 3\\"/>
     </items>
@@ -784,7 +784,7 @@ exports[`xml generator for touch ui aem dialogs should print the touchUI dialog 
     </field>
 </element_0><element_1
         jcr:primaryType=\\"nt:unstructured\\"
-        sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathbrowser\\" name=\\"./pathBrowser\\" fieldLabel=\\"6.2 Pathbrowser\\"      />
+        sling:resourceType=\\"granite/ui/components/coral/foundation/form/pathbrowser\\"  name=\\"./pathBrowser\\" fieldLabel=\\"6.2 Pathbrowser\\"      />
             </items>
         </column>
     </items>
