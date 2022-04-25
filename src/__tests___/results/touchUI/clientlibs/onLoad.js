@@ -127,7 +127,7 @@
     });
   }
 
-  $(document).on('dialog-ready', function () {
+  $(document).on('foundation-contentloaded', function () {
     onLoad(onLoadContainer);
   });
 })(document, Granite.$);
