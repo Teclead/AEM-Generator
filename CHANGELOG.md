@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/Teclead/AEM-Generator/compare/v3.0.0...v3.0.1) (2022-04-25)
+
+
+### Bug Fixes
+
+* onLoad function responsive trigger ([ebf25c1](https://github.com/Teclead/AEM-Generator/commit/ebf25c1db355f3fa0fa0c96ace52718bfe8fc656))
+
 ## [3.0.0](https://github.com/Teclead/AEM-Generator/compare/v2.3.0...v3.0.0) (2022-04-07)
 
 
