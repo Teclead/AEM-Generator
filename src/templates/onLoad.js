@@ -2,6 +2,7 @@
   'use strict';
 
   const onLoadContainer = '{{ONLOAD_CONTAINER}}';
+  const componentPath = '{{COMPONENTPATH}}';
 
   /**
    * @param {string} str function that should be retured
@@ -127,7 +128,21 @@
     });
   }
 
-  $(document).on('foundation-contentloaded', function () {
-    onLoad(onLoadContainer);
+  /**
+   * @returns {boolean} isTargetDialog
+   */
+  function isTargetDialog() {
+    const form = getDialogForm();
+    const resourceType = $(form)
+      .find("input[name='./sling:resourceType']")
+      .val();
+
+    return resourceType === componentPath;
+  }
+
+  $(document).on('dialog-ready', function () {
+    if (isTargetDialog()) {
+      onLoad(onLoadContainer);
+    }
   });
 })(document, Granite.$);

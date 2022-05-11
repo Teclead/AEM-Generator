@@ -2,6 +2,7 @@
   'use strict';
 
   const onChangeContainer = '{{ONCHANGE_CONTAINER}}';
+  const componentPath = '{{COMPONENTPATH}}';
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -191,7 +192,21 @@
     });
   }
 
+  /**
+   * @returns {boolean} isTargetDialog
+   */
+  function isTargetDialog() {
+    const form = getDialogForm();
+    const resourceType = $(form)
+      .find("input[name='./sling:resourceType']")
+      .val();
+
+    return resourceType === componentPath;
+  }
+
   $(document).on('foundation-contentloaded', function () {
-    onChange(onChangeContainer);
+    if (isTargetDialog()) {
+      onChange(onChangeContainer);
+    }
   });
 })(document, Granite.$);

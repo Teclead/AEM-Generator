@@ -3,6 +3,7 @@
 
   const hideContainer = '{{HIDE_CONTAINER}}'; // tabs to hide
   const componentName = "'{{HIDE_COMPONENT_NAME}}'"; // execute js only inside this component
+  const componentPath = '{{COMPONENTPATH}}';
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -158,12 +159,25 @@
     activateTabPane(tabPaneId);
   }
 
+  /**
+   * @returns {boolean} isTargetDialog
+   */
+  function isTargetDialog() {
+    const form = getDialogForm();
+    const resourceType = $(form)
+      .find("input[name='./sling:resourceType']")
+      .val();
+
+    return resourceType === componentPath;
+  }
+
   $(document).on('foundation-contentloaded', function (e) {
     const container = e.target;
 
     if (
       container._trackingFeature &&
-      container._trackingFeature.includes(componentName)
+      container._trackingFeature.includes(componentName) &&
+      isTargetDialog()
     ) {
       execute();
     }

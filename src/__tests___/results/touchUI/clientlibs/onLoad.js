@@ -2,6 +2,7 @@
   'use strict';
 
   const onLoadContainer = [{"index":6,"isTab":false,"tabIndex":0,"onLoad":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('Triggered On Load Event', {\n                contentPath: contentPath,\n                targetElement: targetElement,\n                sourceElement: sourceElement,\n            });\n        }","onLoadTarget":"testLoadClass"}];
+  const componentPath = './src/__tests___/results/touchUI';
 
   /**
    * @param {string} str function that should be retured
@@ -127,7 +128,21 @@
     });
   }
 
-  $(document).on('foundation-contentloaded', function () {
-    onLoad(onLoadContainer);
+  /**
+   * @returns {boolean} isTargetDialog
+   */
+  function isTargetDialog() {
+    const form = getDialogForm();
+    const resourceType = $(form)
+      .find("input[name='./sling:resourceType']")
+      .val();
+
+    return resourceType === componentPath;
+  }
+
+  $(document).on('dialog-ready', function () {
+    if (isTargetDialog()) {
+      onLoad(onLoadContainer);
+    }
   });
 })(document, Granite.$);

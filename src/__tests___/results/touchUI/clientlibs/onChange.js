@@ -2,6 +2,7 @@
   'use strict';
 
   const onChangeContainer = [{"index":1,"tabIndex":0,"isTab":false,"multifields":[{"index":0,"isTab":false,"onChange":"function (_a) {\n                    var targetElement = _a.targetElement;\n                    console.log('Nested Multifield Change', targetElement);\n                }","onChangeTarget":"nested-custom-class"}],"onChange":"function (_a) {\n            var targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('Multifield Target', targetElement, sourceElement);\n        }","onChangeTarget":"nested-custom-class"},{"index":6,"tabIndex":0,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('On Change Triggered', {\n                contentPath: contentPath,\n                targetElement: targetElement,\n                sourceElement: sourceElement,\n            });\n        }","onChangeTarget":"testChangeClass"},{"index":0,"tabIndex":2,"isTab":false,"multifields":[{"index":1,"isTab":false,"onChange":"function (_a) {\n            var contentPath = _a.contentPath, targetElement = _a.targetElement, sourceElement = _a.sourceElement;\n            console.log('On Change Triggered', {\n                contentPath: contentPath,\n                targetElement: targetElement,\n                sourceElement: sourceElement,\n            });\n        }","onChangeTarget":"testChangeClass"}],"onChange":"undefined","onChangeTarget":""}];
+  const componentPath = './src/__tests___/results/touchUI';
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -191,7 +192,21 @@
     });
   }
 
+  /**
+   * @returns {boolean} isTargetDialog
+   */
+  function isTargetDialog() {
+    const form = getDialogForm();
+    const resourceType = $(form)
+      .find("input[name='./sling:resourceType']")
+      .val();
+
+    return resourceType === componentPath;
+  }
+
   $(document).on('foundation-contentloaded', function () {
-    onChange(onChangeContainer);
+    if (isTargetDialog()) {
+      onChange(onChangeContainer);
+    }
   });
 })(document, Granite.$);

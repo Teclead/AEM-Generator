@@ -7,7 +7,7 @@
     xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
     jcr:primaryType="nt:unstructured"
     sling:resourceType="cq/gui/components/authoring/dialog"
-    jcr:title="MyTestComponent">
+    jcr:title="MyTestComponent" extraClientlibs="[react.MyTestComponent]">
     <content
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/container">

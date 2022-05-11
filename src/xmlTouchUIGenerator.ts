@@ -114,13 +114,7 @@ export class TouchUIXMLGenerator<T = object> extends UiGenerator<T> {
         this.deleteFolder(this.dialogConfig.componentPath + '/clientlibs');
       }
 
-      // required condition to create clientlibs
-      const hasCustomFunctions =
-        this.hideGenerator.hasImplementation ||
-        this.onLoadGenerator.hasImplementation ||
-        this.onChangeGenerator.hasImplementation;
-
-      if (hasCustomFunctions) {
+      if (this.hasClientLibs) {
         this.makeFolder(this.dialogConfig.componentPath + '/clientlibs');
         this.writeClientLibs();
       }

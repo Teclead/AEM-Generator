@@ -3,6 +3,7 @@
 
   const hideContainer = [{"index":3,"isTab":true,"hide":"function (_a) {\n            var contentPath = _a.contentPath;\n            return contentPath.includes('/it');\n        }"},{"index":6,"tabIndex":0,"isTab":false,"hide":"function (_a) {\n            var contentPath = _a.contentPath;\n            return contentPath.includes('/de');\n        }"}]; // tabs to hide
   const componentName = "mytestcomponent"; // execute js only inside this component
+  const componentPath = './src/__tests___/results/touchUI';
 
   /**
    * @returns {HTMLElement} the first found dialog form
@@ -158,12 +159,25 @@
     activateTabPane(tabPaneId);
   }
 
+  /**
+   * @returns {boolean} isTargetDialog
+   */
+  function isTargetDialog() {
+    const form = getDialogForm();
+    const resourceType = $(form)
+      .find("input[name='./sling:resourceType']")
+      .val();
+
+    return resourceType === componentPath;
+  }
+
   $(document).on('foundation-contentloaded', function (e) {
     const container = e.target;
 
     if (
       container._trackingFeature &&
-      container._trackingFeature.includes(componentName)
+      container._trackingFeature.includes(componentName) &&
+      isTargetDialog()
     ) {
       execute();
     }
