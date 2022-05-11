@@ -49,6 +49,18 @@ export abstract class JQueryGenerator<T extends JQueryModel> {
   public constructor(dialogConfig: AEMTouchUIDialog) {
     this.dialogConfig = dialogConfig;
   }
+
+  /**
+   * Returns the component path which is used for ./sling:resourceType
+   *
+   * @returns {string} ./sling:resourceType
+   */
+  public get componentPath(): string {
+    const path = this.dialogConfig.componentPath.split('/jcr_root/apps/');
+
+    return path.length > 1 ? path[1] : path[0];
+  }
+
   /**
    * Checks if the dialog has the provided JQuery Implementation
    *

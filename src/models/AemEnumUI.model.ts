@@ -74,4 +74,6 @@ export enum PlaceHolder {
   Level = '{{LEVEL}}',
   Vertical = '{{VERTICAL}}',
   ClassName = '{{CLASSNAME}}',
+  ExtraClientLibs = '{{EXTRACLIENTLIBS}}',
+  ComponentPath = '{{COMPONENTPATH}}',
 }

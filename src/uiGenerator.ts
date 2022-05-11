@@ -46,6 +46,17 @@ export class UiGenerator<T = object> {
   }
 
   /**
+   * @returns {boolean} dialog has custom function implementation
+   */
+  protected get hasClientLibs(): boolean {
+    return (
+      this.hideGenerator.hasImplementation ||
+      this.onLoadGenerator.hasImplementation ||
+      this.onChangeGenerator.hasImplementation
+    );
+  }
+
+  /**
    * @returns {string} cqEditConfig template string
    */
   public getCqConfig(): string {
@@ -75,6 +86,12 @@ export class UiGenerator<T = object> {
   public getDialog(): string {
     return template.dialog
       .replace(PlaceHolder.Title, this.dialogConfig.componentName)
+      .replace(
+        PlaceHolder.ExtraClientLibs,
+        this.hasClientLibs
+          ? ` extraClientlibs="[react.${this.dialogConfig.componentName}]"`
+          : ''
+      )
       .replace(PlaceHolder.Tab, this.buildTabs());
   }
   /**
@@ -217,6 +234,10 @@ export class UiGenerator<T = object> {
         JavaScriptPlaceHolder.HideComponentName,
         this.dialogConfig.componentName.toLowerCase()
       )
+      .replace(
+        JavaScriptPlaceHolder.ComponentPath,
+        this.hideGenerator.componentPath
+      )
       .replace(JavaScriptPlaceHolder.HideContainer, JSON.stringify(container));
   }
 
@@ -238,6 +259,10 @@ export class UiGenerator<T = object> {
       .replace(
         JavaScriptPlaceHolder.OnLoadComponentName,
         this.dialogConfig.componentName.toLowerCase()
+      )
+      .replace(
+        JavaScriptPlaceHolder.ComponentPath,
+        this.onLoadGenerator.componentPath
       )
       .replace(
         JavaScriptPlaceHolder.OnLoadContainer,
@@ -265,6 +290,10 @@ export class UiGenerator<T = object> {
         this.dialogConfig.componentName.toLowerCase()
       )
       .replace(
+        JavaScriptPlaceHolder.ComponentPath,
+        this.onChangeGenerator.componentPath
+      )
+      .replace(
         JavaScriptPlaceHolder.OnChangeContainer,
         JSON.stringify(container)
       );
@@ -274,7 +303,12 @@ export class UiGenerator<T = object> {
    * @returns {string} cqClientlibs template string
    */
   public buildCqClientLibs(): string {
-    return template.clientlibs;
+    return template.clientlibs.replace(
+      PlaceHolder.ExtraClientLibs,
+      this.hasClientLibs
+        ? `react.${this.dialogConfig.componentName}`
+        : 'cq.authoring.dialog'
+    );
   }
 
   /**

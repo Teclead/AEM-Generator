@@ -17,4 +17,5 @@ export enum JavaScriptPlaceHolder {
   OnLoadComponentName = "'{{ONLOAD_COMPONENT_NAME}}'",
   OnChangeContainer = "'{{ONCHANGE_CONTAINER}}'",
   OnChangeComponentName = "'{{ONCHANGE_COMPONENT_NAME}}'",
+  ComponentPath = '{{COMPONENTPATH}}',
 }
