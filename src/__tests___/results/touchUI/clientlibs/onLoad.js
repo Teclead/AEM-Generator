@@ -140,7 +140,7 @@
     return resourceType === componentPath;
   }
 
-  $(document).on('dialog-ready', function () {
+  $(document).on('foundation-contentloaded', function () {
     if (isTargetDialog()) {
       onLoad(onLoadContainer);
     }
