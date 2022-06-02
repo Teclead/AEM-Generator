@@ -119,6 +119,7 @@ export interface AEMTouchUIDialog<T = object> {
   css?: string; // classes that should be used in the tag
   noCqDesignDialog?: boolean; // conditionally build cqDesignDialog
   newPar?: boolean; // conditionally generate a new par component for containers
+  disableRefresh?: boolean; // disables the automatic refresh of the page after insert the component
 }
 
 export interface Templates {
