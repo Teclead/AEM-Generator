@@ -93,6 +93,10 @@ export const dialog: AEMTouchUIDialog = {
 new TouchUIXMLGenerator(dialog).writeFilesToAEM();
 ```
 
+By default, if you add a component, which uses this generator, the page in AEM will do a page refresh after inserting the component. This will guarantees, that the react component will be available immediately after adding the component to your page. To disable this behaviour, simply set the property `disableRefresh: true` inside the `AEMTouchUIDialog` object.
+
+## Fields
+
 The variable fields: `TouchUIDialogFieldOptions[]` describes the individual fields of the Dialog. `label`, `type`, `databaseName` are always required,
 all additional configurations are optional and also based on the selected type. To select the Type the TouchUiField-Object should be include and the wanted field-type needs to be selected in the properties. You can add custom additional common keys for own implementations on touch ui dialog field level.
 

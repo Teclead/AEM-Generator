@@ -60,7 +60,10 @@ export class UiGenerator<T = object> {
    * @returns {string} cqEditConfig template string
    */
   public getCqConfig(): string {
-    return template.cqEditConfig;
+    return template.cqEditConfig.replace(
+      PlaceHolder.AfterInsert,
+      this.dialogConfig.disableRefresh ? '' : 'afterinsert="REFRESH_PAGE"'
+    );
   }
 
   /**

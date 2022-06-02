@@ -76,4 +76,5 @@ export enum PlaceHolder {
   ClassName = '{{CLASSNAME}}',
   ExtraClientLibs = '{{EXTRACLIENTLIBS}}',
   ComponentPath = '{{COMPONENTPATH}}',
+  AfterInsert = '{{AFTER_INSERT}}',
 }
