@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/Teclead/AEM-Generator/compare/v3.1.1...v3.2.0) (2022-06-02)
+
+
+### Features
+
+* refresh page after insert ([cad7ed0](https://github.com/Teclead/AEM-Generator/commit/cad7ed020bc4063efd01894bd22588d146c26876))
+
 ### [3.1.1](https://github.com/Teclead/AEM-Generator/compare/v3.1.0...v3.1.1) (2022-05-31)
 
 
